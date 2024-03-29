@@ -1,0 +1,37 @@
+---
+// Component Imports
+import Button from '../components/Button.astro';
+import Layout from '../layouts/Layout.astro';
+
+// Full Astro Component Syntax:
+// https://docs.astro.build/basics/astro-components/
+---
+
+<Layout title="Small Page Energy">
+	<div class="hero w-screen h-screen">
+		<div class="w-full h-full grid grid-cols-12 gap-5 items-center justify-center px-16">
+			<div class="flex flex-col gap-8 col-start-2 col-span-5 ">
+				<div class="flex flex-col gap-10">
+					<img src="/logo-h1-spe.png" alt="">
+					<div class="flex flex-col gap-8">
+						<h2 class="text-blue600">Qui aura la plus petite ?</h2>
+						<p class="text-black">Un classement digne de sa taille qui expose les géants du web en fonction du poids de leurs pages. Ce palmarès, qu'il soit par catégorie ou général, est actualisé mensuellement pour rester dans la course folle du digital.</p>
+					</div>
+				</div>
+				<!-- button -->
+			</div>
+			<div class="col-start-8 col-span-4">
+
+			</div>
+		</div>
+	</div>
+</Layout>
+
+<style>
+	.hero{
+		background: 
+			radial-gradient(circle at right bottom, rgba(155, 82, 239, 0.40) 0%, rgba(108, 55, 170, 0.00) 50%),
+			radial-gradient(circle at left top, rgba(155, 82, 239, 0.40) 0%, rgba(108, 55, 170, 0.00) 50%),
+			radial-gradient(circle at center, rgba(145, 224, 255, 0.50) 0%, rgba(145, 224, 255, 0.00) 200%);
+	}
+</style>

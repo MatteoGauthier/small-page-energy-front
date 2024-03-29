@@ -1,0 +1,70 @@
+---
+import Navbar from '../components/Navbar.astro';
+
+interface Props {
+	title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="stylesheet" href="../../cabinet-grotesk.css"/>
+		<link rel="stylesheet" href="../../reset.css"/>
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+	</head>
+	<body>
+		<Navbar></Navbar>
+		<main>
+			<slot />
+		</main>
+	</body>
+</html>
+<style is:global>
+	h1{
+		font-family: 'CabinetGrotesk-Bold';
+		font-size: 4rem;
+		line-height: 120%
+	}
+	h2{
+		font-family: 'CabinetGrotesk-Bold';
+		font-size: 2.625rem;
+		font-weight: 700;
+		line-height: 120%
+	}
+	h3{
+		font-family: 'CabinetGrotesk-Black';
+		font-size: 2rem;
+		font-weight: 900;
+		line-height: 120%
+	}
+	h4{
+		font-family: 'CabinetGrotesk-Variable';
+		font-size: 1.5rem;
+		line-height: 120%
+	}
+	p{
+		font-family: 'CabinetGrotesk-Variable';
+		font-size: 1rem;
+		line-height: 120%;
+		font-weight: 600;
+	}
+	.brand{
+		font-size: 1.25rem;
+	}
+	.number{
+		font-size: 2.25rem;
+	}
+	.tab{
+		font-size: 1.125rem;
+	}
+	.nav-link{
+		font-family: 'CabinetGrotesk-Medium';
+		font-size: 1.125rem;
+	}
+</style>

@@ -1,0 +1,26 @@
+---
+// Button statistique
+interface Props {
+	weight: string;
+    primary: boolean;
+}
+
+const {weight, primary} = Astro.props;
+---
+
+{primary ? <p class="primary-stat text-gray100 bg-pink100 w-fit h-fit text-center">{weight}</p> : <p class="secondary-stat text-black bg-white w-fit h-fit text-center border-2 border-blue300 border-solid">{weight}</p>}
+
+<style>
+    .primary-stat{
+        border-radius: 60px;
+        padding: 0.875rem 1.25rem;
+        line-height: 100%;
+        font-weight: 500;
+    }
+    .secondary-stat{
+        border-radius: 60px;
+        padding: 0.325rem 0.875rem;
+        line-height: 100%;
+        font-weight: 500;
+    }
+</style>

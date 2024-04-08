@@ -1,0 +1,35 @@
+---
+// Card
+import List from '../components/List.astro';
+import Button from './Button.astro';
+
+// interface Props {
+// 	title: string;
+// 	href: string;
+// 	primary: boolean;
+// }
+
+// const {title, href, primary} = Astro.props;
+---
+
+<div class="card flex flex-col gap-10 justify-center bg-white border-blue500 border-solid p-8 h-fit border">
+    <h3 class="sector text-center text-blue600">Category</h3>
+    <div class="flex flex-col gap-4 mt-4">
+        <List brand="Brand" number="1." weight="320Ko" hasHr={true}></List>
+        <List brand="Brand" number="2." weight="320Ko" hasHr={true}></List>
+        <List brand="Brand" number="3." weight="320Ko" hasHr={false}></List>
+    </div>
+    <Button title="Voir le classement" href="" primary={false} secondary={false} tertiary={true}></Button>
+</div>
+
+
+
+<style>
+    h3.sector{
+        font-size: 2.625rem;
+    }
+
+    .card{
+        border-radius: 40px;
+    }
+</style>

@@ -1,0 +1,35 @@
+---
+// Button statistique
+import ButtonStat from '../components/ButtonStat.astro';
+
+interface Props {
+	brand: string;
+    number: string;
+    weight: string;
+    hasHr: boolean;
+}
+
+const {brand, number, weight, hasHr} = Astro.props;
+---
+<div class="w-full flex flex-col gap-2">
+    <div class="flex flex-row justify-between items-center">
+        <div class="flex flex-row gap-4 items-center">
+            <p class="number text-blue300 w-12">{number}</p>
+            <p class="text-black brand">{brand}</p>
+        </div>
+        <ButtonStat weight={weight} primary={false}}></ButtonStat>
+    </div>
+    {hasHr && <hr class="opacity-30">}
+</div>
+
+
+<style>
+    hr{
+
+    }
+
+    .brand{
+        font-size: 1rem;
+        font-weight: bold;
+    }
+</style>

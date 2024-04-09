@@ -1,0 +1,160 @@
+---
+// Component Imports
+import Button from '../components/Button.astro'
+import Layout from '../layouts/Layout.astro'
+import ButtonStat from '../components/ButtonStat.astro'
+import List from '../components/List.astro'
+import Card from '../components/Card.astro'
+import ListLink from '../components/ListLink.astro'
+import Footer from '../components/Footer.astro'
+import type { CategoryWithLeaderboardPreview } from '../types'
+
+import { Breadcrumbs } from 'astro-breadcrumbs'
+
+const customCrumbs = [
+    {
+        text: 'Accueil',
+        href: '/'
+    },
+    {
+        text: 'Mentions légales & CGU',
+        href: '/legals'
+    }
+]
+---
+
+<Layout title="Small Page Energy">
+    <Breadcrumbs crumbs={customCrumbs} />
+    <!-- Hero -->
+    <div class="hero w-full h-full pr-4 pl-4 flex justify-center align-center">
+        <h1 class="text-blue600 text-center">Mentions légales & CGU</h1>
+    </div>
+
+    <section class="p-4">
+        <div class="legals-content bg-white w-full m-auto p-8 rounded-3xl border border-solid border-blue500 mt-16">
+            <section>
+                <h2 class="text-blue600">Éditeurs et propriétaires du site</h2>
+                <p>
+                    Ce site est édité par la promotion MMI Bordeaux 24-25-26. MMI Bordeaux, une composante de l'Université Bordeaux Montaigne, établissement
+                    d'enseignement supérieur, situé au 1 Rue Jacques Ellul, 33800 Bordeaux.
+                </p>
+                <p>
+                    Directeur de la publication : Dina RAKOTONARIVO <br />
+                    Mail : <a href="mailto:contact.smallpageenergy@gmail.com">contact.smallpageenergy@gmail.com</a><br />
+                    Téléphone : <a href="tel:0557122044">05 57 12 20 44</a>
+                </p>
+            </section>
+            <section>
+                <h2 class="text-blue600">Acceptation des CGU</h2>
+                <p>Toute personne accédant au site (ci-après dénommée "l'Utilisateur") accepte expressément et sans réserve les présentes CGU.</p>
+            </section>
+            <section>
+                <h2 class="text-blue600">Accès au site</h2>
+                <p>
+                    L'accès au site est libre et gratuit. L'utilisateur est seul responsable de l'acquisition et du maintien de son équipement informatique
+                    ainsi que de son accès à internet. L'éditeur du site se réserve le droit de modifier, interrompre ou suspendre l'accès au Site pour des
+                    raisons techniques ou de maintenance, sans préavis.
+                </p>
+            </section>
+            <section>
+                <h2 class="text-blue600">Hébergeurs</h2>
+                <p>
+                    Scalingo, 9 Rue de la Krutenau, 67000 Strasbourg, support@scalingo.com <br />
+                    Vercel, 340 S Lemon Ave #4133 Walnut, CA 91789, (559) 288-7060 <br />
+                    Le présent site est soumis à la loi française.
+                </p>
+            </section>
+            <section>
+                <h2 class="text-blue600">Propriété intellectuelle</h2>
+                <p>
+                    L'ensemble de ce site relève des législations française sur le droit d'auteur et la propriété intellectuelle. Tous les droits de
+                    reproduction sont réservés, y compris pour les documents téléchargeables et les représentations iconographiques et photographiques. La
+                    reproduction de tout ou partie de ce site sur un support électronique ou papier quel qu'il soit est formellement interdite sauf autorisation
+                    expresse de la promotion MMI Bordeaux 24-25-26.
+                </p>
+            </section>
+            <section>
+                <h2 class="text-blue600">Conditions d’utilisations de personnelles</h2>
+                <p>
+                    Small Page Energy est un service proposé par la promotion MMI Bordeaux 24-25-26. Notre mission consiste à élaborer des outils et des
+                    réflexions visant à soutenir les individus, les organisations et les autorités publiques dans la création d'un avenir numérique durable et
+                    plus souhaitable pour les générations futures. Le destinataire des données est le directeur de publication. Conformément à la loi «
+                    informatique et libertés » du 6 janvier 1978 modifiée, vous bénéficiez d'un droit d'accès, de rectification, de portabilité, d'effacement de
+                    ces informations, que vous pouvez exercer en vous adressant à contact.smallpageenergy@gmail.com.
+                </p>
+            </section>
+            <section>
+                <h2 class="text-blue600">Liens externes</h2>
+                <p>
+                    Les liens hypertextes mis en place dans le cadre du présent site en direction d'autres ressources présentes sur le réseau Internet ne
+                    sauraient engager la responsabilité du directeur de publication ou de l'IUT Bordeaux Montaigne.
+                </p>
+            </section>
+            <section>
+                <h2 class="text-blue600">Données personnelles / Cookies</h2>
+                <p>
+                    Aucune donnée personnelle des utilisateur·ices procédant à un test sur smallpageenergy.com n’est collectée. Ce site n’utilise pas de
+                    cookies.
+                </p>
+            </section>
+            <section>
+                <h2 class="text-blue600">Modification des CGU</h2>
+                <p>
+                    L'éditeur du Site se réserve le droit de modifier à tout moment les présentes CGU. Les Utilisateurs sont invités à consulter régulièrement
+                    la dernière version des CGU disponible sur le site.
+                </p>
+            </section>
+            <section>
+                <h2 class="text-blue600">Loi applicable et juridiction compétente</h2>
+                <p>
+                    Les présentes CGU sont régies par le droit français. En cas de litige relatif à l'interprétation ou à l'exécution des présentes CGU, les
+                    tribunaux bordelais seront seuls compétents.
+                </p>
+                <p>Fait à Bordeaux, le 28 mars 2024.</p>
+            </section>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <Footer />
+</Layout>
+
+<style>
+    body {
+        background: radial-gradient(circle at right bottom, hsla(268, 83%, 63%, 0.4) 0%, rgba(108, 55, 170, 0) 50%),
+            radial-gradient(circle at 0 -2%, rgba(155, 82, 239, 0.4) 0%, rgba(108, 55, 170, 0) 10%),
+            radial-gradient(circle at right center, rgba(155, 82, 239, 0.4) 0%, rgba(108, 55, 170, 0) 30%),
+            radial-gradient(circle at left center, rgba(155, 82, 239, 0.4) 0%, rgba(108, 55, 170, 0) 30%),
+            radial-gradient(circle at center, rgba(145, 224, 255, 0.5) 0%, rgba(145, 224, 255, 0) 85%);
+
+        @media (min-width: 768px) {
+            background: radial-gradient(circle at 120% 70%, hsla(268, 83%, 63%, 0.4) 0%, rgba(108, 55, 170, 0) 30%),
+                radial-gradient(circle at -30% -5%, rgba(155, 82, 239, 0.4) 20%, rgba(108, 55, 170, 0) 30%),
+                radial-gradient(circle at 0 130%, rgba(155, 82, 239, 0.4) 20%, rgba(108, 55, 170, 0) 30%),
+                radial-gradient(circle at right center, rgba(155, 82, 239, 0.4) 0%, rgba(108, 55, 170, 0) 30%),
+                radial-gradient(circle at center, rgba(145, 224, 255, 0.5) 0%, rgba(145, 224, 255, 0) 85%);
+        }
+    }
+
+    .hero {
+        margin-top: 10rem;
+
+        @media (min-width: 768px) {
+            margin-top: 1rem;
+        }
+    }
+
+    .legals-content {
+        max-width: 1320px;
+
+        section:not(:first-of-type) {
+            margin-top: 1rem;
+        }
+
+        p {
+            font-family: 'CabinetGrotesk-Variable';
+            font-weight: 400;
+            margin-top: 1rem;
+        }
+    }
+</style>

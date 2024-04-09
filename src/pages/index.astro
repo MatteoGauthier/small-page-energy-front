@@ -71,9 +71,9 @@ const leaderboardPreviewByCategory: CategoryWithLeaderboardPreview[] = [
 	<!-- Hero -->
 	<div class="hero w-full h-full pt-24 pb-80">
 		<!-- Grid containing elements -->
-		<div class="w-full h-full grid xs:grid-cols-4 xs:px-4 lg:grid-cols-12 gap-5 items-center lg:justify-center lg:px-16 xs:gap-y-20">
+		<div class="w-full h-full grid xs:grid-cols-4 xs:px-4 grid-cols-12 gap-5 items-center justify-center px-16 xs:gap-y-20">
 			<!-- Text + logo -->
-			<div class="flex flex-col gap-8 xs:col-start-1 xs:col-span-4 lg:col-start-2 lg:col-span-5">
+			<div class="flex flex-col gap-8 xs:col-start-1 xs:col-span-4 col-start-2 col-span-5">
 				<div class="flex flex-col gap-10">
 					<img src="/logo-h1-spe.png" alt="" />
 					<div class="flex flex-col gap-8 xs:items-center">
@@ -95,10 +95,10 @@ const leaderboardPreviewByCategory: CategoryWithLeaderboardPreview[] = [
 				</div>
 			</div>
 			<!-- Classement -->
-			<div class="flex flex-col gap-4 lg:col-start-8 xs:col-start-1 col-span-4">
+			<div class="flex flex-col gap-4 col-start-8 xs:col-start-1 col-span-4">
 				<div class="w-full">
 					<div class="grid grid-cols-3 mb-4">
-						<div class="col-span-1 flex flex-col justify-center items-center gap-3 w-full lg:top-[41%] xs:top-[38%] relative">
+						<div class="col-span-1 flex flex-col justify-center items-center gap-3 w-full top-[41%] xs:top-[38%] relative">
 							<img src="/peugeot-logo.png" alt="" class="logo-entreprise max-h-16 w-auto"/>
 							<p class="brand text-center break-all">Brand</p>
 							<ButtonStat weight="32Ko" primary={true} />
@@ -108,7 +108,7 @@ const leaderboardPreviewByCategory: CategoryWithLeaderboardPreview[] = [
 							<p class="brand text-center break-all">Brand</p>
 							<ButtonStat weight="32Ko" primary={true} />
 						</div>
-						<div class="col-span-1 flex flex-col justify-center items-center gap-3 w-full lg:top-[72%] xs:top-[66%] relative">
+						<div class="col-span-1 flex flex-col justify-center items-center gap-3 w-full top-[72%] xs:top-[66%] relative">
 							<img src="/peugeot-logo.png" alt="" class="logo-entreprise max-h-16 w-auto"/>
 							<p class="brand text-center break-all">Brand</p>
 							<ButtonStat weight="32Ko" primary={true} />
@@ -151,7 +151,7 @@ const leaderboardPreviewByCategory: CategoryWithLeaderboardPreview[] = [
 	<!-- Card slider -->
 	<div class="carousel-container">
 		<div class="splide overflow-hidden">
-			<div class="splide__track py-8">
+			<div class="splide__track py-8 w-[120%] mx-[-8.5%] xs:w-full xs:mx-0">
 				<ul class="splide__list">
 					{
 						leaderboardPreviewByCategory.map((category) => {
@@ -198,15 +198,15 @@ const leaderboardPreviewByCategory: CategoryWithLeaderboardPreview[] = [
 		</div>
 	</div>
 	<!-- Resources -->
-	<div class="resources lg:pt-[28rem] xs:pt-[22rem] w-full h-full lg:pb-64 xs:pb-48">
+	<div class="resources pt-[28rem] xs:pt-[22rem] w-full h-full pb-64 xs:pb-48">
 		<!-- Grid cotaining elements -->
-		<div class="w-full h-full grid lg:grid-cols-12 xs:grid-cols-4 gap-5 justify-center lg:px-16 xs:px-4">
+		<div class="w-full h-full grid grid-cols-12 xs:grid-cols-4 gap-5 justify-center px-16 xs:px-4">
 			<!-- Img -->
-			<div class="flex flex-col gap-8 lg:col-start-2 lg:col-span-3 xs:col-start-1 xs:col-span-4">
-				<img class="lg:scale-150" src="/woman-with-pc.svg" alt="" class="w-full"/>
+			<div class="flex flex-col gap-8 col-start-2 col-span-3 xs:col-start-1 xs:col-span-4">
+				<img class="scale-150" src="/woman-with-pc.svg" alt="" class="w-full"/>
 			</div>
 			<!-- Text + Liens Resources -->
-			<div class="flex flex-col gap-8 lg:col-start-6 lg:col-span-6 xs:col-start-1 xs:col-span-4">
+			<div class="flex flex-col gap-8 col-start-6 col-span-6 xs:col-start-1 xs:col-span-4">
 				<h2 class="text-gray100">La course à la <span class="text-blue500 bg-white px-5 py-1 rounded-full whitespace-nowrap">plus petite</span>
 				</h2>
 				<p class="text-gray100 font-normal">
@@ -289,11 +289,10 @@ const leaderboardPreviewByCategory: CategoryWithLeaderboardPreview[] = [
 		transform: scaleX(-1);
 	}
 
-	.splide__track {
+	/* .splide__track {
 		width: 120%;
-		/* margin: 0 -10%; */
 		margin: 0 -8.5%;
-	}
+	} */
 
 	.splide__slide {
 		transform: scale(1);
@@ -312,35 +311,60 @@ const leaderboardPreviewByCategory: CategoryWithLeaderboardPreview[] = [
 
 	import Splide from "@splidejs/splide";
 
-	const mediaQuery = window.matchMedia("(min-width: 600px)");
-
-	if (mediaQuery.matches) {
+	if (window.matchMedia("(min-width: 1024px)").matches) {
+			var splide = new Splide(".splide", {
+			type: "loop",
+			perPage: 5,
+			focus: "center",
+			pagination: false,
+			gap: 32,
+			live: false,
+			classes: {
+				prev: "splide__arrow--prev btn-prev",
+			},
+		});
+	} 
+	else if (window.matchMedia("(max-width: 1024px)").matches){
+		if (window.matchMedia("(max-width: 390px)").matches){
+			var splide = new Splide(".splide", {
+				type: "loop",
+				perPage: 1,
+				focus: "center",
+				pagination: false,
+				gap: 48,
+				live: false,
+				classes: {
+					prev: "splide__arrow--prev btn-prev",
+				},
+			});
+		}
+		else{
+			var splide = new Splide(".splide", {
+				type: "loop",
+				perPage: 3,
+				focus: "center",
+				pagination: false,
+				gap: 32,
+				live: false,
+				classes: {
+					prev: "splide__arrow--prev btn-prev",
+				},
+			});
+		}
+	}
+	else if (window.matchMedia("(max-width: 390px)").matches){
 		var splide = new Splide(".splide", {
-		type: "loop",
-		perPage: 5,
-		focus: "center",
-		pagination: false,
-		gap: 32,
-		live: false,
-		classes: {
-			prev: "splide__arrow--prev btn-prev",
-		},
-	});
-	} else {
-		var splide = new Splide(".splide", {
-		type: "loop",
-		perPage: 3,
-		focus: "center",
-		pagination: false,
-		gap: 12,
-		live: false,
-		classes: {
-			prev: "splide__arrow--prev btn-prev",
-		},
-	});
-}
-
-
+			type: "loop",
+			perPage: 1,
+			focus: "center",
+			pagination: false,
+			gap: 12,
+			live: false,
+			classes: {
+				prev: "splide__arrow--prev btn-prev",
+			},
+		});
+	}
 	/*var splide = new Splide(".splide", {
 		type: "loop",
 		perPage: 5,

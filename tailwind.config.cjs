@@ -24,13 +24,13 @@ module.exports = {
 			'xs': {'min': '0px', 'max': '390px'},
 			// => @media (min-width: 390px) { ... }
 
-			'sm': '640px',
+			'sm': {'min': '390px', 'max': '640px'},
 			// => @media (min-width: 640px) { ... }
 	  
-			'md': '768px',
+			'md': {'min': '640px', 'max': '768px'},
 			// => @media (min-width: 768px) { ... }
 	  
-			'lg': '1024px',
+			'lg': {'min': '768px', 'max': '1024px'},
 			// => @media (min-width: 1024px) { ... }
 	  
 			'xl': '1280px',

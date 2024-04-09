@@ -12,7 +12,7 @@ const props = Astro.props;
 <div
     class="card flex flex-col gap-10 justify-center bg-white border-blue500 border-solid p-8 h-fit border"
 >
-    <h3 class="sector text-center text-blue600">{props.name}</h3>
+    <h3 class="sector text-center text-blue600 break-words">{props.name}</h3>
     <div class="flex flex-col gap-4 mt-4">
         {
             props.top.map((item, index) => {

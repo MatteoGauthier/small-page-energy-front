@@ -2,13 +2,37 @@
 // Barre de navigation
 ---
 
-<nav class="flex flex-row justify-between fixed top-0 right-0 w-full px-16 mt-4 z-10">
+<style>
+    .hamburger {
+        display: block;
+        cursor: pointer;
+    }
+
+    .bar {
+        display: block;
+        width: 25px;
+        height: 2px;
+        margin: 5px auto;
+        -webkit-transition: all 0.3s ease-in-out;
+        transition: all 0.3s ease-in-out;
+        background-color: #2D1B83;
+    }
+    
+
+</style>
+
+<nav class="flex lg:flex-row justify-between fixed top-0 right-0 w-full px-16 mt-4 z-10 xs:flex-col">
     <a>
         <img src="/logo-spe.svg">
     </a>
 
     <div class="flex flex-wrap content-center">
-        <ul class="flex flex-row gap-12">
+        <div class="xs:hamburger lg:hidden">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+        <ul class="xs:nav-menu flex lg:flex-row lg:gap-12 xs:flex-col xs:gap-4 ">
             <li>
                 <a class="nav-link" href="">Accueil</a>
             </li>
@@ -23,3 +47,4 @@
         </ul>
     </div>
 </nav>
+

@@ -1,35 +1,47 @@
 ---
 // Card
-import List from '../components/List.astro';
-import Button from './Button.astro';
+import List from "../components/List.astro";
+import type { CategoryWithLeaderboardPreview } from "../types";
+import Button from "./Button.astro";
 
-// interface Props {
-// 	title: string;
-// 	href: string;
-// 	primary: boolean;
-// }
+type Props = CategoryWithLeaderboardPreview;
 
-// const {title, href, primary} = Astro.props;
+const props = Astro.props;
 ---
 
-<div class="card flex flex-col gap-10 justify-center bg-white border-blue500 border-solid p-8 h-fit border">
-    <h3 class="sector text-center text-blue600">Category</h3>
+<div
+    class="card flex flex-col gap-10 justify-center bg-white border-blue500 border-solid p-8 h-fit border"
+>
+    <h3 class="sector text-center text-blue600">{props.name}</h3>
     <div class="flex flex-col gap-4 mt-4">
-        <List brand="Brand" number="1." weight="320Ko" hasHr={true}></List>
-        <List brand="Brand" number="2." weight="320Ko" hasHr={true}></List>
-        <List brand="Brand" number="3." weight="320Ko" hasHr={false}></List>
+        {
+            props.top.map((item, index) => {
+                return (
+                    <List
+                        brand={item.name}
+                        number={`${index + 1}.`}
+                        weight={`${(item.size / 1000).toFixed()}Ko`}
+                        hasHr={index !== props.top.length}
+                    />
+                );
+            })
+        }
     </div>
-    <Button title="Voir le classement" href="" primary={false} secondary={false} tertiary={true}></Button>
+    <Button
+        title="Voir le classement"
+        href=""
+        primary={false}
+        secondary={false}
+        tertiary={true}
+    />
 </div>
 
-
-
 <style>
-    h3.sector{
+    h3.sector {
         font-size: 2.625rem;
     }
 
-    .card{
+    .card {
         border-radius: 40px;
     }
 </style>

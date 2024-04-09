@@ -1,28 +1,97 @@
 ---
 // Component Imports
-import Button from '../components/Button.astro';
-import Layout from '../layouts/Layout.astro';
-import ButtonStat from '../components/ButtonStat.astro';
-import List from '../components/List.astro';
-import Card from '../components/Card.astro';
+import Button from "../components/Button.astro";
+import Layout from "../layouts/Layout.astro";
+import ButtonStat from "../components/ButtonStat.astro";
+import List from "../components/List.astro";
+import Card from "../components/Card.astro";
+import ListLink from "../components/ListLink.astro";
+import Footer from "../components/Footer.astro";
+import type { CategoryWithLeaderboardPreview } from "../types";
 
 // Full Astro Component Syntax:
 // https://docs.astro.build/basics/astro-components/
+
+const leaderboardPreviewByCategory: CategoryWithLeaderboardPreview[] = [
+	{
+		name: "Mode",
+		top: [
+			{
+				name: "Channel",
+				size: 18000,
+			},
+			{
+				name: "LV",
+				size: 20000,
+			},
+			{
+				name: "Dior",
+				size: 58000,
+			},
+		],
+	},
+	{
+		name: "Electricité",
+		top: [
+			{
+				name: "Channel",
+				size: 18000,
+			},
+			{
+				name: "LV",
+				size: 20000,
+			},
+			{
+				name: "Dior",
+				size: 58000,
+			},
+		],
+	},
+	{
+		name: "Electronique",
+		top: [
+			{
+				name: "Channel",
+				size: 18000,
+			},
+			{
+				name: "LV",
+				size: 20000,
+			},
+			{
+				name: "Dior",
+				size: 58000,
+			},
+		],
+	},
+];
 ---
 
 <Layout title="Small Page Energy">
 	<!-- Hero -->
-	<div class="hero w-full h-full pt-16 pb-64">
+	<div class="hero w-full h-full pt-24 pb-80">
 		<!-- Grid cotaining elements -->
 		<div class="w-full h-full grid grid-cols-12 gap-5 items-center justify-center px-16">
 			<!-- Text + logo -->
-			<div class="flex flex-col gap-8 col-start-2 col-span-5 ">
+			<div class="flex flex-col gap-8 col-start-2 col-span-5">
 				<div class="flex flex-col gap-10">
-					<img src="/logo-h1-spe.png" alt="">
+					<img src="/logo-h1-spe.png" alt="" />
 					<div class="flex flex-col gap-8">
 						<h2 class="text-blue600">Qui aura la plus petite ?</h2>
-						<p class="text-black">Un classement digne de sa taille qui expose les géants du web en fonction du poids de leurs pages. Ce palmarès, qu'il soit par catégorie ou général, est actualisé mensuellement pour rester dans la course folle du digital.</p>
-						<Button href="" primary={true} secondary={false} tertiary={false} title="Voir le classement général"></Button>
+						<p class="text-black">
+							Un classement digne de sa taille qui expose les
+							géants du web en fonction du poids de leurs pages.
+							Ce palmarès, qu'il soit par catégorie ou général,
+							est actualisé mensuellement pour rester dans la
+							course folle du digital.
+						</p>
+						<Button
+							href=""
+							primary={true}
+							secondary={false}
+							tertiary={false}
+							title="Voir le classement général"
+						/>
 					</div>
 				</div>
 			</div>
@@ -31,29 +100,50 @@ import Card from '../components/Card.astro';
 				<div class="w-full">
 					<div class="grid grid-cols-3 mb-4">
 						<div class="col-span-1 flex flex-col justify-center items-center gap-3 w-full top-second relative">
-							<img src="/peugeot-logo.png" alt="" class="logo-entreprise max-h-16 w-auto">
+							<img src="/peugeot-logo.png" alt="" class="logo-entreprise max-h-16 w-auto"/>
 							<p class="brand text-center break-all">Brand</p>
-							<ButtonStat weight="32Ko" primary={true}}></ButtonStat>
+							<ButtonStat weight="32Ko" primary={true} } />
 						</div>
 						<div class="col-span-1 flex flex-col justify-center items-center gap-3 w-full">
-							<img src="/peugeot-logo.png" alt="" class="logo-entreprise max-h-16 w-auto">
+							<img src="/peugeot-logo.png" alt="" class="logo-entreprise max-h-16 w-auto"/>
 							<p class="brand text-center break-all">Brand</p>
-							<ButtonStat weight="32Ko" primary={true}></ButtonStat>
+							<ButtonStat weight="32Ko" primary={true} />
 						</div>
 						<div class="col-span-1 flex flex-col justify-center items-center gap-3 w-full top-third relative">
-							<img src="/peugeot-logo.png" alt="" class="logo-entreprise max-h-16 w-auto">
+							<img src="/peugeot-logo.png" alt="" class="logo-entreprise max-h-16 w-auto"/>
 							<p class="brand text-center break-all">Brand</p>
-							<ButtonStat weight="32Ko" primary={true}></ButtonStat>
+							<ButtonStat weight="32Ko" primary={true} />
 						</div>
 					</div>
-					<img class="w-full" src="/podium-spe.svg" alt="">
+					<img class="w-full" src="/podium-spe.svg" alt="" />
 					<div class="flex flex-col gap-4 mt-4">
-						<List brand="Renault" number="4." weight="320Ko" hasHr={true}></List>
-						<List brand="Citroën" number="5." weight="200Ko" hasHr={true}></List>
-						<List brand="Hello Bank" number="6." weight="1Go" hasHr={false}></List>
+						<List
+							brand="Renault"
+							number="4."
+							weight="320Ko"
+							hasHr={true}
+						/>
+						<List
+							brand="Citroën"
+							number="5."
+							weight="200Ko"
+							hasHr={true}
+						/>
+						<List
+							brand="Hello Bank"
+							number="6."
+							weight="1Go"
+							hasHr={false}
+						/>
 					</div>
 					<div class="w-full flex flex-row justify-end mt-4">
-						<Button href="" primary={false} secondary={true} tertiary={false} title="Partager"></Button>
+						<Button
+							href=""
+							primary={false}
+							secondary={true}
+							tertiary={false}
+							title="Partager"
+						/>
 					</div>
 				</div>
 			</div>
@@ -64,122 +154,184 @@ import Card from '../components/Card.astro';
 		<div class="splide overflow-hidden">
 			<div class="splide__track py-8">
 				<ul class="splide__list">
-					<!-- <li class="splide__slide bg-blue300 h-60">Slide 01</li>
-					<li class="splide__slide bg-blue300 h-60">Slide 02</li>
-					<li class="splide__slide bg-blue300 h-60">Slide 03</li>
-					<li class="splide__slide bg-blue300 h-60">Slide 04</li>
-					<li class="splide__slide bg-blue300 h-60">Slide 06</li>
-					<li class="splide__slide bg-blue300 h-60">Slide 05</li>
-					<li class="splide__slide bg-blue300 h-60">Slide 07</li>
-					<li class="splide__slide bg-blue300 h-60">Slide 08</li>
-					<li class="splide__slide bg-blue300 h-60">Slide 09</li>
-					<li class="splide__slide bg-blue300 h-60">Slide 10</li> -->
-					<li class="splide__slide"><div class="scaleControll"><Card></Card></div></li>
-					<li class="splide__slide"><div class="scaleControll"><Card></Card></div></li>
-					<li class="splide__slide"><div class="scaleControll"><Card></Card></div></li>
-					<li class="splide__slide"><div class="scaleControll"><Card></Card></div></li>
-					<li class="splide__slide"><div class="scaleControll"><Card></Card></div></li>
-					<li class="splide__slide"><div class="scaleControll"><Card></Card></div></li>
-					<li class="splide__slide"><div class="scaleControll"><Card></Card></div></li>
-					<li class="splide__slide"><div class="scaleControll"><Card></Card></div></li>
-					<li class="splide__slide"><div class="scaleControll"><Card></Card></div></li>
-					<li class="splide__slide"><div class="scaleControll"><Card></Card></div></li>
+					{
+						leaderboardPreviewByCategory.map((category) => {
+							return (
+								<li class="splide__slide">
+									<div class="scaleControll">
+										<Card
+											name={category.name}
+											top={category.top}
+										/>
+									</div>
+								</li>
+							);
+						})
+					}
 				</ul>
 			</div>
-			<div class="splide__arrows flex flex-row justify-center gap-8 fill-blue200">
+			<div class="splide__arrows flex flex-row justify-center gap-8 fill-gray100 mt-8">
 				<button class="splide__arrow splide__arrow--prev">
-					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" width="40" height="40" focusable="false"><path d="m15.5 0.932-4.3 4.38 14.5 14.6-14.5 14.5 4.3 4.4 14.6-14.6 4.4-4.3-4.4-4.4-14.6-14.6z"></path></svg>
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						viewBox="0 0 40 40"
+						width="40"
+						height="40"
+						focusable="false"
+						><path
+							d="m15.5 0.932-4.3 4.38 14.5 14.6-14.5 14.5 4.3 4.4 14.6-14.6 4.4-4.3-4.4-4.4-14.6-14.6z"
+						></path></svg
+					>
 				</button>
 				<button class="splide__arrow splide__arrow--next">
-					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" width="40" height="40" focusable="false"><path d="m15.5 0.932-4.3 4.38 14.5 14.6-14.5 14.5 4.3 4.4 14.6-14.6 4.4-4.3-4.4-4.4-14.6-14.6z"></path></svg>
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						viewBox="0 0 40 40"
+						width="40"
+						height="40"
+						focusable="false"
+						><path
+							d="m15.5 0.932-4.3 4.38 14.5 14.6-14.5 14.5 4.3 4.4 14.6-14.6 4.4-4.3-4.4-4.4-14.6-14.6z"
+						></path></svg
+					>
 				</button>
-				
 			</div>
 		</div>
 	</div>
 	<!-- Resources -->
-	<div class="resources w-full h-screen pt-16 pb-64">
+	<div class="resources w-full h-full pb-64">
 		<!-- Grid cotaining elements -->
-		<div class="w-full h-full grid grid-cols-12 gap-5 items-center justify-center px-16">
+		<div class="w-full h-full grid grid-cols-12 gap-5 justify-center px-16">
 			<!-- Img -->
-			<div class="flex flex-col gap-8 col-start-2 col-span-3 ">
-				
+			<div class="flex flex-col gap-8 col-start-2 col-span-3">
+				<img class="scale-150" src="/woman-with-pc.svg" alt="" class="w-full"/>
 			</div>
 			<!-- Text + Liens Resources -->
-			<div class="flex flex-col gap-4 col-start-6 col-span-6">
-				
+			<div class="flex flex-col gap-8 col-start-6 col-span-6">
+				<h2 class="text-gray100">La course à la <span class="text-blue500 bg-white px-5 py-1 rounded-full whitespace-nowrap">plus petite</span>
+				</h2>
+				<p class="text-gray100 font-normal">
+					Dans un monde où notre empreinte carbone résonne de plus en
+					plus fort, les grandes entreprises, telles que les
+					mastodontes du CAC 40, se livrent à une course effrénée pour
+					s'approprier le titre de champion de l'éco-responsabilité.
+					Mais derrière les discours pompeux, se cache parfois une
+					réalité moins étincelante : le greenwashing.
+
+					</br></br>
+
+					Pour que tu puisses plus t’informer voici quelques ressources
+					intéressantes :
+				</p>
+				<div class="flex flex-col w-full">
+					<ListLink href="" name="LowwwCarbon case studies" hasHr={true} />
+					<ListLink href="" name="Osuny" hasHr={true} />
+					<ListLink href="" name="EcoIndex" hasHr={true} />
+					<ListLink href="" name="Web Carbon Calculator" hasHr={false} />
+				</div>
 			</div>
 		</div>
 	</div>
+	<!-- Footer -->
+	<Footer/>
 </Layout>
 
 <style>
-	@import '/node_modules/@splidejs/splide/dist/css/splide-core.min.css';
+	@import "/node_modules/@splidejs/splide/dist/css/splide-core.min.css";
 
-	.hero{
-		background: 
-			radial-gradient(circle at right bottom, hsla(268, 83%, 63%, 0.4) 0%, rgba(108, 55, 170, 0.00) 50%),
-			radial-gradient(circle at left top, rgba(155, 82, 239, 0.40) 0%, rgba(108, 55, 170, 0.00) 50%),
-			radial-gradient(circle at center, rgba(145, 224, 255, 0.50) 0%, rgba(145, 224, 255, 0.00) 85%); 
-			/* 200% */
+	.hero {
+		background: radial-gradient(
+				circle at right bottom,
+				hsla(268, 83%, 63%, 0.4) 0%,
+				rgba(108, 55, 170, 0) 50%
+			),
+			radial-gradient(
+				circle at left top,
+				rgba(155, 82, 239, 0.4) 0%,
+				rgba(108, 55, 170, 0) 50%
+			),
+			radial-gradient(
+				circle at center,
+				rgba(145, 224, 255, 0.5) 0%,
+				rgba(145, 224, 255, 0) 85%
+			);
+		/* 200% */
 	}
-	.resources{
-		background: 
-			radial-gradient(ellipse at right bottom, hsla(268, 83%, 63%, 0.4) 0%, rgba(108, 55, 170, 0.00) 50%),
-			radial-gradient(ellipse at left center, rgba(99, 70, 243, 0.70) 0%, rgba(108, 55, 170, 0.00) 50%),
-			radial-gradient(circle at center, rgb(53, 32, 157) 0%, rgba(145, 224, 255, 0.00) 200%); 
+	.resources {
+		background: radial-gradient(
+				50% 110% at 95% 40%,
+				rgba(99, 70, 243, 0.7) 25%,
+				rgba(108, 55, 170, 0) 50%
+			),
+			radial-gradient(
+				50% 100% at left center,
+				rgba(255, 0, 168, 0.5) 5%,
+				rgba(108, 55, 170, 0) 100%
+			),
+			radial-gradient(
+				circle at center,
+				rgb(53, 32, 157) 100%,
+				rgba(145, 224, 255, 0) 100%
+			);
 	}
 
-	.top-second{
+	.top-second {
 		top: 41%;
 	}
-	.top-third{
+	.top-third {
 		top: 76%;
 	}
 
-	.carousel-container{
+	.carousel-container {
 		position: relative;
-		top: -12rem;
+		/* top: -16rem; */
+		margin: -18.7rem 0;
+		z-index: 1;
+	}
+	.resources {
+		position: relative;
+		/* top: -36.7rem; */
+		padding-top: 28rem;
 	}
 
-	.splide__arrow--prev svg{
+	.splide__arrow--prev svg {
 		transform: scaleX(-1);
 	}
 
-	.splide__track{
+	.splide__track {
 		width: 120%;
-        margin: 0 -10%;
+		/* margin: 0 -10%; */
+		margin: 0 -8.5%;
 	}
 
-	.splide__slide{
+	.splide__slide {
 		transform: scale(1);
 		transform-origin: center;
 		transition: transform 0.3s ease-in-out;
 	}
 
-	.splide__slide.is-active{
+	.splide__slide.is-active {
 		position: relative;
 		transform: scale(1.1);
 	}
-
 </style>
 
 <script>
 	import "/node_modules/@splidejs/splide/dist/js/splide.min.js";
 
-	import Splide from '@splidejs/splide';
+	import Splide from "@splidejs/splide";
 
-	var splide = new Splide( '.splide', {
-	type   : 'loop',
-	perPage: 5,
-	focus  : 'center',
-	pagination: false,
-	gap: 32,
-	live: false,
-	classes: {
-		prev  : 'splide__arrow--prev btn-prev',
-	},
-	} );
+	var splide = new Splide(".splide", {
+		type: "loop",
+		perPage: 5,
+		focus: "center",
+		pagination: false,
+		gap: 32,
+		live: false,
+		classes: {
+			prev: "splide__arrow--prev btn-prev",
+		},
+	});
 
 	splide.mount();
 </script>

@@ -1,0 +1,20 @@
+---
+// List link
+interface Props {
+	name: string;
+    href: string;
+    hasHr: boolean;
+}
+
+const {name, href, hasHr} = Astro.props;
+---
+
+<a href={href} class="w-full flex flex-col">
+    <div class="flex flex-row justify-between items-center py-4">
+        <div class="flex flex-row gap-4 items-center">
+            <p class="text-gray100 text-lg">{name}</p>
+        </div>
+        <img src="/arrow-link.svg" alt="">
+    </div>
+    {hasHr && <hr class="text-gray100">}
+</a>

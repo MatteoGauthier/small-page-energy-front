@@ -8,7 +8,7 @@ interface Props {
 const {weight, primary} = Astro.props;
 ---
 
-{primary ? <p class="primary-stat text-gray100 bg-pink100 w-fit h-fit text-center">{weight}</p> : <p class="secondary-stat text-black bg-white w-fit h-fit text-center border-2 border-blue300 border-solid">{weight}</p>}
+{primary ? <p class="primary-stat text-gray100 bg-pink100 w-fit h-fit text-center">{weight}</p> : <p class="secondary-stat text-black bg-white w-fit h-fit text-center border border-blue300 border-solid">{weight}</p>}
 
 <style>
     .primary-stat{

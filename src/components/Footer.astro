@@ -6,17 +6,33 @@ import Button from '../components/Button.astro'
     <!-- Grid cotaining elements -->
     <div class="flex flex-col w-full h-full">
         <!-- Img -->
-        <div class="grid grid-cols-12 gap-5 px-16 w-full rounded-full bg-gray100 py-8">
-            <div class="flex flex-col gap-8">
-                <h2 class="text-blue600">Suis-nous sur nos réseaux</h2>
-                <p class="text-blue600 max-w-xl">
-                    Va suivre notre comm’ sur les réseaux, on fait des palmarès, on met les sites en concurrence. Avec un peu de chance on aura même fait un
-                    post sur ta toute petite page !
-                </p>
-            </div>
-            <div class="flex flex-col gap-6">
-                <Button href="" primary={true} secondary={false} tertiary={false} title="Instagram" />
-                <Button href="" primary={true} secondary={false} tertiary={false} title="Twitter" />
+        <div class="px-16">
+            <div class="grid grid-cols-12 gap-5 w-full rounded-full bg-gray100 py-8">
+                <div class="flex flex-col gap-8 col-start-3 col-span-5">
+                    <h2 class="text-blue600">Suis-nous sur nos réseaux</h2>
+                    <p class="text-blue600  max-w-xl">
+                        Va suivre notre comm’ sur les réseaux, on fait des
+                        palmarès, on met les sites en concurrence. Avec un peu
+                        de chance on aura même fait un post sur ta toute petite
+                        page !
+                    </p>
+                </div>
+                <div class="flex flex-col gap-6 col-start-9 col-span-2">
+                    <Button
+                        href=""
+                        variant="primary"
+                        title="Instagram"
+                        custom="w-full"
+                        icon="instagram"
+                    />
+                    <Button
+                        href=""
+                        variant="primary"
+                        title="Twitter"
+                        custom="w-full"
+                        icon="twitter"
+                    />
+                </div>
             </div>
         </div>
         <!-- Text + Liens Resources -->
@@ -25,7 +41,7 @@ import Button from '../components/Button.astro'
 </div>
 
 <style>
-    /*     .footer {
+    .footer {
         background: radial-gradient(
                 circle at right bottom,
                 hsla(268, 83%, 63%, 0.4) 0%,
@@ -41,5 +57,5 @@ import Button from '../components/Button.astro'
                 rgba(145, 224, 255, 0.5) 0%,
                 rgba(145, 224, 255, 0) 85%
             );
-    } */
+    }
 </style>

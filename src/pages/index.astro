@@ -313,7 +313,9 @@ const leaderboardPreviewByCategory: CategoryWithLeaderboardPreview[] = [
 
 	import Splide from "@splidejs/splide";
 
-	if (window.matchMedia("(min-width: 600px)").matches) {
+	const mediaQuery = window.matchMedia("(min-width: 600px)");
+
+	if (mediaQuery.matches) {
 		var splide = new Splide(".splide", {
 		type: "loop",
 		perPage: 5,
@@ -325,8 +327,8 @@ const leaderboardPreviewByCategory: CategoryWithLeaderboardPreview[] = [
 			prev: "splide__arrow--prev btn-prev",
 		},
 	});
-} else {
-	var splide = new Splide(".splide", {
+	} else {
+		var splide = new Splide(".splide", {
 		type: "loop",
 		perPage: 3,
 		focus: "center",
@@ -338,6 +340,8 @@ const leaderboardPreviewByCategory: CategoryWithLeaderboardPreview[] = [
 		},
 	});
 }
+
+
 	/*var splide = new Splide(".splide", {
 		type: "loop",
 		perPage: 5,

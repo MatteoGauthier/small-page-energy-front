@@ -8,63 +8,13 @@ import Card from "../components/Card.astro";
 import ListLink from "../components/ListLink.astro";
 import Footer from "../components/Footer.astro";
 import type { CategoryWithLeaderboardPreview } from "../types";
+import { getCategoriesLeaderboardPreview } from "../lib/api";
 
 // Full Astro Component Syntax:
 // https://docs.astro.build/basics/astro-components/
 
-const leaderboardPreviewByCategory: CategoryWithLeaderboardPreview[] = [
-	{
-		name: "Mode",
-		top: [
-			{
-				name: "Channel",
-				size: 18000,
-			},
-			{
-				name: "LV",
-				size: 20000,
-			},
-			{
-				name: "Dior",
-				size: 58000,
-			},
-		],
-	},
-	{
-		name: "Electricité",
-		top: [
-			{
-				name: "Channel",
-				size: 18000,
-			},
-			{
-				name: "LV",
-				size: 20000,
-			},
-			{
-				name: "Dior",
-				size: 58000,
-			},
-		],
-	},
-	{
-		name: "Electronique",
-		top: [
-			{
-				name: "Channel",
-				size: 18000,
-			},
-			{
-				name: "LV",
-				size: 20000,
-			},
-			{
-				name: "Dior",
-				size: 58000,
-			},
-		],
-	},
-];
+const leaderboardPreviewByCategory = await getCategoriesLeaderboardPreview()
+
 ---
 
 <Layout title="Small Page Energy">
@@ -160,11 +110,11 @@ const leaderboardPreviewByCategory: CategoryWithLeaderboardPreview[] = [
 									<div class="scaleControll">
 										<Card
 											name={category.name}
-											top={category.top}
+											ranks={category.ranks}
 										/>
 									</div>
 								</li>
-							);
+							)
 						})
 					}
 				</ul>

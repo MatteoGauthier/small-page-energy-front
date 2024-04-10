@@ -262,8 +262,11 @@ const leaderboard = await getLeaderboard()
 		transform: translateY(-50px);
 	}
 
-	@media (min-width: 390px) {
-
+	@media (max-width: 390px) {
+		.splide__slide.is-active {
+			position: relative;
+			transform: translateY(0px);
+		}
 	}
 
 

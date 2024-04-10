@@ -69,8 +69,8 @@
     const navMenu = document.querySelector(".nav-menu");
     const navLink = document.querySelectorAll(".nav-link");
     const hamburger= document.querySelector(".hamburger");
-    const closeIcon= document.querySelector(".closeIcon");
-    const menuIcon = document.querySelector(".menuIcon");
+    const closeIcon= document.querySelector(".closeIcon") as HTMLElement;
+    const menuIcon = document.querySelector(".menuIcon") as HTMLElement;
 
     function toggleMenu() {
         if (navMenu.classList.contains("showMenu")) {

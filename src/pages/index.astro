@@ -8,12 +8,14 @@ import Card from '../components/Card.astro'
 import ListLink from '../components/ListLink.astro'
 import Footer from '../components/Footer.astro'
 import type { CategoryWithLeaderboardPreview } from '../types'
-import { getCategoriesLeaderboardPreview } from '../lib/api'
+import { getCategoriesLeaderboardPreview, getLeaderboard } from '../lib/api'
 
 // Full Astro Component Syntax:
 // https://docs.astro.build/basics/astro-components/
 
 const leaderboardPreviewByCategory = await getCategoriesLeaderboardPreview()
+
+const leaderboard = await getLeaderboard()
 ---
 
 <Layout title="Small Page Energy">
@@ -42,27 +44,44 @@ const leaderboardPreviewByCategory = await getCategoriesLeaderboardPreview()
     <div class="flex flex-col gap-4 col-start-8 xs:col-start-1 col-span-4">
         <div class="w-full">
             <div class="grid grid-cols-3 mb-4">
-                <div class="col-span-1 flex flex-col justify-center items-center gap-3 w-full top-[41%] xs:top-[38%] relative">
-                    <img src="/peugeot-logo.png" alt="" class="logo-entreprise max-h-16 w-auto" />
-                    <p class="brand text-center break-all">Brand</p>
-                    <ButtonStat weight="32Ko" primary={true} />
-                </div>
-                <div class="col-span-1 flex flex-col justify-center items-center gap-3 w-full">
-                    <img src="/peugeot-logo.png" alt="" class="logo-entreprise max-h-16 w-auto" />
-                    <p class="brand text-center break-all">Brand</p>
-                    <ButtonStat weight="32Ko" primary={true} />
-                </div>
-                <div class="col-span-1 flex flex-col justify-center items-center gap-3 w-full top-[72%] xs:top-[66%] relative">
-                    <img src="/peugeot-logo.png" alt="" class="logo-entreprise max-h-16 w-auto" />
-                    <p class="brand text-center break-all">Brand</p>
-                    <ButtonStat weight="32Ko" primary={true} />
-                </div>
+                {
+                    (
+                        <>
+                            <div class="col-span-1 flex flex-col justify-center items-center gap-3 w-full top-[41%] xs:top-[38%] relative">
+                                <img src="/peugeot-logo.png" alt="" class="logo-entreprise max-h-16 w-auto" />
+                                <p class="brand text-center break-all">{leaderboard[1].website.name}</p>
+                                <ButtonStat weight={`${(leaderboard[1].siteWeight / 1000).toFixed()}Ko`} primary={true} />
+                            </div>
+                            <div class="col-span-1 flex flex-col justify-center items-center gap-3 w-full">
+                                <img src="/peugeot-logo.png" alt="" class="logo-entreprise max-h-16 w-auto" />
+                                <p class="brand text-center break-all">{leaderboard[0].website.name}</p>
+                                <ButtonStat weight={`${(leaderboard[0].siteWeight / 1000).toFixed()}Ko`} primary={true} />
+                            </div>
+                            <div class="col-span-1 flex flex-col justify-center items-center gap-3 w-full top-[72%] xs:top-[66%] relative">
+                                <img src="/peugeot-logo.png" alt="" class="logo-entreprise max-h-16 w-auto" />
+                                <p class="brand text-center break-all">{leaderboard[2].website.name}</p>
+                                <ButtonStat weight={`${(leaderboard[2].siteWeight / 1000).toFixed()}Ko`} primary={true} />
+                            </div>
+                        </>
+                    )
+                }
             </div>
             <img class="w-full" src="/podium-spe.svg" alt="" />
             <div class="flex flex-col gap-4 mt-4">
-                <List brand="Renault" number="4." weight="320Ko" hasHr={true} />
-                <List brand="Citroën" number="5." weight="200Ko" hasHr={true} />
-                <List brand="Hello Bank" number="6." weight="1Go" hasHr={false} />
+                {
+                    leaderboard.slice(3, 6).map((ranking, index, array) => {
+                        const hasHr = index !== array.length - 1
+
+                        return (
+                            <List
+                                brand={ranking.website.name}
+                                number={`${ranking.rank}.`}
+                                weight={`${(ranking.siteWeight / 1000).toFixed()}Ko`}
+                                hasHr={hasHr}
+                            />
+                        )
+                    })
+                }
             </div>
             <div class="w-full flex flex-row justify-end mt-4">
                 <Button href="" variant="secondary" title="Partager" custom="w-fit" ; icon="share" />
@@ -70,6 +89,44 @@ const leaderboardPreviewByCategory = await getCategoriesLeaderboardPreview()
         </div>
     </div>
 </Layout>
+
+<!-- Card slider -->
+<div class="carousel-container xs:mb-10">
+    <div class="splide overflow-hidden">
+        <div class="splide__track py-16 w-[120%] mx-[-10%] xs:w-full xs:mx-0">
+            <ul class="splide__list">
+                {
+                    leaderboardPreviewByCategory.map(category => {
+                        if (category.ranks && category.ranks.length > 0) {
+                            return (
+                                <li class="splide__slide xs:px-4">
+                                    <div class="scaleControll">
+                                        <Card name={category.name} ranks={category.ranks} />
+                                    </div>
+                                </li>
+                            )
+                        } else {
+                            // Si la catégorie n'a pas de rangs, ne rien rendre
+                            return null
+                        }
+                    })
+                }
+            </ul>
+        </div>
+        <div class="splide__arrows flex flex-row justify-center gap-8 fill-gray100 mt-8">
+            <button class="splide__arrow splide__arrow--prev">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" width="40" height="40" focusable="false"
+                    ><path d="m15.5 0.932-4.3 4.38 14.5 14.6-14.5 14.5 4.3 4.4 14.6-14.6 4.4-4.3-4.4-4.4-14.6-14.6z"></path></svg
+                >
+            </button>
+            <button class="splide__arrow splide__arrow--next">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" width="40" height="40" focusable="false"
+                    ><path d="m15.5 0.932-4.3 4.38 14.5 14.6-14.5 14.5 4.3 4.4 14.6-14.6 4.4-4.3-4.4-4.4-14.6-14.6z"></path></svg
+                >
+            </button>
+        </div>
+    </div>
+</div>
 
 <!-- Card slider -->
 <div class="carousel-container xs:mb-10">
@@ -147,16 +204,23 @@ const leaderboardPreviewByCategory = await getCategoriesLeaderboardPreview()
             radial-gradient(50% 100% at left center, rgba(255, 0, 168, 0.5) 5%, rgba(108, 55, 170, 0) 100%),
             radial-gradient(circle at center, rgb(53, 32, 157) 100%, rgba(145, 224, 255, 0) 100%);
 
-        .resources-container {
-            margin: auto;
+        .carousel-container {
+            position: relative;
+            /* top: -16rem; */
+            margin: -20.1rem 0;
+            z-index: 1;
+        }
+        .resources {
+            position: relative;
+            /* top: -36.7rem; */
+        }
 
-            .resources-text {
-                max-width: 640px;
-            }
+        .resources-text {
+            max-width: 640px;
+        }
 
-            img {
-                max-width: 300px;
-            }
+        img {
+            max-width: 300px;
         }
     }
 
@@ -181,14 +245,20 @@ const leaderboardPreviewByCategory = await getCategoriesLeaderboardPreview()
 	} */
 
     .splide__slide {
-        transform: scale(1);
         transform-origin: center;
         transition: transform 0.3s ease-in-out;
     }
 
     .splide__slide.is-active {
         position: relative;
-        transform: scale(1.1);
+        transform: translateY(-50px);
+    }
+
+    @media (max-width: 390px) {
+        .splide__slide.is-active {
+            position: relative;
+            transform: translateY(0px);
+        }
     }
 </style>
 
@@ -248,17 +318,6 @@ const leaderboardPreviewByCategory = await getCategoriesLeaderboardPreview()
             }
         })
     }
-    /*var splide = new Splide(".splide", {
-		type: "loop",
-		perPage: 5,
-		focus: "center",
-		pagination: false,
-		gap: 32,
-		live: false,
-		classes: {
-			prev: "splide__arrow--prev btn-prev",
-		},
-	});*/
 
     splide.mount()
 </script>

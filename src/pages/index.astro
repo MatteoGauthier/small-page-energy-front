@@ -29,8 +29,11 @@ const leaderboard = await getLeaderboard()
             <div class="flex flex-col gap-8 xs:col-span-1 sm:col-span-1 md:col-span-1">
                 <div class="flex flex-col gap-10">
                     <img src="/logo-h1-spe.png" alt="" />
-                    <div class="flex flex-col gap-8 xs:items-center">
+                    <div class="hero-text flex flex-col gap-8">
+						<div class="flex gap-4 xs:flex-col sm:flex-col md:flex-col">
                         <h2 class="text-blue600">Le classement des plus petites pages !</h2>
+						<img src="/eggplant.svg" alt="Sticker d'une aubergine" class="eggplant-sticker">
+					</div>
                         <p class="text-black">
                             Un classement digne de sa taille qui expose les géants du web en fonction du poids de leurs pages. Ce palmarès, qu'il soit par
                             catégorie ou général, est actualisé mensuellement pour rester dans la course folle du numérique.
@@ -139,6 +142,7 @@ const leaderboard = await getLeaderboard()
 				<h2 class="text-gray100">
                     La course à la <span class="text-blue500 bg-white px-5 py-1 rounded-full whitespace-nowrap">plus petite</span> commence avec des ressources !
                 </h2>
+				<img src="/rule.svg" alt="Sticker d'un mètre" class="rule-sticker">
                 <p class="text-gray100 font-normal">
                     Dans un monde où notre empreinte carbone résonne de plus en plus fort, les grandes entreprises, telles que les mastodontes du CAC 40, se
                     livrent à une course effrénée pour s'approprier le titre de champion de l'éco-responsabilité. Mais derrière les discours pompeux, se cache
@@ -169,8 +173,38 @@ const leaderboard = await getLeaderboard()
 
         .hero-container {
             max-width: 1320px;
+			overflow: hidden;
         }
+
+		.hero-text {
+			position: relative;
+		}
     }
+
+	.eggplant-sticker {
+		display: none;
+
+		@media (min-width: 769px) {
+			display: block;
+			position: absolute;
+			top: -3rem;
+			right: -3rem;
+			width: 20%;
+		}
+	}
+
+	.rule-sticker {
+		display: none;
+
+@media (min-width: 769px) {
+	display: block;
+	position: absolute;
+	top: -3rem;
+	right: -3rem;
+	width: 20%;
+}
+	}
+
     .resources {
         background: radial-gradient(50% 110% at 95% 40%, rgba(99, 70, 243, 0.7) 25%, rgba(108, 55, 170, 0) 50%),
             radial-gradient(50% 100% at left center, rgba(255, 0, 168, 0.5) 5%, rgba(108, 55, 170, 0) 100%),
@@ -189,6 +223,7 @@ const leaderboard = await getLeaderboard()
 
         .resources-text {
             max-width: 640px;
+			position: relative;
         }
 
         img {

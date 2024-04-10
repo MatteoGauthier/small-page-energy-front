@@ -8,8 +8,8 @@ interface Props {
     }
 
 const {
-background=false, 
-socials=true, 
+background=false,
+socials=true,
 marginTop} = Astro.props;
 ---
 
@@ -19,18 +19,18 @@ marginTop} = Astro.props;
         <!-- Banner réseaux sociaux -->
         {
             socials && (
-                <div class={`px-16 xs:px-4  ${marginTop}  z-[1]`}>
-                    <div class="grid grid-cols-12 xs:grid-cols-4 gap-5 w-full rounded-[60px] bg-gray100 py-10">
-                        <div class="flex flex-col gap-8 col-start-3 col-span-5 xs:col-start-2 xs:col-span-2 xs:gap-5 xs:items-center">
-                            <h2 class="text-blue600">Suis-nous sur nos réseaux</h2>
-                            <p class="text-blue600 max-w-xl">
+                <div class={`px-16 xs:px-4 sm:px-4 md:px-4 ${marginTop}  z-[1]`}>
+                    <div class="footer-content grid grid-cols-6 gap-8 xl:gap-24 w-full rounded-[60px] py-20 px-24 xl:px-64 xs:p-8 sm:p-8 md:p-8">
+                        <div class="flex flex-col gap-8 xs:col-span-6 sm:col-span-6 md:col-span-6 col-span-4 xs:gap-5 xs:items-center">
+                            <h2 class="text-blue600 xs:text-center sm:text-center md:text-center">Suis-nous sur nos réseaux</h2>
+                            <p class="text-blue600 xs:text-center sm:text-center md:text-center max-w-xl">
                                 Va suivre notre comm’ sur les réseaux, on fait des
                                 palmarès, on met les sites en concurrence. Avec un peu
                                 de chance on aura même fait un post sur ta toute petite
                                 page !
                             </p>
                         </div>
-                        <div class="flex flex-col xs:flex-col gap-6 col-start-9 col-span-2 xs:col-start-2 xs:justify-center">
+                        <div class="flex flex-col gap-6 xs:col-span-6 sm:col-span-6 md:col-span-6 col-span-1 xs:justify-center sm:justify-center md:justify-center w-fit m-auto">
                             <Button
                                 href=""
                                 variant="primary"
@@ -50,21 +50,21 @@ marginTop} = Astro.props;
                 </div>
             )
         }
-        <!-- Logo + Slogan + Lienss utiles -->
+        <!-- Logo + Slogan + Liens utiles -->
         <div class="flex flex-col gap-16">
-            <div class="flex flex-row xs:flex-col justify-between px-16 xs:gap-8">
+            <div class="flex flex-row xs:flex-col sm:flex-col md:flex-col justify-between px-16 xs:px-4 sm:px-4 md:px-4 gap-8">
                 <div class="flex flex-col gap-6">
-                    <img class="max-w-52" src="/logo-h1-spe.png" alt="" />
-                    <h4 class="text-blue600">
+                    <img class="max-w-52 xs:m-auto sm:m-auto md:m-auto" src="/logo-h1-spe.png" alt="" />
+                    <h4 class="text-blue600 xs:text-center sm:text-center md:text-center">
                         Qui aura la plus petite ?
                     </h4>
                 </div>
-                <div class="flex flex-row xs:flex-col gap-16">
+                <div class="flex flex-row xs:flex-col sm:flex-col gap-16 flex-wrap xs:items-center sm:items-center md:items-center">
                     <div class="flex flex-col gap-5">
-                        <h4 class="text-blue600 text-xl">
+                        <h4 class="text-blue600 text-xl xs:text-center sm:text-center md:text-center">
                             Plan du site
                         </h4>
-                        <div class="flex flex-col gap-4">
+                        <div class="flex flex-col gap-4 xs:text-center sm:text-center md:text-center">
                             <a href="">Accueil</a>
                             <a href="">Classement</a>
                             <a href="">À propos</a>
@@ -72,20 +72,20 @@ marginTop} = Astro.props;
                         </div>
                     </div>
                     <div class="flex flex-col gap-5">
-                        <h4 class="text-blue600 text-xl">
+                        <h4 class="text-blue600 text-xl xs:text-center sm:text-center md:text-center">
                             Ressources
                         </h4>
-                        <div class="flex flex-col gap-4">
+                        <div class="flex flex-col gap-4 xs:text-center sm:text-center md:text-center">
                             <a href="">Osuny</a>
                             <a href="">Ecoindex</a>
                             <a href="">LowwwCarbon</a>
                         </div>
                     </div>
                     <div class="flex flex-col gap-5">
-                        <h4 class="text-blue600 text-xl">
+                        <h4 class="text-blue600 text-xl xs:text-center sm:text-center md:text-center">
                             Réseaux sociaux
                         </h4>
-                        <div class="flex flex-col gap-4">
+                        <div class="flex flex-col gap-4 xs:text-center sm:text-center md:text-center">
                             <a href="">Instagram</a>
                             <a href="">Twitter</a>
                         </div>
@@ -96,6 +96,24 @@ marginTop} = Astro.props;
         </div>
     </div>
 </div>
+
+<style>
+                .footer-content {
+                    background:  radial-gradient(
+                        circle at 200% bottom,
+                        rgba(155,82,239,.5) 20%,
+                        rgba(242,240,255,1) 70%
+                    );
+
+                    @media (min-width: 768px) {
+                        background:  radial-gradient(
+                        circle at center top,
+                        rgba(145,224,255,.2) 0%,
+                        rgba(242,240,255,1) 40%
+                    );
+                    }
+            }
+</style>
 
 {
     background && (
@@ -120,23 +138,3 @@ marginTop} = Astro.props;
         </style>
 	)
 }
-
-<!-- <style>
-    .footer {
-        background: radial-gradient(
-                circle at right bottom,
-                hsla(268, 83%, 63%, 0.4) 0%,
-                rgba(108, 55, 170, 0) 50%
-            ),
-            radial-gradient(
-                circle at left top,
-                rgba(155, 82, 239, 0.4) 0%,
-                rgba(108, 55, 170, 0) 50%
-            ),
-            radial-gradient(
-                circle at center,
-                rgba(145, 224, 255, 0.5) 0%,
-                rgba(145, 224, 255, 0) 85%
-            );
-    }
-</style> -->

@@ -1,0 +1,123 @@
+---
+// Component Imports
+import Button from '../components/Button.astro'
+import Layout from '../layouts/Layout.astro'
+import ButtonStat from '../components/ButtonStat.astro'
+import List from '../components/List.astro'
+import Card from '../components/Card.astro'
+import ListLink from '../components/ListLink.astro'
+import Footer from '../components/Footer.astro'
+import type { CategoryWithLeaderboardPreview } from '../types'
+
+import { Breadcrumbs } from 'astro-breadcrumbs'
+
+const customCrumbs = [
+    {
+        text: 'Accueil',
+        href: '/'
+    },
+    {
+        text: 'À propos',
+        href: '/about'
+    }
+]
+---
+
+<Layout title="Small Page Energy">
+    <Breadcrumbs crumbs={customCrumbs} />
+    <!-- Hero -->
+    <div class="hero w-full h-full pr-4 pl-4 flex justify-center align-center">
+        <h1 class="text-blue600 text-center">À propos</h1>
+    </div>
+
+    <!-- Section 1 -->
+    <section class="about-section w-full h-full grid xs:grid-cols-1 lg:grid-cols-2 p-4 gap-4 m-auto mt-16 mb-16">
+        <img src="/logo-h1-spe.png" alt="" class="max-w-xs lg:order-1 justify-self-center" />
+        <div class="flex flex-col">
+            <div class="flex flex-col gap-10">
+                <div class="flex flex-col gap-8 xs:items-center">
+                    <h2 class="text-blue600">Qui sommes-nous ?</h2>
+                    <p class="text-black">
+                        Alors que les entreprises se battent pour se parer d'un manteau vert, nous on décide de <span class="text-blue300"
+                            >passer à l'action</span
+                        >. Issus des départements Métiers du Multimédia et de l'Internet de l'IUT Bordeaux Montaigne, nous établissons un <span
+                            class="text-blue300">classement</span
+                        > dévoilant le véritable <span class="text-blue300">poids</span> écologique des sites web des grandes entreprises.
+                    </p>
+                    <p>
+                        C’est fini les paroles en l'air : il est temps de <span class="text-blue300">peser les actes.</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="calculate-section lg:pt-28 xs:pt-22 w-full h-full lg:pb-64 xs:pb-48 p-8 pr-4 pl-4">
+        <div class="calculate-container w-full h-full grid lg:grid-cols-12 xs:grid-cols-4 gap-5 justify-center lg:px-16 xs:px-4">
+            <img class="xs:order-1 lg:scale-150" src="/woman-with-pc.svg" alt="Illustration d'un développeur" />
+            <div class="flex flex-col gap-8 lg:col-start-6 lg:col-span-6 xs:col-start-1 xs:col-span-4">
+                <h2 class="text-gray100">
+                    Et comment on sait <span class="text-blue500 bg-white px-5 py-1 rounded-full whitespace-nowrap">combien</span> fait la tienne ?
+                </h2>
+                <p class="text-gray100 font-normal">
+                    On a des super-développeurs qui utilisent Lighthouse pour déterminer si la tienne mérite une bonne note dans notre classement, ou si
+                    finalement t’es pas aussi un pro qu’on le pensait ...
+                </p>
+            </div>
+        </div>
+    </div>
+</Layout>
+
+<!-- Footer -->
+<Footer />
+
+<style>
+    body {
+        background: radial-gradient(circle at right bottom, hsla(268, 83%, 63%, 0.4) 0%, rgba(108, 55, 170, 0) 50%),
+            radial-gradient(circle at 0 -2%, rgba(155, 82, 239, 0.4) 0%, rgba(108, 55, 170, 0) 10%),
+            radial-gradient(circle at right center, rgba(155, 82, 239, 0.4) 0%, rgba(108, 55, 170, 0) 30%),
+            radial-gradient(circle at left center, rgba(155, 82, 239, 0.4) 0%, rgba(108, 55, 170, 0) 30%),
+            radial-gradient(circle at center, rgba(145, 224, 255, 0.5) 0%, rgba(145, 224, 255, 0) 85%);
+
+        @media (min-width: 768px) {
+            background: radial-gradient(circle at 120% 70%, hsla(268, 83%, 63%, 0.4) 0%, rgba(108, 55, 170, 0) 30%),
+                radial-gradient(circle at -30% -5%, rgba(155, 82, 239, 0.4) 20%, rgba(108, 55, 170, 0) 30%),
+                radial-gradient(circle at 0 130%, rgba(155, 82, 239, 0.4) 20%, rgba(108, 55, 170, 0) 30%),
+                radial-gradient(circle at right center, rgba(155, 82, 239, 0.4) 0%, rgba(108, 55, 170, 0) 30%),
+                radial-gradient(circle at center, rgba(145, 224, 255, 0.5) 0%, rgba(145, 224, 255, 0) 85%);
+        }
+    }
+
+    .hero {
+        margin-top: 10rem;
+
+        @media (min-width: 768px) {
+            margin-top: 1rem;
+        }
+    }
+
+    .about-section {
+        max-width: 1320px;
+
+        p {
+            span {
+                font-weight: 700;
+            }
+        }
+    }
+
+    .calculate-section {
+        background: radial-gradient(50% 110% at 95% 40%, rgba(99, 70, 243, 0.7) 25%, rgba(108, 55, 170, 0) 50%),
+            radial-gradient(50% 100% at left center, rgba(255, 0, 168, 0.5) 5%, rgba(108, 55, 170, 0) 100%),
+            radial-gradient(circle at center, rgb(53, 32, 157) 100%, rgba(145, 224, 255, 0) 100%);
+
+        .calculate-container {
+            max-width: 1320px;
+            margin: auto;
+
+            img {
+                max-width: 300px;
+            }
+        }
+    }
+</style>

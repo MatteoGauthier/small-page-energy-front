@@ -23,17 +23,17 @@ const leaderboard = await getLeaderboard()
     <div class="hero w-full h-full pt-24 pb-80">
         <!-- Grid containing elements -->
         <div
-            class="hero-container m-auto w-full h-full grid xs:grid-cols-1 sm:grid-cols-1 md:grid-cols-1 grid-cols-2 gap-32 items-center justify-center px-16 xs:px-4 sm:px-4 md:px-4 "
+            class="hero-container overflow-hidden m-auto w-full h-full grid xs:grid-cols-1 sm:grid-cols-1 md:grid-cols-1 grid-cols-2 gap-32 items-center justify-center px-16 xs:px-4 sm:px-4 md:px-4"
         >
             <!-- Text + logo -->
             <div class="flex flex-col gap-8 xs:col-span-1 sm:col-span-1 md:col-span-1">
                 <div class="flex flex-col gap-10">
                     <img src="/logo-h1-spe.png" alt="" />
                     <div class="hero-text flex flex-col gap-8">
-						<div class="flex gap-4 xs:flex-col sm:flex-col md:flex-col">
-                        <h2 class="text-blue600">Le classement des plus petites pages !</h2>
-						<img src="/eggplant.svg" alt="Sticker d'une aubergine" class="eggplant-sticker">
-					</div>
+                        <div class="flex gap-4 xs:flex-col sm:flex-col md:flex-col">
+                            <h2 class="text-blue600">Le classement des plus petites pages !</h2>
+                            <img src="/eggplant.svg" alt="Sticker d'une aubergine" class="eggplant-sticker" />
+                        </div>
                         <p class="text-black">
                             Un classement digne de sa taille qui expose les géants du web en fonction du poids de leurs pages. Ce palmarès, qu'il soit par
                             catégorie ou général, est actualisé mensuellement pour rester dans la course folle du numérique.
@@ -44,7 +44,7 @@ const leaderboard = await getLeaderboard()
                 <Button href="" variant="primary" title="Voir le classement général" custom="w-fit" />
             </div>
             <!-- Classement -->
-            <div class="w-full xs:col-span-1 sm:col-span-1 md:col-span-1 ">
+            <div class="w-full xs:col-span-1 sm:col-span-1 md:col-span-1">
                 <div class="grid grid-cols-3 mb-8">
                     {
                         (
@@ -129,7 +129,7 @@ const leaderboard = await getLeaderboard()
     </div>
 
     <!-- Resources -->
-    <section class="resources pt-[28rem] pr-4 pb-[12rem] pl-4 -mt-[24rem]">
+    <section class="resources overflow-hidden pt-[28rem] pr-4 pb-[12rem] pl-4 -mt-[24rem]">
         <div
             class="resources-container max-w-screen-xl w-full h-full grid xs:grid-cols-1 sm:grid-cols-1 md:grid-cols-1 grid-cols-6 gap-5 justify-center items-center m-auto"
         >
@@ -139,10 +139,10 @@ const leaderboard = await getLeaderboard()
                 alt="Illustration d'un développeur"
             />
             <div class="resources-text flex flex-col gap-8 col-span-4 justify-self-center">
-				<h2 class="text-gray100">
+                <h2 class="text-gray100">
                     La course à la <span class="text-blue500 bg-white px-5 py-1 rounded-full whitespace-nowrap">plus petite</span> commence avec des ressources !
                 </h2>
-				<img src="/rule.svg" alt="Sticker d'un mètre" class="rule-sticker">
+                <img src="/rule.svg" alt="Sticker d'un mètre" class="rule-sticker" />
                 <p class="text-gray100 font-normal">
                     Dans un monde où notre empreinte carbone résonne de plus en plus fort, les grandes entreprises, telles que les mastodontes du CAC 40, se
                     livrent à une course effrénée pour s'approprier le titre de champion de l'éco-responsabilité. Mais derrière les discours pompeux, se cache
@@ -173,37 +173,24 @@ const leaderboard = await getLeaderboard()
 
         .hero-container {
             max-width: 1320px;
-			overflow: hidden;
         }
 
-		.hero-text {
-			position: relative;
-		}
+        .hero-text {
+            position: relative;
+        }
     }
 
-	.eggplant-sticker {
-		display: none;
+    .eggplant-sticker {
+        display: none;
 
-		@media (min-width: 769px) {
-			display: block;
-			position: absolute;
-			top: -3rem;
-			right: -3rem;
-			width: 20%;
-		}
-	}
-
-	.rule-sticker {
-		display: none;
-
-@media (min-width: 769px) {
-	display: block;
-	position: absolute;
-	top: -3rem;
-	right: -3rem;
-	width: 20%;
-}
-	}
+        @media (min-width: 769px) {
+            display: block;
+            position: absolute;
+            top: -3rem;
+            right: -3rem;
+            width: 20%;
+        }
+    }
 
     .resources {
         background: radial-gradient(50% 110% at 95% 40%, rgba(99, 70, 243, 0.7) 25%, rgba(108, 55, 170, 0) 50%),
@@ -223,11 +210,23 @@ const leaderboard = await getLeaderboard()
 
         .resources-text {
             max-width: 640px;
-			position: relative;
+            position: relative;
         }
 
         img {
             max-width: 300px;
+        }
+
+        .rule-sticker {
+            display: none;
+
+            @media (min-width: 769px) {
+                display: block;
+                position: absolute;
+                top: -7rem;
+                right: 2rem;
+                width: 15%;
+            }
         }
     }
 

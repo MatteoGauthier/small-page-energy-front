@@ -34,6 +34,8 @@ const leaderboardPreviewByCategory = await getCategoriesLeaderboardPreview()
 							Ce palmarès, qu'il soit par catégorie ou général,
 							est actualisé mensuellement pour rester dans la
 							course folle du digital.
+							</br></br>
+							Qui aura la plus petite ?
 						</p>
 						<Button
 							href=""
@@ -157,7 +159,7 @@ const leaderboardPreviewByCategory = await getCategoriesLeaderboardPreview()
 			</div>
 			<!-- Text + Liens Resources -->
 			<div class="flex flex-col gap-8 col-start-6 col-span-6 xs:col-start-1 xs:col-span-4">
-				<h2 class="text-gray100">La course à la <span class="text-blue500 bg-white px-5 py-1 rounded-full whitespace-nowrap">plus petite</span>
+				<h2 class="text-gray100 xs:leading-[150%]">La course à la <span class="text-blue500 bg-white px-5 py-1 rounded-full whitespace-nowrap">plus petite</span>
 				</h2>
 				<p class="text-gray100 font-normal">
 					Dans un monde où notre empreinte carbone résonne de plus en
@@ -182,7 +184,7 @@ const leaderboardPreviewByCategory = await getCategoriesLeaderboardPreview()
 		</div>
 	</div>
 	<!-- Footer -->
-	<Footer/>
+	<Footer background={true} marginTop="-mt-24"/>
 </Layout>
 
 <style>

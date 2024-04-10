@@ -23,10 +23,10 @@ const leaderboard = await getLeaderboard()
     <div class="hero w-full h-full pt-24 pb-80">
         <!-- Grid containing elements -->
         <div
-            class="hero-container m-auto w-full h-full grid xs:grid-cols-1 sm:grid-cols-1 md:grid-cols-1 xs:px-4 grid-cols-12 gap-32 items-center justify-center px-16"
+            class="hero-container m-auto w-full h-full grid xs:grid-cols-1 sm:grid-cols-1 md:grid-cols-1 grid-cols-2 gap-32 items-center justify-center px-16 xs:px-4 sm:px-4 md:px-4 "
         >
             <!-- Text + logo -->
-            <div class="flex flex-col gap-8 xs:col-span-1 sm:col-span-1 md:col-span-1 col-span-6">
+            <div class="flex flex-col gap-8 xs:col-span-1 sm:col-span-1 md:col-span-1">
                 <div class="flex flex-col gap-10">
                     <img src="/logo-h1-spe.png" alt="" />
                     <div class="flex flex-col gap-8 xs:items-center">
@@ -41,8 +41,8 @@ const leaderboard = await getLeaderboard()
                 <Button href="" variant="primary" title="Voir le classement général" custom="w-fit" />
             </div>
             <!-- Classement -->
-            <div class="w-full xs:col-span-1 sm:col-span-1 md:col-span-1 col-span-6">
-                <div class="grid grid-cols-3 mb-4">
+            <div class="w-full xs:col-span-1 sm:col-span-1 md:col-span-1 ">
+                <div class="grid grid-cols-3 mb-8">
                     {
                         (
                                 <div class="col-span-1 flex flex-col justify-center items-center gap-3 w-full top-[41%] xs:top-[38%] relative">
@@ -126,7 +126,7 @@ const leaderboard = await getLeaderboard()
     </div>
 
     <!-- Resources -->
-    <section class="resources pt-[20rem] xs:pt-[22rem] sm:pt-[22rem] md:pt-[22rem] pr-4 pb-[12rem] pl-4">
+    <section class="resources pt-[28rem] pr-4 pb-[12rem] pl-4 -mt-[24rem]">
         <div
             class="resources-container max-w-screen-xl w-full h-full grid xs:grid-cols-1 sm:grid-cols-1 md:grid-cols-1 grid-cols-6 gap-5 justify-center items-center m-auto"
         >
@@ -136,6 +136,9 @@ const leaderboard = await getLeaderboard()
                 alt="Illustration d'un développeur"
             />
             <div class="resources-text flex flex-col gap-8 col-span-4 justify-self-center">
+				<h2 class="text-gray100">
+                    La course à la <span class="text-blue500 bg-white px-5 py-1 rounded-full whitespace-nowrap">plus petite</span> commence avec des ressources !
+                </h2>
                 <p class="text-gray100 font-normal">
                     Dans un monde où notre empreinte carbone résonne de plus en plus fort, les grandes entreprises, telles que les mastodontes du CAC 40, se
                     livrent à une course effrénée pour s'approprier le titre de champion de l'éco-responsabilité. Mais derrière les discours pompeux, se cache

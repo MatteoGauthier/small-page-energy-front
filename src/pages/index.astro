@@ -99,7 +99,7 @@ const leaderboard = await getLeaderboard()
                         leaderboardPreviewByCategory.map(category => {
                             if (category.ranks && category.ranks.length > 0) {
                                 return (
-                                    <li class="splide__slide md:px-4">
+                                    <li class="splide__slide md:px-20 sm:px-20 xs:px-12">
                                         <div class="scaleControll">
                                             <Card name={category.name} ranks={category.ranks} />
                                         </div>

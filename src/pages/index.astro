@@ -20,7 +20,7 @@ const leaderboard = await getLeaderboard()
 
 <Layout title="Small Page Energy">
     <!-- Hero -->
-    <div class="hero w-full h-full pt-24 pb-80">
+    <div class="hero w-full h-full pt-24 pb-96">
         <!-- Grid containing elements -->
         <div
             class="hero-container m-auto w-full h-full grid xs:grid-cols-1 sm:grid-cols-1 md:grid-cols-1 grid-cols-2 gap-32 items-center justify-center px-16 xs:px-4 sm:px-4 md:px-4 "
@@ -93,13 +93,13 @@ const leaderboard = await getLeaderboard()
     <!-- Card slider -->
     <div class="carousel-container xs:mb-10">
         <div class="splide overflow-hidden">
-            <div class="splide__track py-16 w-[120%] mx-[-10%] xs:w-full xs:mx-0">
+            <div class="splide__track pt-16 w-[120%] mx-[-10%] md:w-full md:mx-0">
                 <ul class="splide__list">
                     {
                         leaderboardPreviewByCategory.map(category => {
                             if (category.ranks && category.ranks.length > 0) {
                                 return (
-                                    <li class="splide__slide xs:px-4">
+                                    <li class="splide__slide md:px-4">
                                         <div class="scaleControll">
                                             <Card name={category.name} ranks={category.ranks} />
                                         </div>
@@ -113,7 +113,7 @@ const leaderboard = await getLeaderboard()
                     }
                 </ul>
             </div>
-            <div class="splide__arrows flex flex-row justify-center gap-8 fill-gray100 mt-8">
+            <div class="splide__arrows flex flex-row justify-center gap-8 fill-gray100 mt-4 z-10">
                 <button class="splide__arrow splide__arrow--prev">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" width="40" height="40" focusable="false"
                         ><path d="m15.5 0.932-4.3 4.38 14.5 14.6-14.5 14.5 4.3 4.4 14.6-14.6 4.4-4.3-4.4-4.4-14.6-14.6z"></path></svg
@@ -206,20 +206,11 @@ const leaderboard = await getLeaderboard()
 	}
 
     .resources {
+		position: relative;
+
         background: radial-gradient(50% 110% at 95% 40%, rgba(99, 70, 243, 0.7) 25%, rgba(108, 55, 170, 0) 50%),
             radial-gradient(50% 100% at left center, rgba(255, 0, 168, 0.5) 5%, rgba(108, 55, 170, 0) 100%),
             radial-gradient(circle at center, rgb(53, 32, 157) 100%, rgba(145, 224, 255, 0) 100%);
-
-        .carousel-container {
-            position: relative;
-            /* top: -16rem; */
-            margin: -20.1rem 0;
-            z-index: 1;
-        }
-        .resources {
-            position: relative;
-            /* top: -36.7rem; */
-        }
 
         .resources-text {
             max-width: 640px;
@@ -234,7 +225,7 @@ const leaderboard = await getLeaderboard()
     .carousel-container {
         position: relative;
         /* top: -16rem; */
-        margin: -18.7rem 0;
+        margin: -22.1rem 0;
         z-index: 1;
     }
     .resources {
@@ -274,7 +265,7 @@ const leaderboard = await getLeaderboard()
 
     import Splide from '@splidejs/splide'
 
-    if (window.matchMedia('(min-width: 1024px)').matches) {
+    if (window.matchMedia('(min-width: 1380px)').matches) {
         var splide = new Splide('.splide', {
             type: 'loop',
             perPage: 5,
@@ -286,8 +277,8 @@ const leaderboard = await getLeaderboard()
                 prev: 'splide__arrow--prev btn-prev'
             }
         })
-    } else if (window.matchMedia('(max-width: 1024px)').matches) {
-        if (window.matchMedia('(max-width: 390px)').matches) {
+    } else if (window.matchMedia('(max-width: 1380px)').matches) {
+        if (window.matchMedia('(max-width: 768px)').matches) {
             var splide = new Splide('.splide', {
                 type: 'loop',
                 perPage: 1,

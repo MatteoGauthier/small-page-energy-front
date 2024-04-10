@@ -23,7 +23,7 @@ const props = Astro.props
                 brand={item.website.name}
                 number={`${index + 1}.`}
                 weight={`${(item.siteWeight / 1000).toFixed()}Ko`}
-                hasHr={index !== props.ranks.length}
+                hasHr={index !== 2}
             />
             )
         })

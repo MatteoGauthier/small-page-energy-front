@@ -1,323 +1,254 @@
 ---
 // Component Imports
-import Button from "../components/Button.astro";
-import Layout from "../layouts/Layout.astro";
-import ButtonStat from "../components/ButtonStat.astro";
-import List from "../components/List.astro";
-import Card from "../components/Card.astro";
-import ListLink from "../components/ListLink.astro";
-import Footer from "../components/Footer.astro";
-import type { CategoryWithLeaderboardPreview } from "../types";
-import { getCategoriesLeaderboardPreview } from "../lib/api";
+import Button from '../components/Button.astro'
+import Layout from '../layouts/Layout.astro'
+import ButtonStat from '../components/ButtonStat.astro'
+import List from '../components/List.astro'
+import Card from '../components/Card.astro'
+import ListLink from '../components/ListLink.astro'
+import Footer from '../components/Footer.astro'
+import type { CategoryWithLeaderboardPreview } from '../types'
+import { getCategoriesLeaderboardPreview } from '../lib/api'
 
 // Full Astro Component Syntax:
 // https://docs.astro.build/basics/astro-components/
 
 const leaderboardPreviewByCategory = await getCategoriesLeaderboardPreview()
-
 ---
 
 <Layout title="Small Page Energy">
-	<!-- Hero -->
-	<div class="hero w-full h-full pt-24 pb-80">
-		<!-- Grid containing elements -->
-		<div class="w-full h-full grid xs:grid-cols-4 xs:px-4 grid-cols-12 gap-5 items-center justify-center px-16 xs:gap-y-20 xs:mb-10">
-			<!-- Text + logo -->
-			<div class="flex flex-col gap-8 xs:col-start-1 xs:col-span-4 col-start-2 col-span-5">
-				<div class="flex flex-col gap-10">
-					<img src="/logo-h1-spe.png" alt="" />
-					<div class="flex flex-col gap-8 xs:items-center">
-						<h2 class="text-blue600">Qui aura la plus petite ?</h2>
-						<p class="text-black">
-							Un classement digne de sa taille qui expose les
-							géants du web en fonction du poids de leurs pages.
-							Ce palmarès, qu'il soit par catégorie ou général,
-							est actualisé mensuellement pour rester dans la
-							course folle du digital.
-							</br></br>
-							Qui aura la plus petite ?
-						</p>
-						<Button
-							href=""
-							variant="primary"
-							title="Voir le classement général"
-							custom="w-fit"
-						/>
-					</div>
-				</div>
-			</div>
-			<!-- Classement -->
-			<div class="flex flex-col gap-4 col-start-8 xs:col-start-1 col-span-4">
-				<div class="w-full">
-					<div class="grid grid-cols-3 mb-4">
-						<div class="col-span-1 flex flex-col justify-center items-center gap-3 w-full top-[41%] xs:top-[38%] relative">
-							<img src="/peugeot-logo.png" alt="" class="logo-entreprise max-h-16 w-auto"/>
-							<p class="brand text-center break-all">Brand</p>
-							<ButtonStat weight="32Ko" primary={true} />
-						</div>
-						<div class="col-span-1 flex flex-col justify-center items-center gap-3 w-full">
-							<img src="/peugeot-logo.png" alt="" class="logo-entreprise max-h-16 w-auto"/>
-							<p class="brand text-center break-all">Brand</p>
-							<ButtonStat weight="32Ko" primary={true} />
-						</div>
-						<div class="col-span-1 flex flex-col justify-center items-center gap-3 w-full top-[72%] xs:top-[66%] relative">
-							<img src="/peugeot-logo.png" alt="" class="logo-entreprise max-h-16 w-auto"/>
-							<p class="brand text-center break-all">Brand</p>
-							<ButtonStat weight="32Ko" primary={true} />
-						</div>
-					</div>
-					<img class="w-full" src="/podium-spe.svg" alt="" />
-					<div class="flex flex-col gap-4 mt-4">
-						<List
-							brand="Renault"
-							number="4."
-							weight="320Ko"
-							hasHr={true}
-						/>
-						<List
-							brand="Citroën"
-							number="5."
-							weight="200Ko"
-							hasHr={true}
-						/>
-						<List
-							brand="Hello Bank"
-							number="6."
-							weight="1Go"
-							hasHr={false}
-						/>
-					</div>
-					<div class="w-full flex flex-row justify-end mt-4">
-						<Button
-							href=""
-							variant="secondary"
-							title="Partager"
-							custom="w-fit";
-							icon="share"
-						/>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- Card slider -->
-	<div class="carousel-container xs:mb-10">
-		<div class="splide overflow-hidden">
-			<div class="splide__track py-8 w-[120%] mx-[-8.5%] xs:w-full xs:mx-0">
-				<ul class="splide__list">
-					{
-						leaderboardPreviewByCategory.map((category) => {
-							return (
-								<li class="splide__slide">
-									<div class="scaleControll">
-										<Card
-											name={category.name}
-											ranks={category.ranks}
-										/>
-									</div>
-								</li>
-							)
-						})
-					}
-				</ul>
-			</div>
-			<div class="splide__arrows flex flex-row justify-center gap-8 fill-gray100 mt-8">
-				<button class="splide__arrow splide__arrow--prev">
-					<svg
-						xmlns="http://www.w3.org/2000/svg"
-						viewBox="0 0 40 40"
-						width="40"
-						height="40"
-						focusable="false"
-						><path
-							d="m15.5 0.932-4.3 4.38 14.5 14.6-14.5 14.5 4.3 4.4 14.6-14.6 4.4-4.3-4.4-4.4-14.6-14.6z"
-						></path></svg
-					>
-				</button>
-				<button class="splide__arrow splide__arrow--next">
-					<svg
-						xmlns="http://www.w3.org/2000/svg"
-						viewBox="0 0 40 40"
-						width="40"
-						height="40"
-						focusable="false"
-						><path
-							d="m15.5 0.932-4.3 4.38 14.5 14.6-14.5 14.5 4.3 4.4 14.6-14.6 4.4-4.3-4.4-4.4-14.6-14.6z"
-						></path></svg
-					>
-				</button>
-			</div>
-		</div>
-	</div>
-	<!-- Resources -->
-	<div class="resources pt-[28rem] xs:pt-[22rem] w-full h-full pb-64 xs:pb-48 xs:mb-10">
-		<!-- Grid cotaining elements -->
-		<div class="w-full h-full grid grid-cols-12 xs:grid-cols-4 gap-5 justify-center px-16 xs:px-4">
-			<!-- Img -->
-			<div class="flex flex-col gap-8 col-start-2 col-span-3 xs:col-start-1 xs:col-span-4">
-				<img class="scale-150 xs:scale-100" src="/woman-with-pc.svg" alt="" class="w-full"/>
-			</div>
-			<!-- Text + Liens Resources -->
-			<div class="flex flex-col gap-8 col-start-6 col-span-6 xs:col-start-1 xs:col-span-4">
-				<h2 class="text-gray100 xs:leading-[150%]">La course à la <span class="text-blue500 bg-white px-5 py-1 rounded-full whitespace-nowrap">plus petite</span>
-				</h2>
-				<p class="text-gray100 font-normal">
-					Dans un monde où notre empreinte carbone résonne de plus en
-					plus fort, les grandes entreprises, telles que les
-					mastodontes du CAC 40, se livrent à une course effrénée pour
-					s'approprier le titre de champion de l'éco-responsabilité.
-					Mais derrière les discours pompeux, se cache parfois une
-					réalité moins étincelante : le greenwashing.
-
-					</br></br>
-
-					Pour que tu puisses plus t’informer voici quelques ressources
-					intéressantes :
-				</p>
-				<div class="flex flex-col w-full">
-					<ListLink href="" name="LowwwCarbon case studies" hasHr={true} />
-					<ListLink href="" name="Osuny" hasHr={true} />
-					<ListLink href="" name="EcoIndex" hasHr={true} />
-					<ListLink href="" name="Web Carbon Calculator" hasHr={false} />
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- Footer -->
-	<Footer background={true} marginTop="-mt-24"/>
+    <!-- Hero -->
+    <div class="hero w-full h-full pt-24 pb-80">
+        <!-- Grid containing elements -->
+        <div class="w-full h-full grid xs:grid-cols-4 xs:px-4 grid-cols-12 gap-5 items-center justify-center px-16 xs:gap-y-20 xs:mb-10">
+            <!-- Text + logo -->
+            <div class="flex flex-col gap-8 xs:col-start-1 xs:col-span-4 col-start-2 col-span-5">
+                <div class="flex flex-col gap-10">
+                    <img src="/logo-h1-spe.png" alt="" />
+                    <div class="flex flex-col gap-8 xs:items-center">
+                        <h2 class="text-blue600">Qui aura la plus petite ?</h2>
+                        <p class="text-black">
+                            Un classement digne de sa taille qui expose les géants du web en fonction du poids de leurs pages. Ce palmarès, qu'il soit par
+                            catégorie ou général, est actualisé mensuellement pour rester dans la course folle du digital.
+                        </p>
+                    </div>
+                    Qui aura la plus petite ?
+                </div>
+                <Button href="" variant="primary" title="Voir le classement général" custom="w-fit" />
+            </div>
+        </div>
+    </div>
+    <!-- Classement -->
+    <div class="flex flex-col gap-4 col-start-8 xs:col-start-1 col-span-4">
+        <div class="w-full">
+            <div class="grid grid-cols-3 mb-4">
+                <div class="col-span-1 flex flex-col justify-center items-center gap-3 w-full top-[41%] xs:top-[38%] relative">
+                    <img src="/peugeot-logo.png" alt="" class="logo-entreprise max-h-16 w-auto" />
+                    <p class="brand text-center break-all">Brand</p>
+                    <ButtonStat weight="32Ko" primary={true} />
+                </div>
+                <div class="col-span-1 flex flex-col justify-center items-center gap-3 w-full">
+                    <img src="/peugeot-logo.png" alt="" class="logo-entreprise max-h-16 w-auto" />
+                    <p class="brand text-center break-all">Brand</p>
+                    <ButtonStat weight="32Ko" primary={true} />
+                </div>
+                <div class="col-span-1 flex flex-col justify-center items-center gap-3 w-full top-[72%] xs:top-[66%] relative">
+                    <img src="/peugeot-logo.png" alt="" class="logo-entreprise max-h-16 w-auto" />
+                    <p class="brand text-center break-all">Brand</p>
+                    <ButtonStat weight="32Ko" primary={true} />
+                </div>
+            </div>
+            <img class="w-full" src="/podium-spe.svg" alt="" />
+            <div class="flex flex-col gap-4 mt-4">
+                <List brand="Renault" number="4." weight="320Ko" hasHr={true} />
+                <List brand="Citroën" number="5." weight="200Ko" hasHr={true} />
+                <List brand="Hello Bank" number="6." weight="1Go" hasHr={false} />
+            </div>
+            <div class="w-full flex flex-row justify-end mt-4">
+                <Button href="" variant="secondary" title="Partager" custom="w-fit" ; icon="share" />
+            </div>
+        </div>
+    </div>
 </Layout>
 
+<!-- Card slider -->
+<div class="carousel-container xs:mb-10">
+    <div class="splide overflow-hidden">
+        <div class="splide__track py-8 w-[120%] mx-[-8.5%] xs:w-full xs:mx-0">
+            <ul class="splide__list">
+                {
+                    leaderboardPreviewByCategory.map(category => {
+                        return (
+                            <li class="splide__slide">
+                                <div class="scaleControll">
+                                    <Card name={category.name} ranks={category.ranks} />
+                                </div>
+                            </li>
+                        )
+                    })
+                }
+            </ul>
+        </div>
+        <div class="splide__arrows flex flex-row justify-center gap-8 fill-gray100 mt-8">
+            <button class="splide__arrow splide__arrow--prev">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" width="40" height="40" focusable="false"
+                    ><path d="m15.5 0.932-4.3 4.38 14.5 14.6-14.5 14.5 4.3 4.4 14.6-14.6 4.4-4.3-4.4-4.4-14.6-14.6z"></path></svg
+                >
+            </button>
+            <button class="splide__arrow splide__arrow--next">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" width="40" height="40" focusable="false"
+                    ><path d="m15.5 0.932-4.3 4.38 14.5 14.6-14.5 14.5 4.3 4.4 14.6-14.6 4.4-4.3-4.4-4.4-14.6-14.6z"></path></svg
+                >
+            </button>
+        </div>
+    </div>
+</div>
+<!-- Resources -->
+<section class="resources pt-[28rem] xs:pt-[22rem] sm:pt-[22rem] md:pt-[22rem] pr-4 pb-[12rem] pl-4">
+    <div
+        class="resources-container max-w-screen-xl w-full h-full grid xs:grid-cols-1 sm:grid-cols-1 md:grid-cols-1 grid-cols-6 gap-5 justify-center items-center"
+    >
+        <img
+            class="xs:justify-self-center sm:justify-self-center md:justify-self-center col-span-2 w-full justify-self-center"
+            src="/woman-with-pc.svg"
+            alt="Illustration d'un développeur"
+        />
+        <div class="resources-text flex flex-col gap-8 col-span-4 justify-self-center">
+            <p class="text-gray100 font-normal">
+                Dans un monde où notre empreinte carbone résonne de plus en plus fort, les grandes entreprises, telles que les mastodontes du CAC 40, se livrent
+                à une course effrénée pour s'approprier le titre de champion de l'éco-responsabilité. Mais derrière les discours pompeux, se cache parfois une
+                réalité moins étincelante : le greenwashing.
+            </p>
+            <p class="text-gray100 font-normal">Pour que tu puisses plus t’informer voici quelques ressources intéressantes :</p>
+            <div class="flex flex-col w-full">
+                <ListLink href="" name="LowwwCarbon case studies" hasHr={true} />
+                <ListLink href="" name="Osuny" hasHr={true} />
+                <ListLink href="" name="EcoIndex" hasHr={true} />
+                <ListLink href="" name="Web Carbon Calculator" hasHr={false} />
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<Footer background={true} marginTop="-mt-24" />
+
 <style>
-	@import "/node_modules/@splidejs/splide/dist/css/splide-core.min.css";
+    @import '/node_modules/@splidejs/splide/dist/css/splide-core.min.css';
 
-	.hero {
-		background: radial-gradient(
-				circle at right bottom,
-				hsla(268, 83%, 63%, 0.4) 0%,
-				rgba(108, 55, 170, 0) 50%
-			),
-			radial-gradient(
-				circle at left top,
-				rgba(155, 82, 239, 0.4) 0%,
-				rgba(108, 55, 170, 0) 50%
-			),
-			radial-gradient(
-				circle at center,
-				rgba(145, 224, 255, 0.5) 0%,
-				rgba(145, 224, 255, 0) 85%
-			);
-		/* 200% */
-	}
-	.resources {
-		background: radial-gradient(
-				50% 110% at 95% 40%,
-				rgba(99, 70, 243, 0.7) 25%,
-				rgba(108, 55, 170, 0) 50%
-			),
-			radial-gradient(
-				50% 100% at left center,
-				rgba(255, 0, 168, 0.5) 5%,
-				rgba(108, 55, 170, 0) 100%
-			),
-			radial-gradient(
-				circle at center,
-				rgb(53, 32, 157) 100%,
-				rgba(145, 224, 255, 0) 100%
-			);
-	}
+    .hero {
+        background: radial-gradient(circle at right bottom, hsla(268, 83%, 63%, 0.4) 0%, rgba(108, 55, 170, 0) 50%),
+            radial-gradient(circle at left top, rgba(155, 82, 239, 0.4) 0%, rgba(108, 55, 170, 0) 50%),
+            radial-gradient(circle at center, rgba(145, 224, 255, 0.5) 0%, rgba(145, 224, 255, 0) 85%);
+        /* 200% */
+    }
+    .resources {
+        background: radial-gradient(50% 110% at 95% 40%, rgba(99, 70, 243, 0.7) 25%, rgba(108, 55, 170, 0) 50%),
+            radial-gradient(50% 100% at left center, rgba(255, 0, 168, 0.5) 5%, rgba(108, 55, 170, 0) 100%),
+            radial-gradient(circle at center, rgb(53, 32, 157) 100%, rgba(145, 224, 255, 0) 100%);
 
-	.carousel-container {
-		position: relative;
-		/* top: -16rem; */
-		margin: -18.7rem 0;
-		z-index: 1;
-	}
-	.resources {
-		position: relative;
-		/* top: -36.7rem; */
-	}
+        .resources-container {
+            margin: auto;
 
-	.splide__arrow--prev svg {
-		transform: scaleX(-1);
-	}
+            .resources-text {
+                max-width: 640px;
+            }
 
-	/* .splide__track {
+            img {
+                max-width: 300px;
+            }
+        }
+    }
+
+    .carousel-container {
+        position: relative;
+        /* top: -16rem; */
+        margin: -18.7rem 0;
+        z-index: 1;
+    }
+    .resources {
+        position: relative;
+        /* top: -36.7rem; */
+    }
+
+    .splide__arrow--prev svg {
+        transform: scaleX(-1);
+    }
+
+    /* .splide__track {
 		width: 120%;
 		margin: 0 -8.5%;
 	} */
 
-	.splide__slide {
-		transform: scale(1);
-		transform-origin: center;
-		transition: transform 0.3s ease-in-out;
-	}
+    .splide__slide {
+        transform: scale(1);
+        transform-origin: center;
+        transition: transform 0.3s ease-in-out;
+    }
 
-	.splide__slide.is-active {
-		position: relative;
-		transform: scale(1.1);
-	}
+    .splide__slide.is-active {
+        position: relative;
+        transform: scale(1.1);
+    }
 </style>
 
 <script>
-	import "/node_modules/@splidejs/splide/dist/js/splide.min.js";
+    import '/node_modules/@splidejs/splide/dist/js/splide.min.js'
 
-	import Splide from "@splidejs/splide";
+    import Splide from '@splidejs/splide'
 
-	if (window.matchMedia("(min-width: 1024px)").matches) {
-			var splide = new Splide(".splide", {
-			type: "loop",
-			perPage: 5,
-			focus: "center",
-			pagination: false,
-			gap: 32,
-			live: false,
-			classes: {
-				prev: "splide__arrow--prev btn-prev",
-			},
-		});
-	} 
-	else if (window.matchMedia("(max-width: 1024px)").matches){
-		if (window.matchMedia("(max-width: 390px)").matches){
-			var splide = new Splide(".splide", {
-				type: "loop",
-				perPage: 1,
-				focus: "center",
-				pagination: false,
-				gap: 48,
-				live: false,
-				classes: {
-					prev: "splide__arrow--prev btn-prev",
-				},
-			});
-		}
-		else{
-			var splide = new Splide(".splide", {
-				type: "loop",
-				perPage: 3,
-				focus: "center",
-				pagination: false,
-				gap: 32,
-				live: false,
-				classes: {
-					prev: "splide__arrow--prev btn-prev",
-				},
-			});
-		}
-	}
-	else if (window.matchMedia("(max-width: 390px)").matches){
-		var splide = new Splide(".splide", {
-			type: "loop",
-			perPage: 1,
-			focus: "center",
-			pagination: false,
-			gap: 12,
-			live: false,
-			classes: {
-				prev: "splide__arrow--prev btn-prev",
-			},
-		});
-	}
-	/*var splide = new Splide(".splide", {
+    if (window.matchMedia('(min-width: 1024px)').matches) {
+        var splide = new Splide('.splide', {
+            type: 'loop',
+            perPage: 5,
+            focus: 'center',
+            pagination: false,
+            gap: 32,
+            live: false,
+            classes: {
+                prev: 'splide__arrow--prev btn-prev'
+            }
+        })
+    } else if (window.matchMedia('(max-width: 1024px)').matches) {
+        if (window.matchMedia('(max-width: 390px)').matches) {
+            var splide = new Splide('.splide', {
+                type: 'loop',
+                perPage: 1,
+                focus: 'center',
+                pagination: false,
+                gap: 48,
+                live: false,
+                classes: {
+                    prev: 'splide__arrow--prev btn-prev'
+                }
+            })
+        } else {
+            var splide = new Splide('.splide', {
+                type: 'loop',
+                perPage: 3,
+                focus: 'center',
+                pagination: false,
+                gap: 32,
+                live: false,
+                classes: {
+                    prev: 'splide__arrow--prev btn-prev'
+                }
+            })
+        }
+    } else if (window.matchMedia('(max-width: 390px)').matches) {
+        var splide = new Splide('.splide', {
+            type: 'loop',
+            perPage: 1,
+            focus: 'center',
+            pagination: false,
+            gap: 12,
+            live: false,
+            classes: {
+                prev: 'splide__arrow--prev btn-prev'
+            }
+        })
+    }
+    /*var splide = new Splide(".splide", {
 		type: "loop",
 		perPage: 5,
 		focus: "center",
@@ -329,5 +260,5 @@ const leaderboardPreviewByCategory = await getCategoriesLeaderboardPreview()
 		},
 	});*/
 
-	splide.mount();
+    splide.mount()
 </script>

@@ -13,18 +13,18 @@ const { custom, title, href, icon, variant } = Astro.props
 
 {
     variant == 'primary' ? (
-        <a href={href} class={`primary-btn nav-link text-gray100 bg-blue400 text-center flex flex-row gap-2 justify-center w-fit ${custom}`}>
+        <a href={href} class={`primary-btn nav-link text-gray100 bg-blue400 text-center flex flex-row gap-2 justify-center w-fit ${custom} items-center`}>
             <div class={`icon ${icon}`} />
             {title}
         </a>
     ) : variant == 'secondary' ? (
-        <a href={href} class={`secondary-btn nav-link text-blue500 bg-gray100 text-center flex flex-row gap-2 w-fit ${custom}`}>
+        <a href={href} class={`secondary-btn nav-link text-blue500 bg-gray100 text-center flex flex-row gap-2 w-fit ${custom} items-center`}>
             <div class={`icon ${icon}`} />
             {title}
         </a>
     ) : (
         variant == 'tertiary' && (
-            <a href={href} class={`tertiary-btn nav-link text-gray100 bg-pink100 text-center mx-auto flex flex-row gap-2 w-fit ${custom}`}>
+            <a href={href} class={`tertiary-btn nav-link text-gray100 bg-pink100 text-center mx-auto flex flex-row gap-2 w-fit ${custom} items-center`}>
                 <div class={`icon ${icon}`} />
                 {title}
             </a>

@@ -20,7 +20,7 @@ marginTop} = Astro.props;
         {
             socials && (
                 <div class={`px-16 xs:px-4 sm:px-4 md:px-4 ${marginTop}  z-[1]`}>
-                    <div class="footer-content grid grid-cols-6 gap-8 xl:gap-24 w-full rounded-[60px] py-20 px-24 xl:px-64 xs:p-8 sm:p-8 md:p-8">
+                    <div class="footer-content bg-gray100 grid grid-cols-6 gap-8 xl:gap-24 w-full rounded-[60px] py-20 px-24 xl:px-64 xs:p-8 sm:p-8 md:p-8">
                         <div class="flex flex-col gap-8 xs:col-span-6 sm:col-span-6 md:col-span-6 col-span-4 xs:gap-5 xs:items-center">
                             <h2 class="text-blue600 xs:text-center sm:text-center md:text-center">Suis-nous sur nos réseaux</h2>
                             <p class="text-blue600 xs:text-center sm:text-center md:text-center max-w-xl">
@@ -96,24 +96,6 @@ marginTop} = Astro.props;
         </div>
     </div>
 </div>
-
-<style>
-                .footer-content {
-                    background:  radial-gradient(
-                        circle at 200% bottom,
-                        rgba(155,82,239,.5) 20%,
-                        rgba(242,240,255,1) 70%
-                    );
-
-                    @media (min-width: 768px) {
-                        background:  radial-gradient(
-                        circle at center top,
-                        rgba(145,224,255,.2) 0%,
-                        rgba(242,240,255,1) 40%
-                    );
-                    }
-            }
-</style>
 
 {
     background && (

@@ -38,53 +38,53 @@ const leaderboard = await getLeaderboard()
                 </div>
                 <Button href="" variant="primary" title="Voir le classement général" custom="w-fit" />
             </div>
-        </div>
-    </div>
-    <!-- Classement -->
-    <div class="flex flex-col gap-4 col-start-8 xs:col-start-1 col-span-4">
-        <div class="w-full">
-            <div class="grid grid-cols-3 mb-4">
-                {
-                    (
-                        <>
-                            <div class="col-span-1 flex flex-col justify-center items-center gap-3 w-full top-[41%] xs:top-[38%] relative">
-                                <img src="/peugeot-logo.png" alt="" class="logo-entreprise max-h-16 w-auto" />
-                                <p class="brand text-center break-all">{leaderboard[1].website.name}</p>
-                                <ButtonStat weight={`${(leaderboard[1].siteWeight / 1000).toFixed()}Ko`} primary={true} />
-                            </div>
-                            <div class="col-span-1 flex flex-col justify-center items-center gap-3 w-full">
-                                <img src="/peugeot-logo.png" alt="" class="logo-entreprise max-h-16 w-auto" />
-                                <p class="brand text-center break-all">{leaderboard[0].website.name}</p>
-                                <ButtonStat weight={`${(leaderboard[0].siteWeight / 1000).toFixed()}Ko`} primary={true} />
-                            </div>
-                            <div class="col-span-1 flex flex-col justify-center items-center gap-3 w-full top-[72%] xs:top-[66%] relative">
-                                <img src="/peugeot-logo.png" alt="" class="logo-entreprise max-h-16 w-auto" />
-                                <p class="brand text-center break-all">{leaderboard[2].website.name}</p>
-                                <ButtonStat weight={`${(leaderboard[2].siteWeight / 1000).toFixed()}Ko`} primary={true} />
-                            </div>
-                        </>
-                    )
-                }
-            </div>
-            <img class="w-full" src="/podium-spe.svg" alt="" />
-            <div class="flex flex-col gap-4 mt-4">
-                {
-                    leaderboard.slice(3, 6).map((ranking, index, array) => {
-                        const hasHr = index !== array.length - 1
+            <!-- Classement -->
+            <div class="flex flex-col gap-4 col-start-8 xs:col-start-1 col-span-4">
+                <div class="w-full">
+                    <div class="grid grid-cols-3 mb-4">
+                        {
+                            (
+                                <>
+                                    <div class="col-span-1 flex flex-col justify-center items-center gap-3 w-full top-[41%] xs:top-[38%] relative">
+                                        <img src="/peugeot-logo.png" alt="" class="logo-entreprise max-h-16 w-auto" />
+                                        <p class="brand text-center break-all">{leaderboard[1].website.name}</p>
+                                        <ButtonStat weight={`${(leaderboard[1].siteWeight / 1000).toFixed()}Ko`} primary={true} />
+                                    </div>
+                                    <div class="col-span-1 flex flex-col justify-center items-center gap-3 w-full">
+                                        <img src="/peugeot-logo.png" alt="" class="logo-entreprise max-h-16 w-auto" />
+                                        <p class="brand text-center break-all">{leaderboard[0].website.name}</p>
+                                        <ButtonStat weight={`${(leaderboard[0].siteWeight / 1000).toFixed()}Ko`} primary={true} />
+                                    </div>
+                                    <div class="col-span-1 flex flex-col justify-center items-center gap-3 w-full top-[72%] xs:top-[66%] relative">
+                                        <img src="/peugeot-logo.png" alt="" class="logo-entreprise max-h-16 w-auto" />
+                                        <p class="brand text-center break-all">{leaderboard[2].website.name}</p>
+                                        <ButtonStat weight={`${(leaderboard[2].siteWeight / 1000).toFixed()}Ko`} primary={true} />
+                                    </div>
+                                </>
+                            )
+                        }
+                    </div>
+                    <img class="w-full" src="/podium-spe.svg" alt="" />
+                    <div class="flex flex-col gap-4 mt-4">
+                        {
+                            leaderboard.slice(3, 6).map((ranking, index, array) => {
+                                const hasHr = index !== array.length - 1
 
-                        return (
-                            <List
-                                brand={ranking.website.name}
-                                number={`${ranking.rank}.`}
-                                weight={`${(ranking.siteWeight / 1000).toFixed()}Ko`}
-                                hasHr={hasHr}
-                            />
-                        )
-                    })
-                }
-            </div>
-            <div class="w-full flex flex-row justify-end mt-4">
-                <Button href="" variant="secondary" title="Partager" custom="w-fit" ; icon="share" />
+                                return (
+                                    <List
+                                        brand={ranking.website.name}
+                                        number={`${ranking.rank}.`}
+                                        weight={`${(ranking.siteWeight / 1000).toFixed()}Ko`}
+                                        hasHr={hasHr}
+                                    />
+                                )
+                            })
+                        }
+                    </div>
+                    <div class="w-full flex flex-row justify-end mt-4">
+                        <Button href="" variant="secondary" title="Partager" custom="w-fit" ; icon="share" />
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -161,9 +161,9 @@ const leaderboard = await getLeaderboard()
     </div>
 </div>
 <!-- Resources -->
-<section class="resources pt-[28rem] xs:pt-[22rem] sm:pt-[22rem] md:pt-[22rem] pr-4 pb-[12rem] pl-4">
+<section class="resources pt-[20rem] xs:pt-[22rem] sm:pt-[22rem] md:pt-[22rem] -mt-[32rem] pr-4 pb-[12rem] pl-4">
     <div
-        class="resources-container max-w-screen-xl w-full h-full grid xs:grid-cols-1 sm:grid-cols-1 md:grid-cols-1 grid-cols-6 gap-5 justify-center items-center"
+        class="resources-container max-w-screen-xl w-full h-full grid xs:grid-cols-1 sm:grid-cols-1 md:grid-cols-1 grid-cols-6 gap-5 justify-center items-center m-auto"
     >
         <img
             class="xs:justify-self-center sm:justify-self-center md:justify-self-center col-span-2 w-full justify-self-center"

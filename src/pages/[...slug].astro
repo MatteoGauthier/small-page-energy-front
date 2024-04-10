@@ -1,0 +1,23 @@
+---
+import { type CollectionEntry, getCollection } from "astro:content"
+import Layout from "../layouts/Layout.astro"
+import { getCategoriesLeaderboardPreview } from "../lib/api"
+import type { CategoriesLeaderboardPreview } from "../types/api/getCategoriesLeaderboardPreview"
+
+export async function getStaticPaths() {
+  const categories = await getCategoriesLeaderboardPreview()
+  return categories.map((c) => ({
+    params: { slug: c.slug },
+    props: c,
+  }))
+}
+type Props = CategoriesLeaderboardPreview[number]
+
+const props = Astro.props
+---
+
+<Layout title="TODO">
+  <pre>
+    {JSON.stringify(props, null, 2)}
+  </pre>
+</Layout>

@@ -8,70 +8,20 @@ import Card from "../components/Card.astro";
 import ListLink from "../components/ListLink.astro";
 import Footer from "../components/Footer.astro";
 import type { CategoryWithLeaderboardPreview } from "../types";
+import { getCategoriesLeaderboardPreview } from "../lib/api";
 
 // Full Astro Component Syntax:
 // https://docs.astro.build/basics/astro-components/
 
-const leaderboardPreviewByCategory: CategoryWithLeaderboardPreview[] = [
-	{
-		name: "Mode",
-		top: [
-			{
-				name: "Channel",
-				size: 18000,
-			},
-			{
-				name: "LV",
-				size: 20000,
-			},
-			{
-				name: "Dior",
-				size: 58000,
-			},
-		],
-	},
-	{
-		name: "Electricité",
-		top: [
-			{
-				name: "Channel",
-				size: 18000,
-			},
-			{
-				name: "LV",
-				size: 20000,
-			},
-			{
-				name: "Dior",
-				size: 58000,
-			},
-		],
-	},
-	{
-		name: "Electronique",
-		top: [
-			{
-				name: "Channel",
-				size: 18000,
-			},
-			{
-				name: "LV",
-				size: 20000,
-			},
-			{
-				name: "Dior",
-				size: 58000,
-			},
-		],
-	},
-];
+const leaderboardPreviewByCategory = await getCategoriesLeaderboardPreview()
+
 ---
 
 <Layout title="Small Page Energy">
 	<!-- Hero -->
 	<div class="hero w-full h-full pt-24 pb-80">
 		<!-- Grid containing elements -->
-		<div class="w-full h-full grid xs:grid-cols-4 xs:px-4 grid-cols-12 gap-5 items-center justify-center px-16 xs:gap-y-20">
+		<div class="w-full h-full grid xs:grid-cols-4 xs:px-4 grid-cols-12 gap-5 items-center justify-center px-16 xs:gap-y-20 xs:mb-10">
 			<!-- Text + logo -->
 			<div class="flex flex-col gap-8 xs:col-start-1 xs:col-span-4 col-start-2 col-span-5">
 				<div class="flex flex-col gap-10">
@@ -151,7 +101,7 @@ const leaderboardPreviewByCategory: CategoryWithLeaderboardPreview[] = [
 		</div>
 	</div>
 	<!-- Card slider -->
-	<div class="carousel-container">
+	<div class="carousel-container xs:mb-10">
 		<div class="splide overflow-hidden">
 			<div class="splide__track py-8 w-[120%] mx-[-8.5%] xs:w-full xs:mx-0">
 				<ul class="splide__list">
@@ -162,11 +112,11 @@ const leaderboardPreviewByCategory: CategoryWithLeaderboardPreview[] = [
 									<div class="scaleControll">
 										<Card
 											name={category.name}
-											top={category.top}
+											ranks={category.ranks}
 										/>
 									</div>
 								</li>
-							);
+							)
 						})
 					}
 				</ul>
@@ -200,7 +150,7 @@ const leaderboardPreviewByCategory: CategoryWithLeaderboardPreview[] = [
 		</div>
 	</div>
 	<!-- Resources -->
-	<div class="resources pt-[28rem] xs:pt-[22rem] w-full h-full pb-64 xs:pb-48">
+	<div class="resources pt-[28rem] xs:pt-[22rem] w-full h-full pb-64 xs:pb-48 xs:mb-10">
 		<!-- Grid cotaining elements -->
 		<div class="w-full h-full grid grid-cols-12 xs:grid-cols-4 gap-5 justify-center px-16 xs:px-4">
 			<!-- Img -->

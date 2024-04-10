@@ -22,173 +22,139 @@ const leaderboard = await getLeaderboard()
     <!-- Hero -->
     <div class="hero w-full h-full pt-24 pb-80">
         <!-- Grid containing elements -->
-        <div class="w-full h-full grid xs:grid-cols-4 xs:px-4 grid-cols-12 gap-5 items-center justify-center px-16 xs:gap-y-20 xs:mb-10">
+        <div
+            class="hero-container m-auto w-full h-full grid xs:grid-cols-1 sm:grid-cols-1 md:grid-cols-1 xs:px-4 grid-cols-12 gap-32 items-center justify-center px-16"
+        >
             <!-- Text + logo -->
-            <div class="flex flex-col gap-8 xs:col-start-1 xs:col-span-4 col-start-2 col-span-5">
+            <div class="flex flex-col gap-8 xs:col-span-1 sm:col-span-1 md:col-span-1 col-span-6">
                 <div class="flex flex-col gap-10">
                     <img src="/logo-h1-spe.png" alt="" />
                     <div class="flex flex-col gap-8 xs:items-center">
-                        <h2 class="text-blue600">Qui aura la plus petite ?</h2>
+                        <h2 class="text-blue600">Le classement des plus petites pages !</h2>
                         <p class="text-black">
                             Un classement digne de sa taille qui expose les géants du web en fonction du poids de leurs pages. Ce palmarès, qu'il soit par
-                            catégorie ou général, est actualisé mensuellement pour rester dans la course folle du digital.
+                            catégorie ou général, est actualisé mensuellement pour rester dans la course folle du numérique.
                         </p>
+                        <p class="text-black">Qui aura la plus petite ?</p>
                     </div>
-                    Qui aura la plus petite ?
                 </div>
                 <Button href="" variant="primary" title="Voir le classement général" custom="w-fit" />
             </div>
             <!-- Classement -->
-            <div class="flex flex-col gap-4 col-start-8 xs:col-start-1 col-span-4">
-                <div class="w-full">
-                    <div class="grid grid-cols-3 mb-4">
-                        {
-                            (
-                                <>
-                                    <div class="col-span-1 flex flex-col justify-center items-center gap-3 w-full top-[41%] xs:top-[38%] relative">
-                                        <img src="/peugeot-logo.png" alt="" class="logo-entreprise max-h-16 w-auto" />
-                                        <p class="brand text-center break-all">{leaderboard[1].website.name}</p>
-                                        <ButtonStat weight={`${(leaderboard[1].siteWeight / 1000).toFixed()}Ko`} primary={true} />
-                                    </div>
-                                    <div class="col-span-1 flex flex-col justify-center items-center gap-3 w-full">
-                                        <img src="/peugeot-logo.png" alt="" class="logo-entreprise max-h-16 w-auto" />
-                                        <p class="brand text-center break-all">{leaderboard[0].website.name}</p>
-                                        <ButtonStat weight={`${(leaderboard[0].siteWeight / 1000).toFixed()}Ko`} primary={true} />
-                                    </div>
-                                    <div class="col-span-1 flex flex-col justify-center items-center gap-3 w-full top-[72%] xs:top-[66%] relative">
-                                        <img src="/peugeot-logo.png" alt="" class="logo-entreprise max-h-16 w-auto" />
-                                        <p class="brand text-center break-all">{leaderboard[2].website.name}</p>
-                                        <ButtonStat weight={`${(leaderboard[2].siteWeight / 1000).toFixed()}Ko`} primary={true} />
-                                    </div>
-                                </>
-                            )
-                        }
-                    </div>
-                    <img class="w-full" src="/podium-spe.svg" alt="" />
-                    <div class="flex flex-col gap-4 mt-4">
-                        {
-                            leaderboard.slice(3, 6).map((ranking, index, array) => {
-                                const hasHr = index !== array.length - 1
+            <div class="w-full xs:col-span-1 sm:col-span-1 md:col-span-1 col-span-6">
+                <div class="grid grid-cols-3 mb-4">
+                    {
+                        (
+                                <div class="col-span-1 flex flex-col justify-center items-center gap-3 w-full top-[41%] xs:top-[38%] relative">
+                                    <img src="/peugeot-logo.png" alt="" class="logo-entreprise max-h-16 w-auto" />
+                                    <p class="brand text-center break-all">{leaderboard[1].website.name}</p>
+                                    <ButtonStat weight={`${(leaderboard[1].siteWeight / 1000).toFixed()}Ko`} primary={true} />
+                                </div>
+                                <div class="col-span-1 flex flex-col justify-center items-center gap-3 w-full">
+                                    <img src="/peugeot-logo.png" alt="" class="logo-entreprise max-h-16 w-auto" />
+                                    <p class="brand text-center break-all">{leaderboard[0].website.name}</p>
+                                    <ButtonStat weight={`${(leaderboard[0].siteWeight / 1000).toFixed()}Ko`} primary={true} />
+                                </div>
+                                <div class="col-span-1 flex flex-col justify-center items-center gap-3 w-full top-[72%] xs:top-[66%] relative">
+                                    <img src="/peugeot-logo.png" alt="" class="logo-entreprise max-h-16 w-auto" />
+                                    <p class="brand text-center break-all">{leaderboard[2].website.name}</p>
+                                    <ButtonStat weight={`${(leaderboard[2].siteWeight / 1000).toFixed()}Ko`} primary={true} />
+                                </div>
+                        )
+                    }
+                </div>
+                <img class="w-full" src="/podium-spe.svg" alt="" />
+                <div class="flex flex-col gap-4 mt-4">
+                    {
+                        leaderboard.slice(3, 6).map((ranking, index, array) => {
+                            const hasHr = index !== array.length - 1
 
-                                return (
-                                    <List
-                                        brand={ranking.website.name}
-                                        number={`${ranking.rank}.`}
-                                        weight={`${(ranking.siteWeight / 1000).toFixed()}Ko`}
-                                        hasHr={hasHr}
-                                    />
-                                )
-                            })
-                        }
-                    </div>
-                    <div class="w-full flex flex-row justify-end mt-4">
-                        <Button href="" variant="secondary" title="Partager" custom="w-fit" ; icon="share" />
-                    </div>
+                            return (
+                                <List
+                                    brand={ranking.website.name}
+                                    number={`${ranking.rank}.`}
+                                    weight={`${(ranking.siteWeight / 1000).toFixed()}Ko`}
+                                    hasHr={hasHr}
+                                />
+                            )
+                        })
+                    }
+                </div>
+                <div class="w-full flex flex-row justify-end mt-4">
+                    <Button href="" variant="secondary" title="Partager" custom="w-fit" ; icon="share" />
                 </div>
             </div>
         </div>
     </div>
-</Layout>
 
-<!-- Card slider -->
-<div class="carousel-container xs:mb-10">
-    <div class="splide overflow-hidden">
-        <div class="splide__track py-16 w-[120%] mx-[-10%] xs:w-full xs:mx-0">
-            <ul class="splide__list">
-                {
-                    leaderboardPreviewByCategory.map(category => {
-                        if (category.ranks && category.ranks.length > 0) {
-                            return (
-                                <li class="splide__slide xs:px-4">
-                                    <div class="scaleControll">
-                                        <Card name={category.name} ranks={category.ranks} />
-                                    </div>
-                                </li>
-                            )
-                        } else {
-                            // Si la catégorie n'a pas de rangs, ne rien rendre
-                            return null
-                        }
-                    })
-                }
-            </ul>
-        </div>
-        <div class="splide__arrows flex flex-row justify-center gap-8 fill-gray100 mt-8">
-            <button class="splide__arrow splide__arrow--prev">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" width="40" height="40" focusable="false"
-                    ><path d="m15.5 0.932-4.3 4.38 14.5 14.6-14.5 14.5 4.3 4.4 14.6-14.6 4.4-4.3-4.4-4.4-14.6-14.6z"></path></svg
-                >
-            </button>
-            <button class="splide__arrow splide__arrow--next">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" width="40" height="40" focusable="false"
-                    ><path d="m15.5 0.932-4.3 4.38 14.5 14.6-14.5 14.5 4.3 4.4 14.6-14.6 4.4-4.3-4.4-4.4-14.6-14.6z"></path></svg
-                >
-            </button>
-        </div>
-    </div>
-</div>
-
-<!-- Card slider -->
-<div class="carousel-container xs:mb-10">
-    <div class="splide overflow-hidden">
-        <div class="splide__track py-8 w-[120%] mx-[-8.5%] xs:w-full xs:mx-0">
-            <ul class="splide__list">
-                {
-                    leaderboardPreviewByCategory.map(category => {
-                        return (
-                            <li class="splide__slide">
-                                <div class="scaleControll">
-                                    <Card name={category.name} ranks={category.ranks} />
-                                </div>
-                            </li>
-                        )
-                    })
-                }
-            </ul>
-        </div>
-        <div class="splide__arrows flex flex-row justify-center gap-8 fill-gray100 mt-8">
-            <button class="splide__arrow splide__arrow--prev">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" width="40" height="40" focusable="false"
-                    ><path d="m15.5 0.932-4.3 4.38 14.5 14.6-14.5 14.5 4.3 4.4 14.6-14.6 4.4-4.3-4.4-4.4-14.6-14.6z"></path></svg
-                >
-            </button>
-            <button class="splide__arrow splide__arrow--next">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" width="40" height="40" focusable="false"
-                    ><path d="m15.5 0.932-4.3 4.38 14.5 14.6-14.5 14.5 4.3 4.4 14.6-14.6 4.4-4.3-4.4-4.4-14.6-14.6z"></path></svg
-                >
-            </button>
-        </div>
-    </div>
-</div>
-<!-- Resources -->
-<section class="resources pt-[20rem] xs:pt-[22rem] sm:pt-[22rem] md:pt-[22rem] -mt-[32rem] pr-4 pb-[12rem] pl-4">
-    <div
-        class="resources-container max-w-screen-xl w-full h-full grid xs:grid-cols-1 sm:grid-cols-1 md:grid-cols-1 grid-cols-6 gap-5 justify-center items-center m-auto"
-    >
-        <img
-            class="xs:justify-self-center sm:justify-self-center md:justify-self-center col-span-2 w-full justify-self-center"
-            src="/woman-with-pc.svg"
-            alt="Illustration d'un développeur"
-        />
-        <div class="resources-text flex flex-col gap-8 col-span-4 justify-self-center">
-            <p class="text-gray100 font-normal">
-                Dans un monde où notre empreinte carbone résonne de plus en plus fort, les grandes entreprises, telles que les mastodontes du CAC 40, se livrent
-                à une course effrénée pour s'approprier le titre de champion de l'éco-responsabilité. Mais derrière les discours pompeux, se cache parfois une
-                réalité moins étincelante : le greenwashing.
-            </p>
-            <p class="text-gray100 font-normal">Pour que tu puisses plus t’informer voici quelques ressources intéressantes :</p>
-            <div class="flex flex-col w-full">
-                <ListLink href="" name="LowwwCarbon case studies" hasHr={true} />
-                <ListLink href="" name="Osuny" hasHr={true} />
-                <ListLink href="" name="EcoIndex" hasHr={true} />
-                <ListLink href="" name="Web Carbon Calculator" hasHr={false} />
+    <!-- Card slider -->
+    <div class="carousel-container xs:mb-10">
+        <div class="splide overflow-hidden">
+            <div class="splide__track py-16 w-[120%] mx-[-10%] xs:w-full xs:mx-0">
+                <ul class="splide__list">
+                    {
+                        leaderboardPreviewByCategory.map(category => {
+                            if (category.ranks && category.ranks.length > 0) {
+                                return (
+                                    <li class="splide__slide xs:px-4">
+                                        <div class="scaleControll">
+                                            <Card name={category.name} ranks={category.ranks} />
+                                        </div>
+                                    </li>
+                                )
+                            } else {
+                                // Si la catégorie n'a pas de rangs, ne rien rendre
+                                return null
+                            }
+                        })
+                    }
+                </ul>
+            </div>
+            <div class="splide__arrows flex flex-row justify-center gap-8 fill-gray100 mt-8">
+                <button class="splide__arrow splide__arrow--prev">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" width="40" height="40" focusable="false"
+                        ><path d="m15.5 0.932-4.3 4.38 14.5 14.6-14.5 14.5 4.3 4.4 14.6-14.6 4.4-4.3-4.4-4.4-14.6-14.6z"></path></svg
+                    >
+                </button>
+                <button class="splide__arrow splide__arrow--next">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" width="40" height="40" focusable="false"
+                        ><path d="m15.5 0.932-4.3 4.38 14.5 14.6-14.5 14.5 4.3 4.4 14.6-14.6 4.4-4.3-4.4-4.4-14.6-14.6z"></path></svg
+                    >
+                </button>
             </div>
         </div>
     </div>
-</section>
 
-<!-- Footer -->
-<Footer background={true} marginTop="-mt-24" />
+    <!-- Resources -->
+    <section class="resources pt-[20rem] xs:pt-[22rem] sm:pt-[22rem] md:pt-[22rem] pr-4 pb-[12rem] pl-4">
+        <div
+            class="resources-container max-w-screen-xl w-full h-full grid xs:grid-cols-1 sm:grid-cols-1 md:grid-cols-1 grid-cols-6 gap-5 justify-center items-center m-auto"
+        >
+            <img
+                class="xs:justify-self-center sm:justify-self-center md:justify-self-center col-span-2 w-full justify-self-center"
+                src="/woman-with-pc.svg"
+                alt="Illustration d'un développeur"
+            />
+            <div class="resources-text flex flex-col gap-8 col-span-4 justify-self-center">
+                <p class="text-gray100 font-normal">
+                    Dans un monde où notre empreinte carbone résonne de plus en plus fort, les grandes entreprises, telles que les mastodontes du CAC 40, se
+                    livrent à une course effrénée pour s'approprier le titre de champion de l'éco-responsabilité. Mais derrière les discours pompeux, se cache
+                    parfois une réalité moins étincelante : le greenwashing.
+                </p>
+                <p class="text-gray100 font-normal">Pour que tu puisses plus t’informer voici quelques ressources intéressantes :</p>
+                <div class="flex flex-col w-full">
+                    <ListLink href="" name="LowwwCarbon case studies" hasHr={true} />
+                    <ListLink href="" name="Osuny" hasHr={true} />
+                    <ListLink href="" name="EcoIndex" hasHr={true} />
+                    <ListLink href="" name="Web Carbon Calculator" hasHr={false} />
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <Footer background={true} marginTop="-mt-24" />
+</Layout>
 
 <style>
     @import '/node_modules/@splidejs/splide/dist/css/splide-core.min.css';
@@ -197,7 +163,10 @@ const leaderboard = await getLeaderboard()
         background: radial-gradient(circle at right bottom, hsla(268, 83%, 63%, 0.4) 0%, rgba(108, 55, 170, 0) 50%),
             radial-gradient(circle at left top, rgba(155, 82, 239, 0.4) 0%, rgba(108, 55, 170, 0) 50%),
             radial-gradient(circle at center, rgba(145, 224, 255, 0.5) 0%, rgba(145, 224, 255, 0) 85%);
-        /* 200% */
+
+        .hero-container {
+            max-width: 1320px;
+        }
     }
     .resources {
         background: radial-gradient(50% 110% at 95% 40%, rgba(99, 70, 243, 0.7) 25%, rgba(108, 55, 170, 0) 50%),

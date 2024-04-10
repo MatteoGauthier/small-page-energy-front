@@ -1,5 +1,7 @@
 ---
 import Navbar from '../components/Navbar.astro';
+import "../assets/cabinet-grotesk.css"
+import "../assets/reset.css"
 
 interface Props {
     title: string
@@ -12,8 +14,6 @@ const { title } = Astro.props
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width" />
-        <link rel="stylesheet" href="../../cabinet-grotesk.css" />
-        <link rel="stylesheet" href="../../reset.css" />
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <meta name="generator" content={Astro.generator} />
         <title>{title}</title>

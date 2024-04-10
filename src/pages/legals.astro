@@ -9,7 +9,7 @@ import ListLink from '../components/ListLink.astro'
 import Footer from '../components/Footer.astro'
 import type { CategoryWithLeaderboardPreview } from '../types'
 
-import { Breadcrumbs } from 'astro-breadcrumbs'
+import { Breadcrumbs } from '../../node_modules/astro-breadcrumbs';
 
 const customCrumbs = [
     {
@@ -114,9 +114,9 @@ const customCrumbs = [
             </section>
         </div>
     </section>
-
+    
     <!-- Footer -->
-    <Footer />
+    <Footer socials={false} />
 </Layout>
 
 <style>

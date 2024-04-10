@@ -104,13 +104,13 @@ const leaderboard = await getLeaderboard()
 	<!-- Card slider -->
 	<div class="carousel-container xs:mb-10">
 		<div class="splide overflow-hidden">
-			<div class="splide__track py-8 w-[120%] mx-[-8.5%] xs:w-full xs:mx-0">
+			<div class="splide__track py-16 w-[120%] mx-[-10%] xs:w-full xs:mx-0">
 				<ul class="splide__list">
 					{
 						leaderboardPreviewByCategory.map((category) => {
 							if (category.ranks && category.ranks.length > 0) {
 								return (
-									<li class="splide__slide">
+									<li class="splide__slide xs:px-4">
 										<div class="scaleControll">
 											<Card
 												name={category.name}
@@ -235,7 +235,7 @@ const leaderboard = await getLeaderboard()
 	.carousel-container {
 		position: relative;
 		/* top: -16rem; */
-		margin: -18.7rem 0;
+		margin: -20.1rem 0;
 		z-index: 1;
 	}
 	.resources {
@@ -253,15 +253,20 @@ const leaderboard = await getLeaderboard()
 	} */
 
 	.splide__slide {
-		transform: scale(1);
 		transform-origin: center;
 		transition: transform 0.3s ease-in-out;
 	}
 
 	.splide__slide.is-active {
 		position: relative;
-		transform: scale(1.1);
+		transform: translateY(-50px);
 	}
+
+	@media (min-width: 390px) {
+
+	}
+
+
 </style>
 
 <script>

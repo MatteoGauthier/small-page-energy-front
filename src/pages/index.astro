@@ -8,12 +8,14 @@ import Card from "../components/Card.astro";
 import ListLink from "../components/ListLink.astro";
 import Footer from "../components/Footer.astro";
 import type { CategoryWithLeaderboardPreview } from "../types";
-import { getCategoriesLeaderboardPreview } from "../lib/api";
+import { getCategoriesLeaderboardPreview, getLeaderboard } from "../lib/api";
 
 // Full Astro Component Syntax:
 // https://docs.astro.build/basics/astro-components/
 
 const leaderboardPreviewByCategory = await getCategoriesLeaderboardPreview()
+
+const leaderboard = await getLeaderboard()
 
 ---
 
@@ -50,42 +52,41 @@ const leaderboardPreviewByCategory = await getCategoriesLeaderboardPreview()
 			<div class="flex flex-col gap-4 col-start-8 xs:col-start-1 col-span-4">
 				<div class="w-full">
 					<div class="grid grid-cols-3 mb-4">
-						<div class="col-span-1 flex flex-col justify-center items-center gap-3 w-full top-[41%] xs:top-[38%] relative">
-							<img src="/peugeot-logo.png" alt="" class="logo-entreprise max-h-16 w-auto"/>
-							<p class="brand text-center break-all">Brand</p>
-							<ButtonStat weight="32Ko" primary={true} />
-						</div>
-						<div class="col-span-1 flex flex-col justify-center items-center gap-3 w-full">
-							<img src="/peugeot-logo.png" alt="" class="logo-entreprise max-h-16 w-auto"/>
-							<p class="brand text-center break-all">Brand</p>
-							<ButtonStat weight="32Ko" primary={true} />
-						</div>
-						<div class="col-span-1 flex flex-col justify-center items-center gap-3 w-full top-[72%] xs:top-[66%] relative">
-							<img src="/peugeot-logo.png" alt="" class="logo-entreprise max-h-16 w-auto"/>
-							<p class="brand text-center break-all">Brand</p>
-							<ButtonStat weight="32Ko" primary={true} />
-						</div>
+						{
+							<div class="col-span-1 flex flex-col justify-center items-center gap-3 w-full top-[41%] xs:top-[38%] relative">
+								<img src="/peugeot-logo.png" alt="" class="logo-entreprise max-h-16 w-auto"/>
+								<p class="brand text-center break-all">{leaderboard[1].website.name}</p>
+								<ButtonStat weight={`${(leaderboard[1].siteWeight / 1000).toFixed()}Ko`} primary={true} />
+							</div>
+							<div class="col-span-1 flex flex-col justify-center items-center gap-3 w-full">
+								<img src="/peugeot-logo.png" alt="" class="logo-entreprise max-h-16 w-auto"/>
+								<p class="brand text-center break-all">{leaderboard[0].website.name}</p>
+								<ButtonStat weight={`${(leaderboard[0].siteWeight / 1000).toFixed()}Ko`} primary={true} />
+							</div>
+							<div class="col-span-1 flex flex-col justify-center items-center gap-3 w-full top-[72%] xs:top-[66%] relative">
+								<img src="/peugeot-logo.png" alt="" class="logo-entreprise max-h-16 w-auto"/>
+								<p class="brand text-center break-all">{leaderboard[2].website.name}</p>
+								<ButtonStat weight={`${(leaderboard[2].siteWeight / 1000).toFixed()}Ko`} primary={true} />
+							</div>
+						}
+
 					</div>
 					<img class="w-full" src="/podium-spe.svg" alt="" />
 					<div class="flex flex-col gap-4 mt-4">
-						<List
-							brand="Renault"
-							number="4."
-							weight="320Ko"
-							hasHr={true}
-						/>
-						<List
-							brand="Citroën"
-							number="5."
-							weight="200Ko"
-							hasHr={true}
-						/>
-						<List
-							brand="Hello Bank"
-							number="6."
-							weight="1Go"
-							hasHr={false}
-						/>
+						{
+							leaderboard.slice(3, 6).map((ranking, index, array) => {
+								const hasHr = index !== array.length - 1;
+
+								return (
+									<List
+										brand={ranking.website.name}
+										number={`${ranking.rank}.`}
+										weight={`${(ranking.siteWeight / 1000).toFixed()}Ko`}
+										hasHr={hasHr}
+									/>
+								);
+							})
+						}
 					</div>
 					<div class="w-full flex flex-row justify-end mt-4">
 						<Button
@@ -107,16 +108,21 @@ const leaderboardPreviewByCategory = await getCategoriesLeaderboardPreview()
 				<ul class="splide__list">
 					{
 						leaderboardPreviewByCategory.map((category) => {
-							return (
-								<li class="splide__slide">
-									<div class="scaleControll">
-										<Card
-											name={category.name}
-											ranks={category.ranks}
-										/>
-									</div>
-								</li>
-							)
+							if (category.ranks && category.ranks.length > 0) {
+								return (
+									<li class="splide__slide">
+										<div class="scaleControll">
+											<Card
+												name={category.name}
+												ranks={category.ranks}
+											/>
+										</div>
+									</li>
+								);
+							} else {
+								// Si la catégorie n'a pas de rangs, ne rien rendre
+								return null;
+							}
 						})
 					}
 				</ul>

@@ -6,7 +6,7 @@ const fetcher = async (endpoint: string) => {
   const response = await fetch(`${BASE_URL}/api${endpoint}`, {
     headers: {
       Accept: "application/json",
-      Authorization: `Bearer ${import.meta.env.API_TOKEN}`,
+      Authorization: `Bearer BQsZu102qg_Aq7RVnxmty`,
     },
   })
   if (!response.ok) {

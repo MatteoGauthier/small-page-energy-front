@@ -4,18 +4,19 @@
 
 <style>
     .hamburger {
-        position:fixed;
         z-index: 100;
-        top: 1rem;
-        right: 1rem;
         padding: 4px;
-        border: #35209D solid 1px;
-        background: white;
         cursor: pointer;
     }
 
     .closeIcon {
         display: none;
+    }
+
+    .closeIcon, .menuIcon {
+        filter: brightness(0) saturate(100%) invert(21%) sepia(36%) saturate(7171%) hue-rotate(247deg) brightness(79%) contrast(102%);
+        height: 44px;
+        width: 44px;
     }
 
     .nav-menu {
@@ -27,10 +28,16 @@
         right: 0;
         bottom: 0;
         z-index: 99;
-        background: #35209D;
-        color: white;
+        background: #FBFAFF;
         list-style: none;
-        padding-top: 4rem;
+
+        @media (min-width: 769px) {
+            position: relative;
+            transform: unset;
+            flex-direction: row;
+            background: unset;
+            padding: unset;
+        }
     }
 
     .showMenu {
@@ -39,28 +46,27 @@
 
 </style>
 
-<nav class="flex flex-row justify-between fixed top-0 right-0 w-full px-16 mt-4 z-10 xs:flex-col">
-    <a>
+<nav class="flex flex-row justify-between align-center fixed top-0 right-0 w-full xs:px-4 sm:px-4 md:px-4 px-16 mt-4 z-10 xs:flex-col">
+    <a href="/">
         <img src="/logo-spe.svg">
     </a>
-
     <div class="flex flex-wrap content-center">
-        <ul class="nav-menu flex flex-row gap-12 xs:flex-col xs:gap-4">
-            <li class="xs:ml-6">
-                <a class="nav-link" href="">Accueil</a>
-            </li>
-
-            <li class="xs:ml-6">
-                <a class="nav-link" href="">Les classements</a>
-            </li>
-
-            <li class="xs:ml-6">
-                <a class="nav-link" href="">À propos</a>
-            </li>
-        </ul>
-        <button class="hamburger invisible xs:visible">
-            <img src="/close_black_24dp.svg" class="menuIcon">
-            <img src="/menu_black_24dp.svg" class="closeIcon">
+        <nav class="nav-menu">
+            <ul class="h-full flex flex-row xs:flex-col sm:flex-col md:flex-col gap-12 xs:gap-4 xs:px-16 sm:px-16 md:px-16 items-center justify-center">
+                <li class="xs:ml-6">
+                    <a class="nav-link" href="" class="xs:text-blue500 sm:text-blue500 md:text-blue500 text-black">Accueil</a>
+                </li>
+                <li class="xs:ml-6">
+                    <a class="nav-link" href="" class="xs:text-blue500 sm:text-blue500 md:text-blue500 text-black">Les classements</a>
+                </li>
+                <li class="xs:ml-6">
+                    <a class="nav-link" href="" class="xs:text-blue500 sm:text-blue500 md:text-blue500 text-black">À propos</a>
+                </li>
+            </ul>
+        </nav>
+        <button class="hamburger invisible xs:visible sm:visible md:visible">
+            <img src="/close-menu.svg" class="closeIcon">
+            <img src="/open-menu.svg" class="menuIcon">
         </button>
     </div>
 </nav>
@@ -85,8 +91,8 @@
     }
     hamburger.addEventListener("click", toggleMenu);
 
-    navLink.forEach( 
-        function(navLink) { 
+    navLink.forEach(
+        function(navLink) {
         navLink.addEventListener("click", toggleMenu);
         }
     )

@@ -38,12 +38,55 @@ const customCrumbs = [
 <Layout title={`${props.website.name} Résultats - Small Page Energy`}>
   <Breadcrumbs crumbs={customCrumbs} />
 
-  <section class="max-w-screen-xl mx-auto grid grid-cols-6">
-    <div>
+  <section class="max-w-screen-xl mx-auto grid grid-cols-7 p-4 gap-8 xs:grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-1">
+    <div class="col-span-3 xs:col-span-1 sm:col-span-1 md:col-span-1 lg:col-span-1">
       <h1>{props.website.name}</h1>
-      <Button href="" variant="primary" title="Communiqué de presse" custom="w-fit" icon="download" />
+      <div class="flex flex-wrap gap-4">
+        <Button href="" variant="primary" title="Communiqué de presse" custom="w-fit" />
+        <Button href="" variant="primary" title="Communiqué de presse" custom="w-fit" />
+        <Button href="" variant="primary" title="Communiqué de presse" custom="w-fit" />
+      </div>
     </div>
-    <div class="bg-white"></div>
+    <div class="bg-white col-span-4 flex flex-wrap gap-8 p-8 py-16 gap-8 xs:col-span-1 sm:col-span-1 md:col-span-1 lg:col-span-1">
+      <section class="col-span-1 justify-center p-4 min-w-1/2">
+        <h4 class="text-blue600 mb-4">Classement automobile</h4>
+        <div class="flex gap-4 flex-col">
+        <div class="flex flex-wrap gap-x-4 items-center">
+          <div class="flex flex-wrap gap-2 items:center">
+            <h5 class="month text-blue600">Mars 2023 : </h5>
+            <p class="weight text-blue600">16000ko</p>
+          </div>
+          <p class="number text-blue600">25ème</p>
+        </div>
+        <div class="flex flex-wrap gap-x-4 items-center">
+          <div class="flex flex-wrap gap-2 items:center">
+            <h5 class="month text-blue600">Mars 2023 : </h5>
+            <p class="weight text-blue600">16000ko</p>
+          </div>
+          <p class="number text-blue600">25ème</p>
+        </div>
+      </div>
+      </section>
+      <section class="col-span-1 justify-center p-4 min-w-1/2">
+        <h4 class="text-blue600 mb-4">Classement général</h4>
+        <div class="flex gap-4 flex-col">
+        <div class="flex flex-wrap gap-x-4 items-center">
+          <div class="flex flex-wrap gap-2 items:center">
+            <h5 class="month text-blue600">Mars 2023 : </h5>
+            <p class="weight text-blue600">16000ko</p>
+          </div>
+          <p class="number text-blue600">25ème</p>
+        </div>
+        <div class="flex flex-wrap gap-x-4 items-center">
+          <div class="flex flex-wrap gap-2 items:center">
+            <h5 class="month text-blue600">Mars 2023 : </h5>
+            <p class="weight text-blue600">16000ko</p>
+          </div>
+          <p class="number text-blue600">25ème</p>
+        </div>
+      </div>
+      </section>
+    </div>
 
     <pre>
       {JSON.stringify(props, null, 2)}
@@ -71,5 +114,13 @@ const customCrumbs = [
         radial-gradient(circle at right center, rgba(155, 82, 239, 0.4) 0%, rgba(108, 55, 170, 0) 30%),
         radial-gradient(circle at center, rgba(145, 224, 255, 0.5) 0%, rgba(145, 224, 255, 0) 85%);
     }
+  }
+
+  .number {
+    font-size: 1.625rem;
+  }
+
+  .weight, .month {
+    line-height: 1.5;
   }
 </style>

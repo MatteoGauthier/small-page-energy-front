@@ -103,7 +103,7 @@ const leaderboard = await getLeaderboard()
                                 return (
                                     <li class="splide__slide">
                                         <div class="scaleControl">
-                                            <Card name={category.name} ranks={category.ranks} />
+                                            <Card slug={category.slug} name={category.name} id={category.id} ranks={category.ranks} />
                                         </div>
                                     </li>
                                 )

@@ -13,16 +13,16 @@ interface Props {
 const { brand, number, weight, hasHr, href } = Astro.props
 ---
 
-<a href={href} class="w-full flex flex-col gap-2">
+<div  class="w-full flex flex-col gap-2">
   <div class="flex flex-row justify-between items-center">
     <div class="flex flex-row gap-4 items-center">
       <p class="number text-blue300 w-12">{number}</p>
-      <p class="text-black brand">{brand}</p>
+      <a href={href} class="text-black brand">{brand}</a>
     </div>
     <ButtonStat weight={weight} primary={false} } />
   </div>
   {hasHr && <hr class="opacity-30" />}
-</a>
+</div>
 
 <style>
   hr {

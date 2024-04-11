@@ -1,145 +1,99 @@
 ---
 // Component Imports
-import Button from '../components/Button.astro'
-import Layout from '../layouts/Layout.astro'
-import ButtonStat from '../components/ButtonStat.astro'
-import List from '../components/List.astro'
-import Card from '../components/Card.astro'
-import ListLink from '../components/ListLink.astro'
-import Footer from '../components/Footer.astro'
-import type { CategoryWithLeaderboardPreview } from '../types'
+import Button from "../components/Button.astro"
+import Layout from "../layouts/Layout.astro"
+import ButtonStat from "../components/ButtonStat.astro"
+import List from "../components/List.astro"
+import Card from "../components/Card.astro"
+import ListLink from "../components/ListLink.astro"
+import Footer from "../components/Footer.astro"
+import type { CategoryWithLeaderboardPreview } from "../types"
 
-import { Breadcrumbs } from 'astro-breadcrumbs'
+import { Breadcrumbs } from "astro-breadcrumbs"
+import CalculateSection from "../components/sections/CalculateSection.astro"
+import SocialSection from "../components/sections/SocialSection.astro"
 
 const customCrumbs = [
-    {
-        text: 'Accueil',
-        href: '/'
-    },
-    {
-        text: 'À propos',
-        href: '/about'
-    }
+  {
+    text: "Accueil",
+    href: "/",
+  },
+  {
+    text: "À propos",
+    href: "/about",
+  },
 ]
 ---
 
 <Layout title="Small Page Energy">
-    <Breadcrumbs crumbs={customCrumbs} />
-    <!-- Hero -->
-    <div class="hero w-full h-full pr-4 pl-4 flex justify-center align-center">
-        <h1 class="text-blue600 text-center">À propos</h1>
+  <Breadcrumbs crumbs={customCrumbs} />
+  <!-- Hero -->
+  <div class="hero w-full h-full pr-4 pl-4 flex justify-center align-center">
+    <h1 class="text-blue600 text-center">À propos</h1>
+  </div>
+
+  <!-- Section 1 -->
+  <section
+    class="about-section w-full h-full grid xs:grid-cols-1 sm:grid-cols-1 md:grid-cols-1 grid-cols-2 p-4 gap-4 m-auto mt-16 mb-16 max-w-screen-xl"
+  >
+    <div class="flex flex-col">
+      <div class="flex flex-col gap-10">
+        <div class="flex flex-col gap-8 xs:items-center">
+          <h2 class="text-blue600">Qui sommes-nous ?</h2>
+          <p class="text-black">
+            Alors que les entreprises se battent pour se parer d'un manteau vert, nous on décide de <span
+              class="text-blue300">passer à l'action</span
+            >. Issus des départements Métiers du Multimédia et de l'Internet de l'IUT Bordeaux Montaigne, nous
+            établissons un <span class="text-blue300">classement</span> dévoilant le véritable <span
+              class="text-blue300">poids</span
+            > écologique des sites web des grandes entreprises.
+          </p>
+          <p>
+            C’est fini les paroles en l'air : il est temps de <span class="text-blue300">peser les actes.</span>
+          </p>
+        </div>
+      </div>
     </div>
+    <img src="/logo-h1-spe.png" alt="" class="max-w-xs xs:-order-1 sm:-order-1 md:-order-1 justify-self-center" />
+  </section>
 
-    <!-- Section 1 -->
-    <section class="about-section w-full h-full grid xs:grid-cols-1 sm:grid-cols-1 md:grid-cols-1 grid-cols-2 p-4 gap-4 m-auto mt-16 mb-16 max-w-screen-xl">
-        <div class="flex flex-col">
-            <div class="flex flex-col gap-10">
-                <div class="flex flex-col gap-8 xs:items-center">
-                    <h2 class="text-blue600">Qui sommes-nous ?</h2>
-                    <p class="text-black">
-                        Alors que les entreprises se battent pour se parer d'un manteau vert, nous on décide de <span class="text-blue300"
-                            >passer à l'action</span
-                        >. Issus des départements Métiers du Multimédia et de l'Internet de l'IUT Bordeaux Montaigne, nous établissons un <span
-                            class="text-blue300">classement</span
-                        > dévoilant le véritable <span class="text-blue300">poids</span> écologique des sites web des grandes entreprises.
-                    </p>
-                    <p>
-                        C’est fini les paroles en l'air : il est temps de <span class="text-blue300">peser les actes.</span>
-                    </p>
-                </div>
-            </div>
-        </div>
-        <img src="/logo-h1-spe.png" alt="" class="max-w-xs xs:-order-1 sm:-order-1 md:-order-1 justify-self-center" />
-    </section>
-
-    <section class="calculate-section pt-16 pr-4 pb-16 pl-4">
-        <div
-            class="calculate-container max-w-screen-xl w-full h-full grid xs:grid-cols-1 sm:grid-cols-1 md:grid-cols-1 grid-cols-3 gap-5 justify-center items-center"
-        >
-            <img
-                class="xs:order-1 sm:order-1 md:order-1 col-span-1 lg:order xl:order xs:justify-self-center sm:justify-self-center md:justify-self-center w-full justify-self-center"
-                src="/illu-dev.svg"
-                alt="Illustration d'un développeur"
-            />
-            <div class="calculate-text flex flex-col gap-8 lg:col-span-2 xl:col-span-2 justify-self-center">
-                <h2 class="text-gray100">
-                    Et comment on sait <span class="text-blue500 bg-white px-5 py-1 rounded-full whitespace-nowrap">combien</span> fait la tienne ?
-                </h2>
-                <p class="text-gray100 font-normal">
-                    On a des super-développeurs qui utilisent Lighthouse pour déterminer si la tienne mérite une bonne note dans notre classement, ou si
-                    finalement t’es pas aussi un pro qu’on le pensait ...
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <section class="max-w-screen-xl m-auto w-full p-4 mt-16 mb-16">
-        <div class="flex flex-col gap-8">
-            <div class="flex flex-col gap-10">
-                <div class="flex flex-col gap-8 xs:items-center">
-                    <h2 class="text-blue600">Médias</h2>
-                    <p class="text-black max-w-md">Tu souhaites en savoir plus ou bien nous relayer ? T’inquiète pas, on a tout prévu :</p>
-                </div>
-            </div>
-            <div class="flex gap-4 flex-wrap">
-                <Button href="" variant="primary" title="Dossier de presse" custom="w-fit" icon="download" />
-                <Button href="" variant="primary" title="Communiqué de presse" custom="w-fit" icon="download" />
-            </div>
-        </div>
-    </section>
+  <CalculateSection />
+  <SocialSection />
 </Layout>
 
 <!-- Footer -->
 <Footer />
 
 <style>
-    body {
-        background: radial-gradient(circle at right bottom, hsla(268, 83%, 63%, 0.4) 0%, rgba(108, 55, 170, 0) 50%),
-            radial-gradient(circle at 0 -2%, rgba(155, 82, 239, 0.4) 0%, rgba(108, 55, 170, 0) 10%),
-            radial-gradient(circle at right center, rgba(155, 82, 239, 0.4) 0%, rgba(108, 55, 170, 0) 30%),
-            radial-gradient(circle at left center, rgba(155, 82, 239, 0.4) 0%, rgba(108, 55, 170, 0) 30%),
-            radial-gradient(circle at center, rgba(145, 224, 255, 0.5) 0%, rgba(145, 224, 255, 0) 85%);
+  body {
+    background: radial-gradient(circle at right bottom, hsla(268, 83%, 63%, 0.4) 0%, rgba(108, 55, 170, 0) 50%),
+      radial-gradient(circle at 0 -2%, rgba(155, 82, 239, 0.4) 0%, rgba(108, 55, 170, 0) 10%),
+      radial-gradient(circle at right center, rgba(155, 82, 239, 0.4) 0%, rgba(108, 55, 170, 0) 30%),
+      radial-gradient(circle at left center, rgba(155, 82, 239, 0.4) 0%, rgba(108, 55, 170, 0) 30%),
+      radial-gradient(circle at center, rgba(145, 224, 255, 0.5) 0%, rgba(145, 224, 255, 0) 85%);
 
-        @media (min-width: 768px) {
-            background: radial-gradient(circle at 120% 70%, hsla(268, 83%, 63%, 0.4) 0%, rgba(108, 55, 170, 0) 30%),
-                radial-gradient(circle at -30% -5%, rgba(155, 82, 239, 0.4) 20%, rgba(108, 55, 170, 0) 30%),
-                radial-gradient(circle at 0 130%, rgba(155, 82, 239, 0.4) 20%, rgba(108, 55, 170, 0) 30%),
-                radial-gradient(circle at right center, rgba(155, 82, 239, 0.4) 0%, rgba(108, 55, 170, 0) 30%),
-                radial-gradient(circle at center, rgba(145, 224, 255, 0.5) 0%, rgba(145, 224, 255, 0) 85%);
-        }
+    @media (min-width: 768px) {
+      background: radial-gradient(circle at 120% 70%, hsla(268, 83%, 63%, 0.4) 0%, rgba(108, 55, 170, 0) 30%),
+        radial-gradient(circle at -30% -5%, rgba(155, 82, 239, 0.4) 20%, rgba(108, 55, 170, 0) 30%),
+        radial-gradient(circle at 0 130%, rgba(155, 82, 239, 0.4) 20%, rgba(108, 55, 170, 0) 30%),
+        radial-gradient(circle at right center, rgba(155, 82, 239, 0.4) 0%, rgba(108, 55, 170, 0) 30%),
+        radial-gradient(circle at center, rgba(145, 224, 255, 0.5) 0%, rgba(145, 224, 255, 0) 85%);
     }
+  }
 
-    .hero {
-        margin-top: 10rem;
+  .hero {
+    margin-top: 10rem;
 
-        @media (min-width: 768px) {
-            margin-top: 1rem;
-        }
+    @media (min-width: 768px) {
+      margin-top: 1rem;
     }
+  }
 
-    .about-section {
-        p {
-            span {
-                font-weight: 700;
-            }
-        }
+  .about-section {
+    p {
+      span {
+        font-weight: 700;
+      }
     }
-
-    .calculate-section {
-        background: radial-gradient(50% 110% at 95% 40%, rgba(99, 70, 243, 0.7) 25%, rgba(108, 55, 170, 0) 50%),
-            radial-gradient(50% 100% at left center, rgba(255, 0, 168, 0.5) 5%, rgba(108, 55, 170, 0) 100%),
-            radial-gradient(circle at center, rgb(53, 32, 157) 100%, rgba(145, 224, 255, 0) 100%);
-
-        .calculate-container {
-            margin: auto;
-
-            .calculate-text {
-                max-width: 640px;
-            }
-
-            img {
-                max-width: 300px;
-            }
-        }
-    }
+  }
 </style>

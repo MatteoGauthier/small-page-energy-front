@@ -252,7 +252,7 @@ const leaderboard = await getLeaderboard()
 
 	let splide = new Splide('.splide', {
     type: 'loop',
-    perPage: 4,
+    perPage: 6,
     focus: 'center',
     pagination: false,
     gap: 32,
@@ -261,7 +261,11 @@ const leaderboard = await getLeaderboard()
         prev: 'splide__arrow--prev btn-prev'
     },
     breakpoints: {
-        1600: {
+		2000: {
+            perPage: 5,
+            gap: 32
+        },
+        1800: {
             perPage: 4,
             gap: 32
         },

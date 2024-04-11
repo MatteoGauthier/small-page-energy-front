@@ -1,11 +1,11 @@
 // getLeaderboard
 
-export interface Leaderboard {
+export type Leaderboard = {
   rank: number
   change: null
   siteWeight: number
   website: Website
-}
+}[]
 
 export type Website = {
   id: string

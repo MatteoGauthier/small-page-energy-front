@@ -1,135 +1,149 @@
 ---
-import { type CollectionEntry, getCollection } from 'astro:content'
-import Layout from '../layouts/Layout.astro'
-import { getCategoriesLeaderboardPreview, getLeaderboard, getCategories } from '../lib/api'
-import type { CategoriesLeaderboardPreview } from '../types/api/getCategoriesLeaderboardPreview'
-import { Breadcrumbs } from '../../node_modules/astro-breadcrumbs'
-import Button from '../components/Button.astro'
-import Rank from '../components/Rank.astro'
-import Footer from '../components/Footer.astro'
-import type { Categories } from '../types/api/getCategories'
+import { type CollectionEntry, getCollection } from "astro:content"
+import Layout from "../layouts/Layout.astro"
+import { getCategoriesLeaderboardPreview, getLeaderboard, getCategories } from "../lib/api"
+import type { CategoriesLeaderboardPreview } from "../types/api/getCategoriesLeaderboardPreview"
+import { Breadcrumbs } from "../../node_modules/astro-breadcrumbs"
+import Button from "../components/Button.astro"
+import Rank from "../components/Rank.astro"
+import Footer from "../components/Footer.astro"
+import type { Categories } from "../types/api/getCategories"
 
 export async function getStaticPaths() {
-    const categories = await getCategoriesLeaderboardPreview()
-    const allCategories = await getCategories()
+  const categories = await getCategoriesLeaderboardPreview()
+  const allCategories = await getCategories()
 
-    return categories.map(c => ({
-        params: { slug: c.slug },
-        props:{ category: c, allCategories}
-    }))
+  return categories.map((c) => ({
+    params: { slug: c.slug },
+    props: { category: c, allCategories },
+  }))
 }
 type Props = {
-    category: CategoriesLeaderboardPreview[number]
-    allCategories: Categories
+  category: CategoriesLeaderboardPreview[number]
+  allCategories: Categories
 }
 
 const props = Astro.props
 
 const customCrumbs = [
-    {
-        text: 'Accueil',
-        href: '/'
-    },
-    {
-        text: 'Les classements',
-        href: '/ranking'
-    }
+  {
+    text: "Accueil",
+    href: "/",
+  },
+  {
+    text: "Les classements",
+    href: "/ranking",
+  },
 ]
 
 const presentMonth = new Date().getMonth()
 
 const year = new Date().getFullYear()
 
-const months: string[] = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre']
+const months: string[] = [
+  "Janvier",
+  "Février",
+  "Mars",
+  "Avril",
+  "Mai",
+  "Juin",
+  "Juillet",
+  "Août",
+  "Septembre",
+  "Octobre",
+  "Novembre",
+  "Décembre",
+]
 
 let month: string | undefined
 
 for (let i = 1; i <= 12; i++) {
-    if (presentMonth === i) {
-        month = months[i]
-        break
-    }
+  if (presentMonth === i) {
+    month = months[i]
+    break
+  }
 }
 
 const pathname = new URL(Astro.request.url).pathname
-const currentPath = pathname.slice(1)
+const currentPath = pathname.slice(1).replaceAll("/", "")
 
 const currentLeaderboard = props.category
 ---
 
 <Layout title="Classement - Small Page Energy">
-    <Breadcrumbs crumbs={customCrumbs} />
+  <Breadcrumbs crumbs={customCrumbs} />
 
-    <section class="flex flex-col gap-12 w-full h-full mb-24">
-        <!-- Intro -->
-        <div class="flex flex-col w-full px-16 gap-8">
-            <h1 class="text-blue600 text-center max-w-xl m-auto">
-              Classement
-                {
-                    props.category.name &&
-                        `${props.category.name}`
-                }
-            </h1>
-            <p class="text-xl font-black flex w-full justify-center text-blue600">{`${month}`} {`${year}`}</p>
-            <p class="text-center max-w-3xl mx-auto">
-                Découvre ce classement qui expose les géants du web en fonction du poids de leurs pages. Ce palmarès, qu'il soit par catégories ou général, est
-                actualisé mensuellement pour rester dans la course folle
-            </p>
-        </div>
-        <!-- Buttons filter -->
-        <section class="tags flex gap-4 flex-wrap p-4 m-auto max-w-screen-xl">
-            <Button href="/ranking" variant="secondary" title="Classement général" custom={`w-fit ${currentPath === 'ranking' ? 'secondary-active' : ''}`} />
-            {
-              
-                props.allCategories.map(category => {
-                    return (
-                        <Button
-                            href={`/${category.slug}`}
-                            variant="secondary"
-                            title={category.name}
-                            custom={`w-fit ${currentPath === `${category.slug}` ? 'secondary-active' : ''}`}
-                        />
-                    )
-                })
-            }
-        </section>
-
-        <!-- Grid classements -->
-        <div class="ranking-table w-full p-4 flex justify-center m-auto max-w-screen-xl">
-            <div class="flex flex-col gap-2 w-full">
-                <div class="bg-gray100 rounded-[20px] py-3 flex gap-15 w-full justify-between">
-                    <p class="text-center text-lg w-1/6">Classement</p>
-                    <p class="text-center text-lg w-1/4">Entreprise</p>
-                    <p class="text-center text-lg w-1/4">Secteur</p>
-                    <p class="text-center text-lg w-1/4">Poids</p>
-                </div>
-                <div class="bg-gray100 rounded-[20px] classement">
-                    {
-                        currentLeaderboard &&
-                            currentLeaderboard.ranks.map((ranking, index, array) => {
-                                const hasBorder = index !== array.length - 1
-
-                                const categories = ranking.website.categories
-
-                                return (
-                                    <Rank
-                                        website={ranking.website}
-                                        rank={`${ranking.rank}.`}
-                                        name={ranking.website.name}
-                                        categories={categories}
-                                        weight={ranking.siteWeight}
-                                        hasBorder={hasBorder}
-                                    />
-                                )
-                            })
-                    }
-                </div>
-                <div class="w-full flex justify-center">
-                    <!-- <button id="loadMoreButton" @click={loadMoreRanks}>Load More</button> -->
-                </div>
-            </div>
-        </div>
+  <section class="flex flex-col gap-12 w-full h-full mb-24">
+    <!-- Intro -->
+    <div class="flex flex-col w-full px-16 gap-8">
+      <h1 class="text-blue600 text-center max-w-xl m-auto">
+        Classement
+        {props.category.name && `${props.category.name}`}
+      </h1>
+      <p class="text-xl font-black flex w-full justify-center text-blue600">{`${month}`} {`${year}`}</p>
+      <p class="text-center max-w-3xl mx-auto">
+        Découvre ce classement qui expose les géants du web en fonction du poids de leurs pages. Ce palmarès, qu'il soit
+        par catégories ou général, est actualisé mensuellement pour rester dans la course folle
+      </p>
+    </div>
+    <!-- Buttons filter -->
+    <section class="tags flex gap-4 flex-wrap p-4 m-auto max-w-screen-xl">
+      <Button
+        href="/ranking"
+        variant="secondary"
+        title="Classement général"
+        custom={`w-fit ${currentPath === "ranking" ? "secondary-active" : ""}`}
+      />
+      {
+        props.allCategories.map((category) => {
+          return (
+            <Button
+              href={`/${category.slug}`}
+              variant="secondary"
+              title={category.name}
+              custom={`w-fit ${currentPath === `${category.slug}` ? "secondary-active" : ""}`}
+            />
+          )
+        })
+      }
     </section>
 
-    <Footer />
+    <!-- Grid classements -->
+    <div class="ranking-table w-full p-4 flex justify-center m-auto max-w-screen-xl">
+      <div class="flex flex-col gap-2 w-full">
+        <div class="bg-gray100 rounded-[20px] py-3 flex gap-15 w-full justify-between">
+          <p class="text-center text-lg w-1/6">Classement</p>
+          <p class="text-center text-lg w-1/4">Entreprise</p>
+          <p class="text-center text-lg w-1/4">Secteur</p>
+          <p class="text-center text-lg w-1/4">Poids</p>
+        </div>
+        <div class="bg-gray100 rounded-[20px] classement">
+          {
+            currentLeaderboard &&
+              currentLeaderboard.ranks.map((ranking, index, array) => {
+                const hasBorder = index !== array.length - 1
+
+                const categories = ranking.website.categories
+
+                return (
+                  <Rank
+                    website={ranking.website}
+                    rank={`${ranking.rank}.`}
+                    name={ranking.website.name}
+                    categories={categories}
+                    weight={ranking.siteWeight}
+                    hasBorder={hasBorder}
+                  />
+                )
+              })
+          }
+        </div>
+        <div class="w-full flex justify-center">
+          <!-- <button id="loadMoreButton" @click={loadMoreRanks}>Load More</button> -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
 </Layout>

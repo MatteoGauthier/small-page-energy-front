@@ -9,6 +9,8 @@ import ListLink from '../components/ListLink.astro'
 import Footer from '../components/Footer.astro'
 import type { CategoryWithLeaderboardPreview } from '../types'
 import { getCategoriesLeaderboardPreview, getLeaderboard } from '../lib/api'
+import { Image } from 'astro:assets';
+import logoFull from "../../public/logo-h1-spe.png";
 
 // Full Astro Component Syntax:
 // https://docs.astro.build/basics/astro-components/
@@ -28,7 +30,7 @@ const leaderboard = await getLeaderboard()
             <!-- Text + logo -->
             <div class="flex flex-col gap-8 xs:col-span-1 sm:col-span-1 md:col-span-1">
                 <div class="flex flex-col gap-10">
-                    <img src="/logo-h1-spe.png" alt="" />
+					<Image src={logoFull} alt="Logo Small Page Energy." />
                     <div class="hero-text flex flex-col gap-8">
                         <div class="flex gap-4 xs:flex-col sm:flex-col md:flex-col">
                             <h2 class="text-blue600">Le classement des plus petites pages !</h2>

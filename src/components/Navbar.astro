@@ -47,8 +47,8 @@
 </style>
 
 <nav class="flex flex-row justify-between align-center fixed top-0 right-0 w-full xs:px-4 sm:px-4 md:px-4 px-16 mt-4 z-10">
-    <a href="/">
-        <img src="/logo-spe.svg">
+    <a href="/" aria-label="Retour à l'accueil">
+        <img src="/logo-spe.svg" alt="Small Page Energy Logo">
     </a>
     <div class="flex content-center">
         <nav class="nav-menu">
@@ -64,9 +64,9 @@
                 </li>
             </ul>
         </nav>
-        <button class="hamburger invisible xs:visible sm:visible md:visible">
-            <img src="/close-menu.svg" class="closeIcon">
-            <img src="/open-menu.svg" class="menuIcon">
+        <button class="hamburger invisible xs:visible sm:visible md:visible" role="button" aria-label="Menu bouton">
+            <img src="/close-menu.svg" class="closeIcon" alt="Bouton de fermerture de menu">
+            <img src="/open-menu.svg" class="menuIcon" alt="Bouton d'ouverture de menu">
         </button>
     </div>
 </nav>

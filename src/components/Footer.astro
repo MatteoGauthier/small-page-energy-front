@@ -1,4 +1,6 @@
 ---
+import { Image } from 'astro:assets';
+import logoFull from "../../public/logo-h1-spe.png";
 import Button from '../components/Button.astro'
 interface Props {
     background?: boolean;
@@ -54,7 +56,7 @@ marginTop} = Astro.props;
         <div class="flex flex-col gap-16">
             <div class="flex flex-row xs:flex-col sm:flex-col md:flex-col justify-between px-16 xs:px-4 sm:px-4 md:px-4 gap-8">
                 <div class="flex flex-col gap-6">
-                    <img class="max-w-52 xs:m-auto sm:m-auto md:m-auto" src="/logo-h1-spe.png" alt="" />
+					<Image src={logoFull} alt="Logo Small Page Energy." class="max-w-52 xs:m-auto sm:m-auto md:m-auto" />
                     <h4 class="text-blue600 xs:text-center sm:text-center md:text-center">
                         Qui aura la plus petite ?
                     </h4>

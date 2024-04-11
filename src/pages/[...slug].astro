@@ -7,20 +7,23 @@ import { Breadcrumbs } from '../../node_modules/astro-breadcrumbs'
 import Button from '../components/Button.astro'
 import Rank from '../components/Rank.astro'
 import Footer from '../components/Footer.astro'
+import type { Categories } from '../types/api/getCategories'
 
 export async function getStaticPaths() {
     const categories = await getCategoriesLeaderboardPreview()
+    const allCategories = await getCategories()
+
     return categories.map(c => ({
         params: { slug: c.slug },
-        props: c
+        props:{ category: c, allCategories}
     }))
 }
-type Props = CategoriesLeaderboardPreview[number]
+type Props = {
+    category: CategoriesLeaderboardPreview[number]
+    allCategories: Categories
+}
 
 const props = Astro.props
-
-const leaderboard = await getCategoriesLeaderboardPreview()
-const categories = await getCategories()
 
 const customCrumbs = [
     {
@@ -51,7 +54,7 @@ for (let i = 1; i <= 12; i++) {
 const pathname = new URL(Astro.request.url).pathname
 const currentPath = pathname.slice(1)
 
-const currentLeaderboard = leaderboard.find(ranking => ranking.slug == currentPath)
+const currentLeaderboard = props.category
 ---
 
 <Layout title="Classement - Small Page Energy">
@@ -63,8 +66,8 @@ const currentLeaderboard = leaderboard.find(ranking => ranking.slug == currentPa
             <h1 class="text-blue600 text-center max-w-xl m-auto">
               Classement
                 {
-                    currentLeaderboard &&
-                        `${currentLeaderboard.name}`
+                    props.category.name &&
+                        `${props.category.name}`
                 }
             </h1>
             <p class="text-xl font-black flex w-full justify-center text-blue600">{`${month}`} {`${year}`}</p>
@@ -77,7 +80,8 @@ const currentLeaderboard = leaderboard.find(ranking => ranking.slug == currentPa
         <section class="tags flex gap-4 flex-wrap p-4 m-auto max-w-screen-xl">
             <Button href="/ranking" variant="secondary" title="Classement général" custom={`w-fit ${currentPath === 'ranking' ? 'secondary-active' : ''}`} />
             {
-                categories.map(category => {
+              
+                props.allCategories.map(category => {
                     return (
                         <Button
                             href={`/${category.slug}`}

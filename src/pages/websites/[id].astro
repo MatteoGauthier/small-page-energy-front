@@ -1,0 +1,22 @@
+---
+import Layout from "../../layouts/Layout.astro"
+import { getWebsitesWithRanks } from "../../lib/api"
+import { type GetWebsitesWithRanks } from "../../types/api/getWebsitesWithRanks"
+
+export async function getStaticPaths() {
+  const websites = await getWebsitesWithRanks()
+  return websites.map((c) => ({
+    params: { id: c.website.id },
+    props: c,
+  }))
+}
+type Props = GetWebsitesWithRanks[number]
+
+const props = Astro.props
+---
+
+<Layout title={`${props.website.name} Résultats - Small Page Energy`}>
+  <pre>
+    {JSON.stringify(props, null, 2)}
+  </pre>
+</Layout>

@@ -6,40 +6,43 @@ import type { CategoriesLeaderboardPreview } from "../types/api/getCategoriesLea
 import Button from "./Button.astro"
 
 type Props = {
-    name: string
-    ranks: CategoriesLeaderboardPreview[number]["ranks"]
+  name: string
+  ranks: CategoriesLeaderboardPreview[number]["ranks"]
 }
 
 const props = Astro.props
 ---
 
-<div class="card flex flex-col gap-8 justify-between bg-white border-blue500 border-solid p-8 h-fit border xs:mx-4 sm:mx-4 md:mx-4">
-    <h3 class="sector text-center text-blue600 break-words">{props.name}</h3>
-    <div class="flex flex-col gap-4 mt-4">
-        {
-        props.ranks.slice(0, 3).map((item, index) => {
-            return (
-            <List
-                brand={item.website.name}
-                number={`${index + 1}.`}
-                weight={`${(item.siteWeight / 1000).toFixed()}Ko`}
-                hasHr={index !== 2}
-            />
-            )
-        })
-        }
-    </div>
-    <Button title="Voir le classement" href="" variant="tertiary" custom="w-fit" ; />
+<div
+  class="card flex flex-col gap-8 justify-between bg-white border-blue500 border-solid p-8 h-fit border xs:mx-4 sm:mx-4 md:mx-4"
+>
+  <h3 class="sector text-center text-blue600 break-words">{props.name}</h3>
+  <div class="flex flex-col gap-4 mt-4">
+    {
+      props.ranks.slice(0, 3).map((item, index) => {
+        return (
+          <List
+            href={`/websites/${item.website.id}`}
+            brand={item.website.name}
+            number={`${index + 1}.`}
+            weight={`${(item.siteWeight / 1000).toFixed()}Ko`}
+            hasHr={index !== 2}
+          />
+        )
+      })
+    }
+  </div>
+  <Button title="Voir le classement" href="" variant="tertiary" custom="w-fit" ; />
 </div>
 
 <style>
-    h3.sector {
-        font-size: 1.625rem;
-    }
+  h3.sector {
+    font-size: 1.625rem;
+  }
 
-    .card {
-        border-radius: 40px;
-        height: 100%;
-        max-height: 26rem;
-    }
+  .card {
+    border-radius: 40px;
+    height: 100%;
+    max-height: 26rem;
+  }
 </style>

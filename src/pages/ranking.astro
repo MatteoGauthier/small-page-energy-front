@@ -53,7 +53,7 @@ const currentPath = pathname.slice(1)
 <Layout title="Classement - Small Page Energy">
     <Breadcrumbs crumbs={customCrumbs} />
 
-    <section class="flex flex-col gap-12 w-full h-full mb-24">
+    <section class="flex flex-col gap-12 w-full h-full mb-24 xs:pt-24 sm:pt-24 md:pt-24">
         <!-- Intro -->
         <div class="flex flex-col w-full px-16 gap-8">
             <h1 class="text-blue600 text-center">Classement général</h1>
@@ -83,11 +83,11 @@ const currentPath = pathname.slice(1)
         <!-- Grid classements -->
         <div class="ranking-table w-full p-4 flex justify-center m-auto max-w-screen-xl">
             <div class="flex flex-col gap-2 w-full">
-                <div class="bg-gray100 rounded-[20px] py-3 flex gap-15 w-full justify-between">
-                    <p class="text-center text-lg w-1/6">Classement</p>
-                    <p class="text-center text-lg w-1/4">Entreprise</p>
-                    <p class="text-center text-lg w-1/4">Secteur</p>
-                    <p class="text-center text-lg w-1/4">Poids</p>
+                <div class="bg-gray100 rounded-[20px] py-3 flex gap-15 w-full justify-between xs:hidden sm:hidden md:hidden">
+                    <p class="text-center text-lg md:text-base sm:text-base xs:text-base w-1/6 md:w-1/4 sm:w-1/4 xs:w-1/4">Classement</p>
+                    <p class="text-center text-lg md:text-base sm:text-base xs:text-base w-1/4">Entreprise</p>
+                    <p class="text-center text-lg md:text-base sm:text-base xs:text-base w-1/4">Secteur</p>
+                    <p class="text-center text-lg md:text-base sm:text-base xs:text-base w-1/4">Poids</p>
                 </div>
                 <div class="bg-gray100 rounded-[20px] classement">
                     {

@@ -1,0 +1,37 @@
+---
+// Rank
+import ButtonStat from '../components/ButtonStat.astro'
+
+interface Props {
+    rank: string
+    name: string
+    category: string
+    region?: string
+    type?: string
+    weight: number
+    hasBorder?: boolean
+}
+
+const { rank, name, category, region="Unknown", type="Unknown", weight, hasBorder=true } = Astro.props
+
+---
+{
+    hasBorder ? (
+        <div class="rank flex w-full border-b-2 border-blue200 border-solid">
+            <div class="ml-16 w-full grid grid-cols-5 gap-15 items-center">
+                <p class="text-center number text-blue300">{rank}</p>
+                <p class="text-center text-lg font-bold">{name}</p>
+                <p class="text-center text-lg font-bold">{category}</p>
+                <p class="text-center text-lg font-bold">{`${(weight / 1000).toFixed()}Ko`}</p>
+            </div>
+        </div>
+    ) : 
+        <div class=" rank flex w-full border-b-2">
+            <div class="ml-16 w-full grid grid-cols-5 gap-15 items-center">
+                <p class="text-center number text-blue300">{rank}</p>
+                <p class="text-center text-lg font-bold">{name}</p>
+                <p class="text-center text-lg font-bold">{category}</p>
+                <p class="text-center text-lg font-bold">{`${(weight / 1000).toFixed()}Ko`}</p>
+            </div>
+        </div>
+}

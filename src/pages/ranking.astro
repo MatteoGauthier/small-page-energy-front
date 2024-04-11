@@ -1,0 +1,162 @@
+---
+// Component Imports
+import Button from "../components/Button.astro";
+import Layout from "../layouts/Layout.astro";
+import ButtonStat from "../components/ButtonStat.astro";
+import List from "../components/List.astro";
+import Card from "../components/Card.astro";
+import ListLink from "../components/ListLink.astro";
+import Footer from "../components/Footer.astro";
+import Rank from "../components/Rank.astro";
+import { getCategoriesLeaderboardPreview, getLeaderboard } from "../lib/api";
+
+import { Breadcrumbs } from "../../node_modules/astro-breadcrumbs";
+
+// Full Astro Component Syntax:
+// https://docs.astro.build/basics/astro-components/
+
+const leaderboardPreviewByCategory = await getCategoriesLeaderboardPreview();
+
+const leaderboard = await getLeaderboard();
+
+const customCrumbs = [
+    {
+        text: "Accueil",
+        href: "/",
+    },
+    {
+        text: "Les classements",
+        href: "/ranking",
+    },
+];
+
+const presentMonth = new Date().getMonth();
+
+const year = new Date().getFullYear();
+
+const months: string[] = ["Janvier","Février","Mars","Avril","Mai","Juin","Juillet","Août","Septembre","Octobre","Novembre","Décembre",
+];
+
+let month: string | undefined;
+
+for (let i = 1; i <= 12; i++) {
+    if (presentMonth === i) {
+        month = months[i];
+        break;
+    }
+}
+---
+
+<Layout title="Classement - Small Page Energy">
+    <Breadcrumbs crumbs={customCrumbs} />
+
+    <section class="flex flex-col gap-12 w-full h-full">
+        <!-- Intro -->
+        <div class="flex flex-col w-full gap-8 px-16">
+            <div>
+                <h1 class="text-blue600 text-center">Classement général</h1>
+                <p class="text-xl font-black flex w-full justify-end text-blue600">{`${month}`} {`${year}`}</p>
+            </div>
+            <p class="text-center max-w-3xl mx-auto">
+                Découvre ce classement qui expose les géants du web en fonction du
+                poids de leurs pages. Ce palmarès, qu'il soit par catégories ou
+                général, est actualisé mensuellement pour rester dans la course
+                folle
+            </p>
+        </div>
+        <!-- Buttons filter -->
+
+        <!-- Buttons filter -->
+
+        <!-- Grid classements -->
+        <div class="w-full px-16 flex justify-center">
+            <div class="flex flex-col max-w-5xl gap-2">
+                <div class="bg-gray100 rounded-[20px] py-3">
+                    <div class="ml-16 grid grid-cols-5 gap-15">
+                        <p class="text-center text-lg">Classement</p>
+                        <p class="text-center text-lg">Entreprise</p>
+                        <p class="text-center text-lg">Secteur</p>
+                        <!-- <p class="text-center text-lg">Région</p>
+                        <p class="text-center text-lg">Type</p> -->
+                        <p class="text-center text-lg">Poids</p>
+                    </div>
+                </div>
+
+                <div class="bg-gray100 rounded-[20px] classement">
+                    <!-- <Rank rank="1." name="Renault" category="Automobile" region="Ile-de-France" type="Corporate" weight={300000} /> -->
+                    {
+                        leaderboard.map((ranking, index, array) => {
+                            const hasBorder = index !== array.length - 1
+
+                            const categories = ranking.website.categories.map(category => category.name).join(', ')
+
+                            return (
+                                <Rank
+                                    rank={`${ranking.rank}.`}
+                                    name={ranking.website.name}
+                                    category={categories}
+                                    weight={ranking.siteWeight}
+                                    hasBorder={hasBorder}
+                                />
+                            )
+                        })
+                    }
+                </div>
+                <div class="w-full flex justify-center">
+                    <!-- <button id="loadMoreButton" @click={loadMoreRanks}>Load More</button> -->
+                </div>
+            </div>
+        </div>
+    </section>
+</Layout>
+
+<style>
+    body {
+        background: radial-gradient(circle at right bottom, hsla(268, 83%, 63%, 0.4) 0%, rgba(108, 55, 170, 0) 50%),
+            radial-gradient(circle at 0 -2%, rgba(155, 82, 239, 0.4) 0%, rgba(108, 55, 170, 0) 10%),
+            radial-gradient(circle at right center, rgba(155, 82, 239, 0.4) 0%, rgba(108, 55, 170, 0) 30%),
+            radial-gradient(circle at left center, rgba(155, 82, 239, 0.4) 0%, rgba(108, 55, 170, 0) 30%),
+            radial-gradient(circle at center, rgba(145, 224, 255, 0.5) 0%, rgba(145, 224, 255, 0) 85%);
+
+        @media (min-width: 768px) {
+            background: radial-gradient(circle at 120% 70%, hsla(268, 83%, 63%, 0.4) 0%, rgba(108, 55, 170, 0) 30%),
+                radial-gradient(circle at -30% -5%, rgba(155, 82, 239, 0.4) 20%, rgba(108, 55, 170, 0) 30%),
+                radial-gradient(circle at 0 130%, rgba(155, 82, 239, 0.4) 20%, rgba(108, 55, 170, 0) 30%),
+                radial-gradient(circle at right center, rgba(155, 82, 239, 0.4) 0%, rgba(108, 55, 170, 0) 30%),
+                radial-gradient(circle at center, rgba(145, 224, 255, 0.5) 0%, rgba(145, 224, 255, 0) 85%);
+        }
+    }
+
+    
+</style>
+<!-- 
+<script>
+
+function loadMoreRanks() {
+        const ranksToShow = document.querySelectorAll('.rank');
+        const nextRanks = leaderboard.slice(ranksToShow.length, ranksToShow.length + 10);
+
+            const rankElement = document.createElement('div');
+            rankElement.innerHTML = `
+                    {   
+                        leaderboard.slice(0, 10).map((ranking, index, array) => {
+                            const hasBorder = index !== array.length - 1
+
+                            const categories = ranking.website.categories.map(category => category.name).join(', ')
+
+                            return (
+                                <Rank
+                                    rank={ranking.rank}
+                                    name={ranking.website.name}
+                                    category={categories}
+                                    weight={ranking.siteWeight}
+                                    hasBorder={hasBorder}
+                                />
+                            )
+                        })
+                    }
+            `;
+            document.querySelector('.classement').appendChild(rankElement);
+    }
+
+</script> -->

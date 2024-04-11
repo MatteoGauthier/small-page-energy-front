@@ -1,50 +1,53 @@
 ---
 // Component Imports
-import Button from "../components/Button.astro";
-import Layout from "../layouts/Layout.astro";
-import ButtonStat from "../components/ButtonStat.astro";
-import List from "../components/List.astro";
-import Card from "../components/Card.astro";
-import ListLink from "../components/ListLink.astro";
-import Footer from "../components/Footer.astro";
-import Rank from "../components/Rank.astro";
-import { getCategoriesLeaderboardPreview, getLeaderboard } from "../lib/api";
+import Button from '../components/Button.astro'
+import Layout from '../layouts/Layout.astro'
+import ButtonStat from '../components/ButtonStat.astro'
+import List from '../components/List.astro'
+import Card from '../components/Card.astro'
+import ListLink from '../components/ListLink.astro'
+import Footer from '../components/Footer.astro'
+import Rank from '../components/Rank.astro'
+import { getCategoriesLeaderboardPreview, getLeaderboard, getCategories } from '../lib/api'
 
-import { Breadcrumbs } from "../../node_modules/astro-breadcrumbs";
+import { Breadcrumbs } from '../../node_modules/astro-breadcrumbs'
 
 // Full Astro Component Syntax:
 // https://docs.astro.build/basics/astro-components/
 
-const leaderboardPreviewByCategory = await getCategoriesLeaderboardPreview();
+const leaderboardPreviewByCategory = await getCategoriesLeaderboardPreview()
 
-const leaderboard = await getLeaderboard();
+const leaderboard = await getLeaderboard()
+const categories = await getCategories()
 
 const customCrumbs = [
     {
-        text: "Accueil",
-        href: "/",
+        text: 'Accueil',
+        href: '/'
     },
     {
-        text: "Les classements",
-        href: "/ranking",
-    },
-];
+        text: 'Les classements',
+        href: '/ranking'
+    }
+]
 
-const presentMonth = new Date().getMonth();
+const presentMonth = new Date().getMonth()
 
-const year = new Date().getFullYear();
+const year = new Date().getFullYear()
 
-const months: string[] = ["Janvier","Février","Mars","Avril","Mai","Juin","Juillet","Août","Septembre","Octobre","Novembre","Décembre",
-];
+const months: string[] = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre']
 
-let month: string | undefined;
+let month: string | undefined
 
 for (let i = 1; i <= 12; i++) {
     if (presentMonth === i) {
-        month = months[i];
-        break;
+        month = months[i]
+        break
     }
 }
+
+const pathname = new URL(Astro.request.url).pathname;
+const currentPath = pathname.slice(1);
 ---
 
 <Layout title="Classement - Small Page Energy">
@@ -58,26 +61,23 @@ for (let i = 1; i <= 12; i++) {
                 <p class="text-xl font-black flex w-full justify-end text-blue600">{`${month}`} {`${year}`}</p>
             </div>
             <p class="text-center max-w-3xl mx-auto">
-                Découvre ce classement qui expose les géants du web en fonction du
-                poids de leurs pages. Ce palmarès, qu'il soit par catégories ou
-                général, est actualisé mensuellement pour rester dans la course
-                folle
+                Découvre ce classement qui expose les géants du web en fonction du poids de leurs pages. Ce palmarès, qu'il soit par catégories ou général, est
+                actualisé mensuellement pour rester dans la course folle
             </p>
         </div>
         <!-- Buttons filter -->
+        <section class="tags flex gap-4 flex-wrap p-4 m-auto max-w-screen-xl">
+            <Button href="/ranking" variant="secondary" title="Classement général" custom={`w-fit ${currentPath === 'ranking' ? 'secondary-active' : ''}`} />
+            {
+                categories.map(category => {
+                    return <Button href={`/${category.slug}`} variant="secondary" title={category.name} custom={`w-fit ${currentPath === `${category.slug}` ? 'secondary-active' : ''}`} />
+                })
+            }
+        </section>
 
-        {
-            leaderboard.map((ranking) => {
-                const categories = ranking.website.categories.map(category => category.name)
-                console.log(categories)
-                return (
-                <Button href={`/${categories}`} variant="primary" title={categories} custom="w-fit" />
-                )
-            })
-        }
 
         <!-- Grid classements -->
-        <div class="w-full px-16 flex max-w-7xl justify-center m-auto">
+        <div class="ranking-table w-full p-4 flex justify-center m-auto max-w-screen-xl">
             <div class="flex flex-col gap-2 w-full">
                 <div class="bg-gray100 rounded-[20px] py-3 flex gap-15 w-full justify-between">
                     <p class="text-center text-lg w-1/6">Classement</p>
@@ -130,9 +130,8 @@ for (let i = 1; i <= 12; i++) {
                 radial-gradient(circle at center, rgba(145, 224, 255, 0.5) 0%, rgba(145, 224, 255, 0) 85%);
         }
     }
-
-
 </style>
+
 <!--
 <script>
 

@@ -6,28 +6,44 @@ interface Props {
     custom: string
     icon?: string
     variant?: 'primary' | 'secondary' | 'tertiary'
+    isBlank?: boolean
 }
 
-const { custom, title, href, icon, variant } = Astro.props
+const { custom, title, href, icon, variant, isBlank = false } = Astro.props
 ---
 
 {
     variant == 'primary' ? (
-        <a href={href} class={`primary-btn nav-link text-gray100 bg-blue400 text-center flex flex-row gap-2 justify-center w-fit ${custom} items-center`}>
-            <div class={`icon ${icon}`} />
-            {title}
-        </a>
-    ) : variant == 'secondary' ? (
-        <a href={href} class={`secondary-btn nav-link text-blue500 bg-gray100 text-center flex flex-row gap-2 w-fit ${custom} items-center`}>
-            <div class={`icon ${icon}`} />
-            {title}
-        </a>
-    ) : (
-        variant == 'tertiary' && (
-            <a href={href} class={`tertiary-btn nav-link text-gray100 bg-pink100 text-center mx-auto flex flex-row gap-2 w-fit ${custom} items-center`}>
+        isBlank ?(
+            <a href={href} target="_blank" class={`primary-btn nav-link text-gray100 bg-blue400 text-center flex flex-row gap-2 justify-center w-fit ${custom} items-center hover:bg-blue600 transition`}>
                 <div class={`icon ${icon}`} />
                 {title}
             </a>
+            ) : <a href={href} class={`primary-btn nav-link text-gray100 bg-blue400 text-center flex flex-row gap-2 justify-center w-fit ${custom} items-center hover:bg-blue600 transition`}>
+                    <div class={`icon ${icon}`} />
+                    {title}
+                </a>
+    ) : variant == 'secondary' ? (
+        isBlank ?(  
+            <a href={href} target="_blank" class={`secondary-btn nav-link text-blue500 bg-gray100 text-center flex flex-row gap-2 w-fit ${custom} items-center hover:bg-purple200 hover:text-gray100 transition`}>
+                <div class={`icon ${icon}`} />
+                {title}
+            </a>
+            ) : <a href={href} class={`secondary-btn nav-link text-blue500 bg-gray100 text-center flex flex-row gap-2 w-fit ${custom} items-center hover:bg-purple200 hover:text-gray100 transition`}>
+                    <div class={`icon ${icon}`} />
+                    {title}
+                </a>
+    ) : (
+        variant == 'tertiary' && (
+            isBlank ?( 
+                <a href={href} target="_blank" class={`tertiary-btn nav-link text-gray100 bg-pink100 text-center mx-auto flex flex-row gap-2 w-fit ${custom} items-center hover:bg-blue200 transition`}>
+                    <div class={`icon ${icon}`} />
+                    {title}
+                </a>
+            ): <a href={href} target="_blank" class={`tertiary-btn nav-link text-gray100 bg-pink100 text-center mx-auto flex flex-row gap-2 w-fit ${custom} items-center hover:bg-blue200 transition`}>
+                    <div class={`icon ${icon}`} />
+                    {title}
+                </a>
         )
     )
 }
@@ -51,6 +67,11 @@ const { custom, title, href, icon, variant } = Astro.props
 
         .icon {
             background-color: #35209d;
+        }
+    }
+    .secondary-btn:hover{
+        .icon{
+            background-color: #fff;
         }
     }
     .tertiary-btn {

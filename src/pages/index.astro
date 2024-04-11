@@ -238,6 +238,9 @@ const leaderboard = await getLeaderboard()
     .splide__slide {
         transform-origin: center;
         transition: transform 0.3s ease-in-out;
+        .card{
+            transition: .2s ease-in-out;
+        }
     }
 
     .splide__slide.is-active {
@@ -247,7 +250,6 @@ const leaderboard = await getLeaderboard()
 	.splide__slide.is-active {
 		.card {
 			transform: scale(1.1);
-			transition: .2s ease-in-out;
 		}
 	}
 

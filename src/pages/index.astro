@@ -94,7 +94,7 @@ const leaderboard = await getLeaderboard()
     <!-- Card slider -->
     <div class="carousel-container xs:mb-10">
         <div class="splide overflow-hidden">
-            <div class="splide__track pt-16">
+            <div class="splide__track py-16">
                 <ul class="splide__list">
                     {
                         leaderboardPreviewByCategory.map(category => {
@@ -241,8 +241,15 @@ const leaderboard = await getLeaderboard()
 
     .splide__slide.is-active {
         position: relative;
-        transform: translateY(-50px);
     }
+
+	.splide__slide.is-active {
+		.card {
+			transform: scale(1.1);
+			transition: .2s ease-in-out;
+		}
+	}
+
 </style>
 
 <script>
@@ -263,15 +270,15 @@ const leaderboard = await getLeaderboard()
     breakpoints: {
 		2000: {
             perPage: 5,
-            gap: 32
+            gap: 40
         },
         1800: {
             perPage: 4,
-            gap: 32
+            gap: 40
         },
         1200: {
             perPage: 3,
-            gap: 32
+            gap: 40
         },
 		992: {
             perPage: 2,

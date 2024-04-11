@@ -1,6 +1,9 @@
 import type { Categories } from "../types/api/getCategories"
 import type { CategoriesLeaderboardPreview } from "../types/api/getCategoriesLeaderboardPreview"
 import type { Leaderboard } from "../types/api/getLeaderboard"
+import type { GetLeaderboardByCategoryResult } from "../types/api/getLeaderboardByCategory"
+import type { GetWebsiteResult } from "../types/api/getWebsite"
+import type { GetWebsitesResult } from "../types/api/getWebsites"
 
 const BASE_URL = "https://small-page-energy.osc-fr1.scalingo.io"
 
@@ -18,7 +21,10 @@ const fetcher = async (endpoint: string) => {
 }
 
 export const getWebsites = async () => {
-  return await fetcher(`/websites`)
+  return (await fetcher(`/websites`)) as GetWebsitesResult
+}
+export const getWebsite = async (websiteId: string) => {
+  return (await fetcher(`/websites/${websiteId}`)) as GetWebsiteResult
 }
 
 export const getCategories = async () => {
@@ -29,7 +35,7 @@ export const getLeaderboard = async () => {
 }
 
 export const getLeaderboardByCategory = async (categoryId: string) => {
-  return await fetcher(`/leaderboard/${categoryId}`)
+  return (await fetcher(`/leaderboard/${categoryId}`)) as GetLeaderboardByCategoryResult
 }
 
 export const getCategoriesLeaderboardPreview = async () => {

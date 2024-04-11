@@ -1,20 +1,20 @@
 // getLeaderboardByCategory
 
-export type LeaderboardByCategory = {
+export type GetLeaderboardByCategoryResult = {
   rank: number
   change: null
   website: Website
   siteWeight: number
-}
+}[]
 
-type Website = {
+export type Website = {
   id: string
   name: string
   url: string
   categories: Category[]
 }
 
-type Category = {
+export type Category = {
   id: string
   createdAt: string
   updatedAt: string

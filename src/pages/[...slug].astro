@@ -59,20 +59,19 @@ const currentLeaderboard = leaderboard.find(ranking => ranking.slug == currentPa
 
     <section class="flex flex-col gap-12 w-full h-full mb-24">
         <!-- Intro -->
-        <div class="flex flex-col w-full px-16">
-                <h1 class="text-blue600 text-center max-w-xl m-auto">
-                  Classement
-                    {
-                        currentLeaderboard &&
-                            `${currentLeaderboard.name}`
-                    }
-                </h1>
+        <div class="flex flex-col w-full px-16 gap-8">
+            <h1 class="text-blue600 text-center max-w-xl m-auto">
+              Classement
+                {
+                    currentLeaderboard &&
+                        `${currentLeaderboard.name}`
+                }
+            </h1>
+            <p class="text-xl font-black flex w-full justify-center text-blue600">{`${month}`} {`${year}`}</p>
             <p class="text-center max-w-3xl mx-auto">
                 Découvre ce classement qui expose les géants du web en fonction du poids de leurs pages. Ce palmarès, qu'il soit par catégories ou général, est
                 actualisé mensuellement pour rester dans la course folle
             </p>
-            <p class="text-xl font-black flex w-full justify-end text-blue600">{`${month}`} {`${year}`}</p>
-
         </div>
         <!-- Buttons filter -->
         <section class="tags flex gap-4 flex-wrap p-4 m-auto max-w-screen-xl">

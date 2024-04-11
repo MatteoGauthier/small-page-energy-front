@@ -55,11 +55,9 @@ const currentPath = pathname.slice(1)
 
     <section class="flex flex-col gap-12 w-full h-full mb-24">
         <!-- Intro -->
-        <div class="flex flex-col w-full px-16">
-            <div>
-                <h1 class="text-blue600 text-center">Classement général</h1>
-                <p class="text-xl font-black flex w-full justify-end text-blue600">{`${month}`} {`${year}`}</p>
-            </div>
+        <div class="flex flex-col w-full px-16 gap-8">
+            <h1 class="text-blue600 text-center">Classement général</h1>
+            <p class="text-xl font-black flex w-full justify-center text-blue600">{`${month}`} {`${year}`}</p>
             <p class="text-center max-w-3xl mx-auto">
                 Découvre ce classement qui expose les géants du web en fonction du poids de leurs pages. Ce palmarès, qu'il soit par catégories ou général, est
                 actualisé mensuellement pour rester dans la course folle
@@ -119,7 +117,6 @@ const currentPath = pathname.slice(1)
 
     <Footer />
 </Layout>
-
 
 <!--
 <script>

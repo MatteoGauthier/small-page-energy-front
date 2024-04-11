@@ -92,7 +92,7 @@ const currentLeaderboard = props.category
         href="/ranking"
         variant="secondary"
         title="Classement général"
-        custom={`w-fit ${currentPath === "ranking" ? "secondary-active" : ""}`}
+        custom={`w-fit ${pathname.includes("ranking") ? "secondary-active" : ""}`}
       />
       {
         props.allCategories.map((category) => {

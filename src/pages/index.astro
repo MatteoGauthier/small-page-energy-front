@@ -52,17 +52,14 @@ const leaderboard = await getLeaderboard()
                         (
                             <>
                                 <div class="col-span-1 flex flex-col justify-center items-center gap-3 w-full top-[41%] xs:top-[38%] relative">
-                                    <img src="/peugeot-logo.png" alt="" class="logo-entreprise max-h-16 w-auto" />
                                     <p class="brand text-center break-all">{leaderboard[1].website.name}</p>
                                     <ButtonStat weight={`${(leaderboard[1].siteWeight / 1000).toFixed()}Ko`} primary={true} />
                                 </div>
                                 <div class="col-span-1 flex flex-col justify-center items-center gap-3 w-full">
-                                    <img src="/peugeot-logo.png" alt="" class="logo-entreprise max-h-16 w-auto" />
                                     <p class="brand text-center break-all">{leaderboard[0].website.name}</p>
                                     <ButtonStat weight={`${(leaderboard[0].siteWeight / 1000).toFixed()}Ko`} primary={true} />
                                 </div>
                                 <div class="col-span-1 flex flex-col justify-center items-center gap-3 w-full top-[72%] xs:top-[66%] relative">
-                                    <img src="/peugeot-logo.png" alt="" class="logo-entreprise max-h-16 w-auto" />
                                     <p class="brand text-center break-all">{leaderboard[2].website.name}</p>
                                     <ButtonStat weight={`${(leaderboard[2].siteWeight / 1000).toFixed()}Ko`} primary={true} />
                                 </div>

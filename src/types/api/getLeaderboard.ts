@@ -1,15 +1,24 @@
 // getLeaderboard
 
 export interface Leaderboard {
-  rank:       number;
-  change:     null;
-  siteWeight: number;
-  website:    Website;
+  rank: number
+  change: null
+  siteWeight: number
+  website: Website
 }
 
-export interface Website {
-  id:         string;
-  name:       string;
-  url:        string;
-  categories: string;
+export type Website = {
+  id: string
+  name: string
+  url: string
+  categories: Category[]
+}
+
+export type Category = {
+  id: string
+  createdAt: string
+  updatedAt: string
+  name: string
+  slug: string
+  description: null
 }

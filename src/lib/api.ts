@@ -1,5 +1,6 @@
 import type { Categories } from "../types/api/getCategories"
 import type { CategoriesLeaderboardPreview } from "../types/api/getCategoriesLeaderboardPreview"
+import type { Leaderboard } from "../types/api/getLeaderboard"
 
 const BASE_URL = "https://small-page-energy.osc-fr1.scalingo.io"
 
@@ -24,7 +25,7 @@ export const getCategories = async () => {
   return (await fetcher(`/categories`)) as Categories
 }
 export const getLeaderboard = async () => {
-  return await fetcher(`/leaderboard`)
+  return (await fetcher(`/leaderboard`)) as Leaderboard
 }
 
 export const getLeaderboardByCategory = async (categoryId: string) => {

@@ -1,126 +1,121 @@
 ---
-import { Breadcrumbs } from "astro-breadcrumbs"
-import Footer from "../../components/Footer.astro"
-import CalculateSection from "../../components/sections/CalculateSection.astro"
-import SocialSection from "../../components/sections/SocialSection.astro"
-import Layout from "../../layouts/Layout.astro"
-import { getWebsitesWithRanks } from "../../lib/api"
-import { type GetWebsitesWithRanks } from "../../types/api/getWebsitesWithRanks"
-import Button from "../../components/Button.astro"
+import { Breadcrumbs } from 'astro-breadcrumbs'
+import Footer from '../../components/Footer.astro'
+import CalculateSection from '../../components/sections/CalculateSection.astro'
+import SocialSection from '../../components/sections/SocialSection.astro'
+import Layout from '../../layouts/Layout.astro'
+import { getWebsitesWithRanks } from '../../lib/api'
+import { type GetWebsitesWithRanks } from '../../types/api/getWebsitesWithRanks'
+import Button from '../../components/Button.astro'
 
 export async function getStaticPaths() {
-  const websites = await getWebsitesWithRanks()
-  return websites.map((c) => ({
-    params: { id: c.website.id },
-    props: c,
-  }))
+    const websites = await getWebsitesWithRanks()
+    return websites.map(c => ({
+        params: { id: c.website.id },
+        props: c
+    }))
 }
 type Props = GetWebsitesWithRanks[number]
 
 const props = Astro.props
 
 const customCrumbs = [
-  {
-    text: "Accueil",
-    href: "/",
-  },
-  {
-    text: "Classement générale",
-    href: "/ranking",
-  },
-  {
-    text: `${props.website.name}`,
-    href: `/websites/${props.website.id}`,
-  },
+    {
+        text: 'Accueil',
+        href: '/'
+    },
+    {
+        text: 'Classement générale',
+        href: '/ranking'
+    },
+    {
+        text: `${props.website.name}`,
+        href: `/websites/${props.website.id}`
+    }
 ]
 ---
 
 <Layout title={`${props.website.name} Résultats - Small Page Energy`}>
-  <Breadcrumbs crumbs={customCrumbs} />
+    <Breadcrumbs crumbs={customCrumbs} />
 
-  <section class="max-w-screen-xl mx-auto grid grid-cols-7 p-4 gap-8 xs:grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-1 mb-16">
-    <div class="col-span-3 xs:col-span-1 sm:col-span-1 md:col-span-1 lg:col-span-1">
-      <h1 class="mb-4">{props.website.name}</h1>
-      <div class="flex flex-wrap gap-4">
-        <Button href="" variant="primary" title="Communiqué de presse" custom="w-fit" />
-        <Button href="" variant="primary" title="Communiqué de presse" custom="w-fit" />
-        <Button href="" variant="primary" title="Communiqué de presse" custom="w-fit" />
-      </div>
-    </div>
-    <div class="bg-white col-span-4 flex flex-wrap gap-8 p-8 py-16 gap-8 xs:col-span-1 sm:col-span-1 md:col-span-1 lg:col-span-1">
-      <section class="col-span-1 justify-center p-4 min-w-1/2">
-        <h4 class="text-blue600 mb-4">Classement automobile</h4>
-        <div class="flex gap-4 flex-col">
-        <div class="flex flex-wrap gap-x-4 items-center">
-          <div class="flex flex-wrap gap-2 items:center">
-            <h5 class="month text-blue600">Mars 2023 : </h5>
-            <p class="weight text-blue600">16000ko</p>
-          </div>
-          <p class="number text-blue600">25ème</p>
+    <section class="max-w-screen-xl mx-auto grid grid-cols-7 p-4 gap-8 xs:grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-1 mb-16">
+        <div class="col-span-3 xs:col-span-1 sm:col-span-1 md:col-span-1 lg:col-span-1">
+            <h1 class="mb-4">{props.website.name}</h1>
+            <div class="flex flex-wrap gap-4">
+                {
+                  props.website.categories.map(e =>
+                  <Button href={`/${e.slug}`} variant="primary" title={e.name} custom="w-fit" />)}
+            </div>
         </div>
-        <div class="flex flex-wrap gap-x-4 items-center">
-          <div class="flex flex-wrap gap-2 items:center">
-            <h5 class="month text-blue600">Mars 2023 : </h5>
-            <p class="weight text-blue600">16000ko</p>
-          </div>
-          <p class="number text-blue600">25ème</p>
+        <div class="bg-white col-span-4 flex flex-wrap gap-8 p-8 py-16 gap-8 xs:col-span-1 sm:col-span-1 md:col-span-1 lg:col-span-1">
+            {
+                props.globalRank && (
+                    <section class="col-span-1 justify-center p-4 min-w-1/2">
+                        <h4 class="text-blue600 mb-4">Classement Global</h4>
+                        <div class="flex gap-4 flex-col">
+                            {props.globalRank.map((r, i) => (
+                                <div class="flex flex-wrap gap-x-4 items-center">
+                                    <div class="flex flex-wrap gap-2 items:center">
+                                        <h5 class="month text-blue600">{r.createdAt} : </h5>
+                                        <p class="weight text-blue600">{r.report.siteWeight / 1000} Ko </p>
+                                    </div>
+                                    <p class="number text-blue600">{r.ranking}</p>
+                                </div>
+                            ))}
+                        </div>
+                    </section>
+                )
+            }
+            {
+                props.categoriesRanks.map(e => (
+                    <section class="col-span-1 justify-center p-4 min-w-1/2">
+                        <h4 class="text-blue600 mb-4">Classement {e.category.name}</h4>
+                        <div class="flex gap-4 flex-col">
+                            {e.ranks.map((r, i) => (
+                                <div class="flex flex-wrap gap-x-4 items-center">
+                                    <div class="flex flex-wrap gap-2 items:center">
+                                        <h5 class="month text-blue600">{r.createdAt} : </h5>
+                                        <p class="weight text-blue600">{r.report.siteWeight / 1000} Ko </p>
+                                    </div>
+                                    <p class="number text-blue600">{r.ranking}</p>
+                                </div>
+                            ))}
+                        </div>
+                    </section>
+                ))
+            }
         </div>
-      </div>
-      </section>
-      <section class="col-span-1 justify-center p-4 min-w-1/2">
-        <h4 class="text-blue600 mb-4">Classement général</h4>
-        <div class="flex gap-4 flex-col">
-        <div class="flex flex-wrap gap-x-4 items-center">
-          <div class="flex flex-wrap gap-2 items:center">
-            <h5 class="month text-blue600">Mars 2023 : </h5>
-            <p class="weight text-blue600">16000ko</p>
-          </div>
-          <p class="number text-blue600">25ème</p>
-        </div>
-        <div class="flex flex-wrap gap-x-4 items-center">
-          <div class="flex flex-wrap gap-2 items:center">
-            <h5 class="month text-blue600">Mars 2023 : </h5>
-            <p class="weight text-blue600">16000ko</p>
-          </div>
-          <p class="number text-blue600">25ème</p>
-        </div>
-      </div>
-      </section>
-    </div>
+    </section>
 
-    <pre>
-      {JSON.stringify(props, null, 2)}
-    </pre>
-  </section>
-
-  <CalculateSection />
-  <SocialSection />
+    <CalculateSection />
+    <SocialSection />
 </Layout>
 
 <Footer />
 
 <style>
-  body {
-    background: radial-gradient(circle at right bottom, hsla(268, 83%, 63%, 0.4) 0%, rgba(108, 55, 170, 0) 50%),
-      radial-gradient(circle at 0 -2%, rgba(155, 82, 239, 0.4) 0%, rgba(108, 55, 170, 0) 10%),
-      radial-gradient(circle at right center, rgba(155, 82, 239, 0.4) 0%, rgba(108, 55, 170, 0) 30%),
-      radial-gradient(circle at left center, rgba(155, 82, 239, 0.4) 0%, rgba(108, 55, 170, 0) 30%),
-      radial-gradient(circle at center, rgba(145, 224, 255, 0.5) 0%, rgba(145, 224, 255, 0) 85%);
+    body {
+        background: radial-gradient(circle at right bottom, hsla(268, 83%, 63%, 0.4) 0%, rgba(108, 55, 170, 0) 50%),
+            radial-gradient(circle at 0 -2%, rgba(155, 82, 239, 0.4) 0%, rgba(108, 55, 170, 0) 10%),
+            radial-gradient(circle at right center, rgba(155, 82, 239, 0.4) 0%, rgba(108, 55, 170, 0) 30%),
+            radial-gradient(circle at left center, rgba(155, 82, 239, 0.4) 0%, rgba(108, 55, 170, 0) 30%),
+            radial-gradient(circle at center, rgba(145, 224, 255, 0.5) 0%, rgba(145, 224, 255, 0) 85%);
 
-    @media (min-width: 768px) {
-      background: radial-gradient(circle at 120% 70%, hsla(268, 83%, 63%, 0.4) 0%, rgba(108, 55, 170, 0) 30%),
-        radial-gradient(circle at -30% -5%, rgba(155, 82, 239, 0.4) 20%, rgba(108, 55, 170, 0) 30%),
-        radial-gradient(circle at 0 130%, rgba(155, 82, 239, 0.4) 20%, rgba(108, 55, 170, 0) 30%),
-        radial-gradient(circle at right center, rgba(155, 82, 239, 0.4) 0%, rgba(108, 55, 170, 0) 30%),
-        radial-gradient(circle at center, rgba(145, 224, 255, 0.5) 0%, rgba(145, 224, 255, 0) 85%);
+        @media (min-width: 768px) {
+            background: radial-gradient(circle at 120% 70%, hsla(268, 83%, 63%, 0.4) 0%, rgba(108, 55, 170, 0) 30%),
+                radial-gradient(circle at -30% -5%, rgba(155, 82, 239, 0.4) 20%, rgba(108, 55, 170, 0) 30%),
+                radial-gradient(circle at 0 130%, rgba(155, 82, 239, 0.4) 20%, rgba(108, 55, 170, 0) 30%),
+                radial-gradient(circle at right center, rgba(155, 82, 239, 0.4) 0%, rgba(108, 55, 170, 0) 30%),
+                radial-gradient(circle at center, rgba(145, 224, 255, 0.5) 0%, rgba(145, 224, 255, 0) 85%);
+        }
     }
-  }
 
-  .number {
-    font-size: 1.625rem;
-  }
+    .number {
+        font-size: 1.625rem;
+    }
 
-  .weight, .month {
-    line-height: 1.5;
-  }
+    .weight,
+    .month {
+        line-height: 1.5;
+    }
 </style>

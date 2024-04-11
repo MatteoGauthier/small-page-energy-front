@@ -50,14 +50,10 @@ for (let i = 1; i <= 12; i++) {
 
 const pathname = new URL(Astro.request.url).pathname
 const currentPath = pathname.slice(1)
+
+const currentLeaderboard = leaderboard.find(ranking => ranking.slug == currentPath)
 ---
 
-<!-- <Layout title="TODO">
-  <pre>
-    {JSON.stringify(props, null, 2)}
-  </pre>
-
-</Layout> -->
 <Layout title="Classement - Small Page Energy">
     <Breadcrumbs crumbs={customCrumbs} />
 
@@ -101,9 +97,8 @@ const currentPath = pathname.slice(1)
                 </div>
                 <div class="bg-gray100 rounded-[20px] classement">
                     {
-                        leaderboard
-                            .find(ranking => ranking.slug == currentPath)
-                            .ranks.map((ranking, index, array) => {
+                        currentLeaderboard &&
+                            currentLeaderboard.ranks.map((ranking, index, array) => {
                                 const hasBorder = index !== array.length - 1
 
                                 const categories = ranking.website.categories
@@ -129,3 +124,21 @@ const currentPath = pathname.slice(1)
 
     <Footer />
 </Layout>
+
+<style>
+  body {
+      background: radial-gradient(circle at right bottom, hsla(268, 83%, 63%, 0.4) 0%, rgba(108, 55, 170, 0) 50%),
+          radial-gradient(circle at 0 -2%, rgba(155, 82, 239, 0.4) 0%, rgba(108, 55, 170, 0) 10%),
+          radial-gradient(circle at right center, rgba(155, 82, 239, 0.4) 0%, rgba(108, 55, 170, 0) 30%),
+          radial-gradient(circle at left center, rgba(155, 82, 239, 0.4) 0%, rgba(108, 55, 170, 0) 30%),
+          radial-gradient(circle at center, rgba(145, 224, 255, 0.5) 0%, rgba(145, 224, 255, 0) 85%);
+
+      @media (min-width: 768px) {
+          background: radial-gradient(circle at 120% 70%, hsla(268, 83%, 63%, 0.4) 0%, rgba(108, 55, 170, 0) 30%),
+              radial-gradient(circle at -30% -5%, rgba(155, 82, 239, 0.4) 20%, rgba(108, 55, 170, 0) 30%),
+              radial-gradient(circle at 0 130%, rgba(155, 82, 239, 0.4) 20%, rgba(108, 55, 170, 0) 30%),
+              radial-gradient(circle at right center, rgba(155, 82, 239, 0.4) 0%, rgba(108, 55, 170, 0) 30%),
+              radial-gradient(circle at center, rgba(145, 224, 255, 0.5) 0%, rgba(145, 224, 255, 0) 85%);
+      }
+  }
+</style>

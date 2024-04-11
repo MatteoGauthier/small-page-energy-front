@@ -60,14 +60,19 @@ const currentLeaderboard = leaderboard.find(ranking => ranking.slug == currentPa
     <section class="flex flex-col gap-12 w-full h-full mb-24">
         <!-- Intro -->
         <div class="flex flex-col w-full px-16">
-            <div>
-                <h1 class="text-blue600 text-center">Classement général</h1>
-                <p class="text-xl font-black flex w-full justify-end text-blue600">{`${month}`} {`${year}`}</p>
-            </div>
+                <h1 class="text-blue600 text-center max-w-xl m-auto">
+                  Classement
+                    {
+                        currentLeaderboard &&
+                            `${currentLeaderboard.name}`
+                    }
+                </h1>
             <p class="text-center max-w-3xl mx-auto">
                 Découvre ce classement qui expose les géants du web en fonction du poids de leurs pages. Ce palmarès, qu'il soit par catégories ou général, est
                 actualisé mensuellement pour rester dans la course folle
             </p>
+            <p class="text-xl font-black flex w-full justify-end text-blue600">{`${month}`} {`${year}`}</p>
+
         </div>
         <!-- Buttons filter -->
         <section class="tags flex gap-4 flex-wrap p-4 m-auto max-w-screen-xl">
@@ -124,21 +129,3 @@ const currentLeaderboard = leaderboard.find(ranking => ranking.slug == currentPa
 
     <Footer />
 </Layout>
-
-<style>
-  body {
-      background: radial-gradient(circle at right bottom, hsla(268, 83%, 63%, 0.4) 0%, rgba(108, 55, 170, 0) 50%),
-          radial-gradient(circle at 0 -2%, rgba(155, 82, 239, 0.4) 0%, rgba(108, 55, 170, 0) 10%),
-          radial-gradient(circle at right center, rgba(155, 82, 239, 0.4) 0%, rgba(108, 55, 170, 0) 30%),
-          radial-gradient(circle at left center, rgba(155, 82, 239, 0.4) 0%, rgba(108, 55, 170, 0) 30%),
-          radial-gradient(circle at center, rgba(145, 224, 255, 0.5) 0%, rgba(145, 224, 255, 0) 85%);
-
-      @media (min-width: 768px) {
-          background: radial-gradient(circle at 120% 70%, hsla(268, 83%, 63%, 0.4) 0%, rgba(108, 55, 170, 0) 30%),
-              radial-gradient(circle at -30% -5%, rgba(155, 82, 239, 0.4) 20%, rgba(108, 55, 170, 0) 30%),
-              radial-gradient(circle at 0 130%, rgba(155, 82, 239, 0.4) 20%, rgba(108, 55, 170, 0) 30%),
-              radial-gradient(circle at right center, rgba(155, 82, 239, 0.4) 0%, rgba(108, 55, 170, 0) 30%),
-              radial-gradient(circle at center, rgba(145, 224, 255, 0.5) 0%, rgba(145, 224, 255, 0) 85%);
-      }
-  }
-</style>

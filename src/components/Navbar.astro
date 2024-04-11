@@ -75,8 +75,8 @@
     const navMenu = document.querySelector(".nav-menu");
     const navLink = document.querySelectorAll(".nav-link");
     const hamburger= document.querySelector(".hamburger");
-    const closeIcon= document.querySelector(".closeIcon") as HTMLElement;
-    const menuIcon = document.querySelector(".menuIcon") as HTMLElement;
+    const closeIcon= document.querySelector(".closeIcon");
+    const menuIcon = document.querySelector(".menuIcon");
 
     function toggleMenu() {
         if (navMenu.classList.contains("showMenu")) {
@@ -90,10 +90,4 @@
         }
     }
     hamburger.addEventListener("click", toggleMenu);
-
-    navLink.forEach(
-        function(navLink) {
-        navLink.addEventListener("click", toggleMenu);
-        }
-    )
 </script>

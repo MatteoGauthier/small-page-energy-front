@@ -85,7 +85,7 @@ const leaderboard = await getLeaderboard()
                     }
                 </div>
                 <div class="w-full flex flex-row justify-end mt-4">
-                    <Button href="" variant="secondary" title="Partager" custom="w-fit" ; icon="share" />
+                    <Button href="/" variant="secondary" title="Partager" custom="w-fit" icon="share" />
                 </div>
             </div>
         </div>
@@ -101,7 +101,7 @@ const leaderboard = await getLeaderboard()
                             if (category.ranks && category.ranks.length > 0) {
                                 return (
                                     <li class="splide__slide">
-                                        <div class="scaleControll">
+                                        <div class="scaleControl">
                                             <Card name={category.name} ranks={category.ranks} />
                                         </div>
                                     </li>
@@ -250,6 +250,10 @@ const leaderboard = await getLeaderboard()
 		}
 	}
 
+	.scaleControl {
+		padding: 1rem;
+		}
+
 </style>
 
 <script>
@@ -270,15 +274,15 @@ const leaderboard = await getLeaderboard()
     breakpoints: {
 		2000: {
             perPage: 5,
-            gap: 40
+            gap: 32
         },
         1800: {
             perPage: 4,
-            gap: 40
+            gap: 32
         },
         1200: {
             perPage: 3,
-            gap: 40
+            gap: 32
         },
 		992: {
             perPage: 2,

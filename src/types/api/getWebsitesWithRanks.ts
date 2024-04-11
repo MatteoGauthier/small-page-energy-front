@@ -5,40 +5,51 @@ export type GetWebsitesWithRanks = {
 }[]
 
 export type CategoriesRank = {
-  category: Category
-  ranks: Rank[]
+  category: Category;
+  ranks:    Rank[];
 }
 
 export type Category = {
-  id: string
-  createdAt: string
-  updatedAt: string
-  name: string
-  slug: string
-  description: null
+  id:          string;
+  createdAt:   string;
+  updatedAt:   string;
+  name:        string;
+  slug:        string;
+  description: null;
 }
 
 export type Rank = {
-  id: string
-  createdAt: string
-  updatedAt: string
-  ranking: number
-  change: null
-  period: null
-  websiteId: string
-  reportId: string
-  categoryId: null | string
-  category: Category | null
+  id:         string;
+  createdAt:  string;
+  updatedAt:  string;
+  ranking:    number;
+  change:     null;
+  period:     null;
+  websiteId:  string;
+  reportId:   string;
+  categoryId: null | string;
+  category:   Category | null;
+  report:     Report;
+}
+
+export type Report = {
+  id:         string;
+  createdAt:  string;
+  updatedAt:  string;
+  url:        string;
+  finalUrl:   string;
+  siteWeight: number;
+  websiteId:  string;
 }
 
 export type Website = {
-  id: string
-  createdAt: string
-  updatedAt: string
-  name: string
-  url: string
-  description: null
-  wrongMeasure: boolean
-  categories: Category[]
-  ranks: Rank[]
+  id:           string;
+  createdAt:    string;
+  updatedAt:    string;
+  name:         string;
+  url:          string;
+  description:  null;
+  wrongMeasure: boolean;
+  categories:   Category[];
+  ranks:        Rank[];
 }

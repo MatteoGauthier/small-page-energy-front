@@ -4,8 +4,9 @@ import type { Leaderboard } from "../types/api/getLeaderboard"
 import type { GetLeaderboardByCategoryResult } from "../types/api/getLeaderboardByCategory"
 import type { GetWebsiteResult } from "../types/api/getWebsite"
 import type { GetWebsitesResult } from "../types/api/getWebsites"
+import type { GetWebsitesWithRanks } from "../types/api/getWebsitesWithRanks"
 
-const BASE_URL = "https://small-page-energy.osc-fr1.scalingo.io"
+const BASE_URL = import.meta.env.API_URL || "https://small-page-energy.osc-fr1.scalingo.io"
 
 const fetcher = async (endpoint: string) => {
   const response = await fetch(`${BASE_URL}/api${endpoint}`, {
@@ -23,6 +24,11 @@ const fetcher = async (endpoint: string) => {
 export const getWebsites = async () => {
   return (await fetcher(`/websites`)) as GetWebsitesResult
 }
+
+export const getWebsitesWithRanks = async () => {
+  return (await fetcher(`/websites-with-ranks`)) as GetWebsitesWithRanks
+}
+
 export const getWebsite = async (websiteId: string) => {
   return (await fetcher(`/websites/${websiteId}`)) as GetWebsiteResult
 }

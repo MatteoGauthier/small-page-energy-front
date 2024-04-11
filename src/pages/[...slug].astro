@@ -109,6 +109,7 @@ const currentLeaderboard = leaderboard.find(ranking => ranking.slug == currentPa
 
                                 return (
                                     <Rank
+                                        website={ranking.website}
                                         rank={`${ranking.rank}.`}
                                         name={ranking.website.name}
                                         categories={categories}

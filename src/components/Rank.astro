@@ -1,7 +1,7 @@
 ---
 // Rank
 import ButtonStat from '../components/ButtonStat.astro'
-import type { CategoriesLeaderboardPreview } from '../types/api/getCategoriesLeaderboardPreview'
+import type { CategoriesLeaderboardPreview, Website } from '../types/api/getCategoriesLeaderboardPreview'
 import type { Category } from '../types/api/getLeaderboard'
 
 interface Props {
@@ -12,16 +12,17 @@ interface Props {
     type?: string
     weight: number
     hasBorder?: boolean
+    website: Website
 }
 
-const { rank, name, categories, region = 'Unknown', type = 'Unknown', weight, hasBorder = true } = Astro.props
+const { rank, name, categories, region = 'Unknown', type = 'Unknown', website, weight, hasBorder = true } = Astro.props
 ---
 
 {
     hasBorder ? (
         <div class="w-full flex gap-15 border-b-2 border-blue200 border-solid items-center justify-between">
             <p class="text-center number text-blue300 w-1/6 py-2">{rank}</p>
-            <p class="text-center text-lg font-bold w-1/4 py-2">{name}</p>
+            <a href={`/websites/${website.id}`} class="text-center text-lg font-bold w-1/4 py-2">{name}</a>
             <p class="text-center text-lg font-bold py-2 w-1/4">
                 {categories.map(e => (
                     <a href={`/${e.slug}`} class="category-link">{e.name}</a>
@@ -32,7 +33,7 @@ const { rank, name, categories, region = 'Unknown', type = 'Unknown', weight, ha
     ) : (
         <div class="w-full flex gap-15 items-center justify-between">
             <p class="text-center number text-blue300 w-1/6 py-2">{rank}</p>
-            <p class="text-center text-lg font-bold w-1/4 py-2">{name}</p>
+            <a href={`/websites/${website.id}`} class="text-center text-lg font-bold w-1/4 py-2">{name}</a>
             <p class="text-center text-lg font-bold w-1/4 py-2">
                 {categories.map(e => (
                     <a href={`/${e.slug}`} class="category-link">{e.name}</a>

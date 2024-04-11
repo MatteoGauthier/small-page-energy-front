@@ -43,7 +43,7 @@ const leaderboard = await getLeaderboard()
                         <p class="text-black">Qui aura la plus petite ?</p>
                     </div>
                 </div>
-                <Button href="" variant="primary" title="Voir le classement général" custom="w-fit" />
+                <Button href="/ranking" variant="primary" title="Voir le classement général" custom="w-fit" />
             </div>
             <!-- Classement -->
             <div class="w-full xs:col-span-1 sm:col-span-1 md:col-span-1">
@@ -51,18 +51,18 @@ const leaderboard = await getLeaderboard()
                     {
                         (
                             <>
-                                <div class="col-span-1 flex flex-col justify-center items-center gap-3 w-full top-[41%] xs:top-[38%] relative">
+                                <a href={`/websites/${leaderboard[1].website.id}`} class="col-span-1 flex flex-col justify-center items-center gap-3 w-full top-[41%] xs:top-[38%] relative">
                                     <p class="brand text-center break-all">{leaderboard[1].website.name}</p>
                                     <ButtonStat weight={`${(leaderboard[1].siteWeight / 1000).toFixed()}Ko`} primary={true} />
-                                </div>
-                                <div class="col-span-1 flex flex-col justify-center items-center gap-3 w-full">
+                                </a>
+                                <a href={`/websites/${leaderboard[0].website.id}`} class="col-span-1 flex flex-col justify-center items-center gap-3 w-full">
                                     <p class="brand text-center break-all">{leaderboard[0].website.name}</p>
                                     <ButtonStat weight={`${(leaderboard[0].siteWeight / 1000).toFixed()}Ko`} primary={true} />
-                                </div>
-                                <div class="col-span-1 flex flex-col justify-center items-center gap-3 w-full top-[72%] xs:top-[66%] relative">
+                                </a>
+                                <a href={`/websites/${leaderboard[2].website.id}`} class="col-span-1 flex flex-col justify-center items-center gap-3 w-full top-[72%] xs:top-[66%] relative">
                                     <p class="brand text-center break-all">{leaderboard[2].website.name}</p>
                                     <ButtonStat weight={`${(leaderboard[2].siteWeight / 1000).toFixed()}Ko`} primary={true} />
-                                </div>
+                                </a>
                             </>
                         )
                     }
@@ -79,6 +79,7 @@ const leaderboard = await getLeaderboard()
                                     number={`${ranking.rank}.`}
                                     weight={`${(ranking.siteWeight / 1000).toFixed()}Ko`}
                                     hasHr={hasHr}
+                                    href={`/websites/${ranking.website.id}`}
                                 />
                             )
                         })

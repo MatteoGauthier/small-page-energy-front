@@ -8,6 +8,7 @@ import Button from "./Button.astro"
 type Props = {
   name: string
   id: string
+  slug: string
   ranks: CategoriesLeaderboardPreview[number]["ranks"]
 }
 
@@ -33,7 +34,7 @@ const props = Astro.props
       })
     }
   </div>
-  <Button title="Voir le classement" href={`/${props.id}`} variant="tertiary" custom="w-fit" ; />
+  <Button title="Voir le classement" href={`/${props.slug}`} variant="tertiary" custom="w-fit" ; />
 </div>
 
 <style>

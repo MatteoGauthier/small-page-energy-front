@@ -1,22 +1,43 @@
 ---
 import { Breadcrumbs } from 'astro-breadcrumbs'
+import { Image } from "astro:assets"
+import Button from '../../components/Button.astro'
+import ButtonStat from '../../components/ButtonStat.astro'
 import Footer from '../../components/Footer.astro'
 import CalculateSection from '../../components/sections/CalculateSection.astro'
 import SocialSection from '../../components/sections/SocialSection.astro'
 import Layout from '../../layouts/Layout.astro'
 import { getWebsitesWithRanks } from '../../lib/api'
 import { type GetWebsitesWithRanks } from '../../types/api/getWebsitesWithRanks'
-import Button from '../../components/Button.astro'
-import ButtonStat from '../../components/ButtonStat.astro'
 
 export async function getStaticPaths() {
-    const websites = await getWebsitesWithRanks()
-    return websites.map(c => ({
-        params: { id: c.website.id },
-        props: c
+  const websites = await getWebsitesWithRanks()
+
+  return websites.map((c) => {
+    const categoriesRanks = c.categoriesRanks.map((e) => ({
+      name: e.category.name,
+      rank: e.ranks[0].ranking,
     }))
+
+    const queryParams = new URLSearchParams()
+    queryParams.append("categoriesRanks", JSON.stringify(categoriesRanks))
+    queryParams.append("brand", c.website.name)
+    queryParams.append("rank", String(c.globalRank[0].ranking))
+    queryParams.append("weight", String(c.globalRank[0].report.siteWeight))
+
+    const websiteImageShare = `http://localhost:3000/api/website-share?${queryParams.toString()}`
+
+    const refined = { ...c, websiteImageShare }
+
+    return {
+      params: { id: c.website.id },
+      props: refined,
+    }
+  })
 }
-type Props = GetWebsitesWithRanks[number]
+type Props = GetWebsitesWithRanks[number] & {
+  websiteImageShare: string
+}
 
 const props = Astro.props
 
@@ -37,18 +58,44 @@ const customCrumbs = [
 ---
 
 <Layout title={`${props.website.name} Résultats - Small Page Energy`}>
-    <Breadcrumbs crumbs={customCrumbs} />
+  <Breadcrumbs crumbs={customCrumbs} />
 
     <section class="max-w-screen-xl mx-auto grid grid-cols-7 p-4 gap-8 xs:grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-1 mb-16 xs:mt-24 sm:mt-24 md:mt-24">
         <div class="col-span-3 xs:col-span-1 sm:col-span-1 md:col-span-1 lg:col-span-1">
-            <h1 class="mb-4">{props.website.name}</h1>
-            <div class="flex flex-wrap gap-4">
-                {
-                  props.website.categories.map(e =>
-                  <Button href={`/${e.slug}`} variant="primary" title={e.name} custom="w-fit" />)}
-            </div>
+       
+
+            <div>
+                <h1 class="mb-4">{props.website.name}</h1>
+        
+                <div class="flex flex-wrap gap-4">
+                  {
+                    props.website.categories.map((e) => (
+                      <Button href={`/${e.slug}`} variant="primary" title={e.name} custom="w-fit" />
+                    ))
+                  }
+                </div>
+              </div>
+              <div class="bg-white mt-6 gap-6 flex items-center p-5 rounded-lg">
+                <Image
+                  src={props.websiteImageShare}
+                  alt="Website share image"
+                  class="shadow-lg rounded"
+                  width="150"
+                  height="150"
+                />
+                <div class="flex flex-col items-start">
+                  <span class="text-xl font-bold mb-2">Partage le score de {props.website.name} !</span>
+                  <button
+                    data-share-target={props.websiteImageShare}
+                    class={`primary-btn share-button nav-link text-gray100  bg-blue400 text-center flex flex-row gap-2 justify-center w-fit items-center hover:bg-blue600 transition`}
+                  >
+                    Partager l'image
+                  </button>
+                </div>
+              </div>
         </div>
-        <div class="bg-white col-span-4 flex flex-wrap gap-8 p-8 py-16 gap-8 xs:col-span-1 sm:col-span-1 md:col-span-1 lg:col-span-1">
+        
+        <div class="bg-white rounded-lg col-span-4 flex flex-wrap gap-8 p-8 py-16 xs:col-span-1 sm:col-span-1 md:col-span-1 lg:col-span-1">
             {
                 props.globalRank && (
                     <section class="justify-center p-4 min-w-1/2">
@@ -58,7 +105,7 @@ const customCrumbs = [
                           <ButtonStat weight={`${r.report.siteWeight / 1000} Ko`} primary={true} />
                           </div>
                         <div class="flex gap-4 flex-col">
-                              <div class="flex flex-wrap gap-x-4 items-center">
+                                         <div class="flex flex-wrap gap-x-4 items-center">
                                     <section class="flex flex-wrap gap-2 items-center">
                                         <p class="number text-blue600">{r.ranking === 1 ? `${r.ranking}er` : `${r.ranking}ème`}</p>
                                         <div class="flex gap-x-2">
@@ -90,31 +137,84 @@ const customCrumbs = [
         </div>
     </section>
 
-    <CalculateSection />
-    <SocialSection />
+  <CalculateSection />
+  <SocialSection />
 </Layout>
 
 <Footer />
 
-<style>
-    body {
-        background: radial-gradient(circle at right bottom, hsla(268, 83%, 63%, 0.4) 0%, rgba(108, 55, 170, 0) 50%),
-            radial-gradient(circle at 0 -2%, rgba(155, 82, 239, 0.4) 0%, rgba(108, 55, 170, 0) 10%),
-            radial-gradient(circle at right center, rgba(155, 82, 239, 0.4) 0%, rgba(108, 55, 170, 0) 30%),
-            radial-gradient(circle at left center, rgba(155, 82, 239, 0.4) 0%, rgba(108, 55, 170, 0) 30%),
-            radial-gradient(circle at center, rgba(145, 224, 255, 0.5) 0%, rgba(145, 224, 255, 0) 85%);
-
-        @media (min-width: 768px) {
-            background: radial-gradient(circle at 120% 70%, hsla(268, 83%, 63%, 0.4) 0%, rgba(108, 55, 170, 0) 30%),
-                radial-gradient(circle at -30% -5%, rgba(155, 82, 239, 0.4) 20%, rgba(108, 55, 170, 0) 30%),
-                radial-gradient(circle at 0 130%, rgba(155, 82, 239, 0.4) 20%, rgba(108, 55, 170, 0) 30%),
-                radial-gradient(circle at right center, rgba(155, 82, 239, 0.4) 0%, rgba(108, 55, 170, 0) 30%),
-                radial-gradient(circle at center, rgba(145, 224, 255, 0.5) 0%, rgba(145, 224, 255, 0) 85%);
-        }
+<script>
+  function downloadImage(url) {
+    var img = new Image()
+    img.src = url
+    var link = document.createElement("a")
+    link.href = img.src
+    link.target = "_blank"
+    link.download = "image.jpg"
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
+  }
+  const button = document.querySelector<HTMLButtonElement>(".share-button")
+  const share = () => {
+    if (navigator.share) {
+      console.log("yo")
+      navigator.share({
+        title: "Small Page Energy",
+        text: "Découvre le score de mon site sur Small Page Energy",
+        url: window.location.href,
+      })
+    } else if (button.dataset.shareTarget) {
+      // download image
+      downloadImage(button.dataset.shareTarget)
     }
+  }
+
+  button.addEventListener("click", share, false)
+
+  if (!navigator.share) {
+    button.textContent = "Télécharger l'image"
+  }
+</script>
+
+<style>
+  .primary-btn {
+    border-radius: 100px;
+    padding: 1rem 1.375rem;
+
+    font-size: 1.125rem;
 
     .number {
         font-size: 1.625rem;
         min-width: 5rem;
     }
+
+    .icon {
+      background-color: #fff;
+    }
+  }
+  body {
+    background: radial-gradient(circle at right bottom, hsla(268, 83%, 63%, 0.4) 0%, rgba(108, 55, 170, 0) 50%),
+      radial-gradient(circle at 0 -2%, rgba(155, 82, 239, 0.4) 0%, rgba(108, 55, 170, 0) 10%),
+      radial-gradient(circle at right center, rgba(155, 82, 239, 0.4) 0%, rgba(108, 55, 170, 0) 30%),
+      radial-gradient(circle at left center, rgba(155, 82, 239, 0.4) 0%, rgba(108, 55, 170, 0) 30%),
+      radial-gradient(circle at center, rgba(145, 224, 255, 0.5) 0%, rgba(145, 224, 255, 0) 85%);
+
+    @media (min-width: 768px) {
+      background: radial-gradient(circle at 120% 70%, hsla(268, 83%, 63%, 0.4) 0%, rgba(108, 55, 170, 0) 30%),
+        radial-gradient(circle at -30% -5%, rgba(155, 82, 239, 0.4) 20%, rgba(108, 55, 170, 0) 30%),
+        radial-gradient(circle at 0 130%, rgba(155, 82, 239, 0.4) 20%, rgba(108, 55, 170, 0) 30%),
+        radial-gradient(circle at right center, rgba(155, 82, 239, 0.4) 0%, rgba(108, 55, 170, 0) 30%),
+        radial-gradient(circle at center, rgba(145, 224, 255, 0.5) 0%, rgba(145, 224, 255, 0) 85%);
+    }
+  }
+
+  .number {
+    font-size: 1.625rem;
+  }
+
+  .weight,
+  .month {
+    line-height: 1.5;
+  }
 </style>

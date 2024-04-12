@@ -19,7 +19,11 @@ module.exports = {
 			'purple300': '#8F13A5',
 			'pink100': '#F005AE',
 		},
-		extend: {},
+		extend: {
+			fontFamily: {
+				'display': ['CabinetGrotesk-Variable', 'sans-serif'],
+			},
+		},
 		screens: {
 			'xs': {'min': '0px', 'max': '390px'},
 			// => @media (min-width: 390px) { ... }

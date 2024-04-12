@@ -78,9 +78,9 @@ const customCrumbs = [
               </div>
               <div class="bg-white mt-6 gap-6 flex items-center p-5 rounded-lg">
                 <Image
-                  src={`https://google.com`}
+                  src={`${props.websiteImageShare}&preview=true`}
+                  loading='lazy'
                   alt="Website share image"
-                  loading="lazy"
                   class="shadow-lg rounded"
                   widths={[150]}
                   sizes={`(max-width: 360px) 150px, (max-width: 720px) 150px, (max-width: 1600px) 150px, 150px`}

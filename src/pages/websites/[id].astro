@@ -7,6 +7,7 @@ import Layout from '../../layouts/Layout.astro'
 import { getWebsitesWithRanks } from '../../lib/api'
 import { type GetWebsitesWithRanks } from '../../types/api/getWebsitesWithRanks'
 import Button from '../../components/Button.astro'
+import ButtonStat from '../../components/ButtonStat.astro'
 
 export async function getStaticPaths() {
     const websites = await getWebsitesWithRanks()
@@ -25,7 +26,7 @@ const customCrumbs = [
         href: '/'
     },
     {
-        text: 'Classement générale',
+        text: 'Classement général',
         href: '/ranking'
     },
     {
@@ -50,39 +51,41 @@ const customCrumbs = [
         <div class="bg-white col-span-4 flex flex-wrap gap-8 p-8 py-16 gap-8 xs:col-span-1 sm:col-span-1 md:col-span-1 lg:col-span-1">
             {
                 props.globalRank && (
-                    <section class="col-span-1 justify-center p-4 min-w-1/2">
-                        <h4 class="text-blue600 mb-4">Classement Global</h4>
+                    <section class="justify-center p-4 min-w-1/2">
+                      {props.globalRank.map((r, i) => (
+                        <div class="flex gap-4 items-center mb-4">
+                          <h4 class="text-blue600 capitalize date-weight">{new Intl.DateTimeFormat('fr-FR', {month: "long", year: "numeric"}).format(new Date(r.createdAt))}</h4>
+                          <ButtonStat weight={`${r.report.siteWeight / 1000} Ko`} primary={true} />
+                          </div>
                         <div class="flex gap-4 flex-col">
-                            {props.globalRank.map((r, i) => (
-                                <div class="flex flex-wrap gap-x-4 items-center">
-                                    <div class="flex flex-wrap gap-2 items:center">
-                                        <h5 class="month text-blue600">{r.createdAt} : </h5>
-                                        <p class="weight text-blue600">{r.report.siteWeight / 1000} Ko </p>
+                              <div class="flex flex-wrap gap-x-4 items-center">
+                                    <section class="flex flex-wrap gap-2 items-center">
+                                        <p class="number text-blue600">{r.ranking === 1 ? `${r.ranking}er` : `${r.ranking}ème`}</p>
+                                        <div class="flex gap-x-2">
+                                          <p class="text-blue600">Classement Général</p>
+                                        </section>
                                     </div>
-                                    <p class="number text-blue600">{r.ranking}</p>
                                 </div>
-                            ))}
                         </div>
-                    </section>
-                )
-            }
-            {
+                              ))}
+                              {
                 props.categoriesRanks.map(e => (
-                    <section class="col-span-1 justify-center p-4 min-w-1/2">
-                        <h4 class="text-blue600 mb-4">Classement {e.category.name}</h4>
                         <div class="flex gap-4 flex-col">
                             {e.ranks.map((r, i) => (
                                 <div class="flex flex-wrap gap-x-4 items-center">
-                                    <div class="flex flex-wrap gap-2 items:center">
-                                        <h5 class="month text-blue600">{r.createdAt} : </h5>
-                                        <p class="weight text-blue600">{r.report.siteWeight / 1000} Ko </p>
-                                    </div>
-                                    <p class="number text-blue600">{r.ranking}</p>
+                                    <section class="flex flex-wrap gap-2 items-center">
+                                        <p class="number text-blue600">{r.ranking === 1 ? `${r.ranking}er` : `${r.ranking}ème`}</p>
+                                        <div class="flex gap-x-2">
+                                          <p class="text-blue600">Classement {e.category.name}</p>
+                                        </div>
+                                      </section>
                                 </div>
                             ))}
                         </div>
-                    </section>
                 ))
+            }
+                    </section>
+                )
             }
         </div>
     </section>
@@ -112,10 +115,6 @@ const customCrumbs = [
 
     .number {
         font-size: 1.625rem;
-    }
-
-    .weight,
-    .month {
-        line-height: 1.5;
+        min-width: 5rem;
     }
 </style>

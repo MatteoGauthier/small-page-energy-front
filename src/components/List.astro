@@ -17,7 +17,7 @@ const { brand, number, weight, hasHr, href } = Astro.props
   <div class="flex flex-row justify-between items-center">
     <div class="flex flex-row gap-4 items-center">
       <p class="number text-blue300 w-12">{number}</p>
-      <a href={href} class="text-black brand">{brand}</a>
+      <a href={href} class="text-black brand hover:underline underline-offset-4 decoration-auto decoration-pink100">{brand}</a>
     </div>
     <ButtonStat weight={weight} primary={false} } />
   </div>

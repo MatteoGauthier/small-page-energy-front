@@ -9,12 +9,12 @@ interface Props {
 const {name, href, hasHr} = Astro.props;
 ---
 
-<a href={href} class="w-full flex flex-col">
+<a href={href} class="w-full flex flex-col group">
     <div class="flex flex-row justify-between items-center py-4">
         <div class="flex flex-row gap-4 items-center">
-            <p class="text-gray100 text-lg">{name}</p>
+            <p class="text-gray100 text-lg group-hover:font-bold transition-all">{name}</p>
         </div>
-        <img src="/arrow-link.svg" alt="">
+        <img class="relative left-[0%] group-hover:left-[-5%] transition-all" src="/arrow-link.svg" alt="">
     </div>
     {hasHr && <hr class="text-gray100">}
 </a>

@@ -51,16 +51,16 @@ const leaderboard = await getLeaderboard()
                     {
                         (
                             <>
-                                <a href={`/websites/${leaderboard[1].website.id}`} class="col-span-1 flex flex-col justify-center items-center gap-3 w-full top-[41%] xs:top-[38%] relative">
-                                    <p class="brand text-center break-all">{leaderboard[1].website.name}</p>
+                                <a href={`/websites/${leaderboard[1].website.id}`} class="col-span-1 flex flex-col justify-center items-center gap-3 w-full top-[41%] xs:top-[38%] relative group">
+                                    <p class="brand text-center break-all group-hover:underline underline-offset-4 decoration-auto decoration-pink100">{leaderboard[1].website.name}</p>
                                     <ButtonStat weight={`${(leaderboard[1].siteWeight / 1000).toFixed()}Ko`} primary={true} />
                                 </a>
-                                <a href={`/websites/${leaderboard[0].website.id}`} class="col-span-1 flex flex-col justify-center items-center gap-3 w-full">
-                                    <p class="brand text-center break-all">{leaderboard[0].website.name}</p>
+                                <a href={`/websites/${leaderboard[0].website.id}`} class="col-span-1 flex flex-col justify-center items-center gap-3 w-full group">
+                                    <p class="brand text-center break-all group-hover:underline underline-offset-4 decoration-auto decoration-pink100">{leaderboard[0].website.name}</p>
                                     <ButtonStat weight={`${(leaderboard[0].siteWeight / 1000).toFixed()}Ko`} primary={true} />
                                 </a>
-                                <a href={`/websites/${leaderboard[2].website.id}`} class="col-span-1 flex flex-col justify-center items-center gap-3 w-full top-[72%] xs:top-[66%] relative">
-                                    <p class="brand text-center break-all">{leaderboard[2].website.name}</p>
+                                <a href={`/websites/${leaderboard[2].website.id}`} class="col-span-1 flex flex-col justify-center items-center gap-3 w-full top-[72%] xs:top-[66%] relative group">
+                                    <p class="brand text-center break-all group-hover:underline underline-offset-4 decoration-auto decoration-pink100">{leaderboard[2].website.name}</p>
                                     <ButtonStat weight={`${(leaderboard[2].siteWeight / 1000).toFixed()}Ko`} primary={true} />
                                 </a>
                             </>

@@ -22,10 +22,10 @@ const { rank, name, categories, region = 'Unknown', type = 'Unknown', website, w
     hasBorder ? (
         <div class="w-full flex gap-15 border-b-2 border-blue200 border-solid items-center justify-between">
             <p class="text-center number text-blue300 w-1/6 py-2">{rank}</p>
-            <a href={`/websites/${website.id}`} class="text-center text-lg font-bold w-1/4 py-2">{name}</a>
+            <a href={`/websites/${website.id}`} class="text-center text-lg font-bold w-1/4 py-2 hover:underline underline-offset-4 decoration-auto decoration-pink100">{name}</a>
             <p class="text-center text-lg font-bold py-2 w-1/4 sm:hidden xs:hidden">
                 {categories.map(e => (
-                    <a href={`/${e.slug}`} class="category-link">{e.name}</a>
+                    <a href={`/${e.slug}`} class="category-link hover:underline underline-offset-4 decoration-auto decoration-pink100">{e.name}</a>
                 ))}
             </p>
             <p class="text-center text-lg font-bold w-1/4 py-2">{`${(weight / 1000).toFixed()}Ko`}</p>
@@ -33,10 +33,10 @@ const { rank, name, categories, region = 'Unknown', type = 'Unknown', website, w
     ) : (
         <div class="w-full flex gap-15 items-center justify-between">
             <p class="text-center number text-blue300 w-1/6 py-2">{rank}</p>
-            <a href={`/websites/${website.id}`} class="text-center text-lg font-bold w-1/4 py-2">{name}</a>
+            <a href={`/websites/${website.id}`} class="text-center text-lg font-bold w-1/4 py-2 hover:underline underline-offset-4 decoration-auto decoration-pink100">{name}</a>
             <p class="text-center text-lg font-bold w-1/4 py-2 sm:hidden xs:hidden">
                 {categories.map(e => (
-                    <a href={`/${e.slug}`} class="category-link">{e.name}</a>
+                    <a href={`/${e.slug}`} class="category-link hover:underline underline-offset-4 decoration-auto decoration-pink100">{e.name}</a>
                 ))}
             </p>
             <p class="text-center text-lg font-bold w-1/4 py-2">{`${(weight / 1000).toFixed()}Ko`}</p>

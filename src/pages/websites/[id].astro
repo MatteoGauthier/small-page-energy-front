@@ -156,18 +156,30 @@ const customCrumbs = [
     document.body.removeChild(link)
   }
   const button = document.querySelector<HTMLButtonElement>(".share-button")
-  const share = () => {
-    if (navigator.share) {
-      console.log("yo")
+  const share = async () => {
+    if (button.dataset.shareTarget) {
+        if (navigator.share) {
+            console.log("yo")
+
+            const blob = await fetch(button.dataset.shareTarget).then(r=>r.blob())
+
+      
       navigator.share({
         title: "Small Page Energy",
         text: "Découvre le score de mon site sur Small Page Energy",
         url: window.location.href,
+        files: [
+            new File([blob], 'image-de-partage-small-page-energy.png', {
+                type: blob.type,
+            }),
+        ],
       })
-    } else if (button.dataset.shareTarget) {
+    } else  {
       // download image
       downloadImage(button.dataset.shareTarget)
     }
+    }
+    
   }
 
   button.addEventListener("click", share, false)

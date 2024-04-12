@@ -1,6 +1,7 @@
 ---
 // Rank
 import ButtonStat from '../components/ButtonStat.astro'
+import { byteValueNumberFormatter } from '../lib/string'
 import type { CategoriesLeaderboardPreview, Website } from '../types/api/getCategoriesLeaderboardPreview'
 import type { Category } from '../types/api/getLeaderboard'
 
@@ -28,7 +29,7 @@ const { rank, name, categories, region = 'Unknown', type = 'Unknown', website, w
                     <a href={`/${e.slug}`} class="category-link hover:underline underline-offset-4 decoration-auto decoration-pink100">{e.name}</a>
                 ))}
             </p>
-            <p class="text-center text-lg font-bold w-1/4 py-2">{`${(weight / 1000).toFixed()}Ko`}</p>
+            <p class="text-center text-lg font-bold w-1/4 py-2">{byteValueNumberFormatter.format(weight)}</p>
         </div>
     ) : (
         <div class="w-full flex gap-15 items-center justify-between">
@@ -39,7 +40,7 @@ const { rank, name, categories, region = 'Unknown', type = 'Unknown', website, w
                     <a href={`/${e.slug}`} class="category-link hover:underline underline-offset-4 decoration-auto decoration-pink100">{e.name}</a>
                 ))}
             </p>
-            <p class="text-center text-lg font-bold w-1/4 py-2">{`${(weight / 1000).toFixed()}Ko`}</p>
+            <p class="text-center text-lg font-bold w-1/4 py-2">{byteValueNumberFormatter.format(weight)}</p>
         </div>
     )
 }

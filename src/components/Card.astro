@@ -1,6 +1,7 @@
 ---
 // Card
 import List from "../components/List.astro"
+import { byteValueNumberFormatter } from "../lib/string"
 import type { CategoryWithLeaderboardPreview } from "../types"
 import type { CategoriesLeaderboardPreview } from "../types/api/getCategoriesLeaderboardPreview"
 import Button from "./Button.astro"
@@ -27,7 +28,7 @@ const props = Astro.props
             href={`/websites/${item.website.id}`}
             brand={item.website.name}
             number={`${index + 1}.`}
-            weight={`${(item.siteWeight / 1000).toFixed()}Ko`}
+            weight={byteValueNumberFormatter.format(item.siteWeight)}
             hasHr={index !== 2}
           />
         )

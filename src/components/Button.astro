@@ -24,7 +24,7 @@ const { custom, title, href, icon, variant, isBlank = false } = Astro.props
                     {title}
                 </a>
     ) : variant == 'secondary' ? (
-        isBlank ?(  
+        isBlank ?(
             <a href={href} target="_blank" class={`secondary-btn nav-link text-blue500 bg-gray100 text-center flex flex-row gap-2 w-fit ${custom} items-center hover:bg-purple200 hover:text-gray100 transition`}>
                 <div class={`icon ${icon}`} />
                 {title}
@@ -35,7 +35,7 @@ const { custom, title, href, icon, variant, isBlank = false } = Astro.props
                 </a>
     ) : (
         variant == 'tertiary' && (
-            isBlank ?( 
+            isBlank ?(
                 <a href={href} target="_blank" class={`tertiary-btn nav-link text-gray100 bg-pink100 text-center mx-auto flex flex-row gap-2 w-fit ${custom} items-center hover:bg-blue200 transition`}>
                     <div class={`icon ${icon}`} />
                     {title}
@@ -98,29 +98,29 @@ const { custom, title, href, icon, variant, isBlank = false } = Astro.props
         display: block;
         width: 24px;
         height: 24px;
-        -webkit-mask: url(share-icon.svg) no-repeat center;
-        mask: url(share-icon.svg) no-repeat center;
+        -webkit-mask: url('/share-icon.svg') no-repeat center;
+        mask: url('/share-icon.svg') no-repeat center;
     }
     .instagram {
         display: block;
         width: 24px;
         height: 24px;
-        -webkit-mask: url(instagram-icon.svg) no-repeat center;
-        mask: url(instagram-icon.svg) no-repeat center;
+        -webkit-mask: url('/instagram-icon.svg') no-repeat center;
+        mask: url('/instagram-icon.svg') no-repeat center;
     }
     .twitter {
         display: block;
         width: 24px;
         height: 24px;
-        -webkit-mask: url(x-icon.svg) no-repeat center;
-        mask: url(x-icon.svg) no-repeat center;
+        -webkit-mask: url('/x-icon.svg') no-repeat center;
+        mask: url('/x-icon.svg') no-repeat center;
     }
 
     .download {
         display: block;
         width: 24px;
         height: 24px;
-        -webkit-mask: url(download-icon.svg) no-repeat center;
-        mask: url(download-icon.svg) no-repeat center;
+        -webkit-mask: url('/download-icon.svg') no-repeat center;
+        mask: url('/download-icon.svg') no-repeat center;
     }
 </style>

@@ -25,7 +25,7 @@ export async function getStaticPaths() {
     queryParams.append("rank", String(c.globalRank[0].ranking))
     queryParams.append("weight", String(c.globalRank[0].report.siteWeight))
 
-    const websiteImageShare = `http://localhost:3000/api/website-share?${queryParams.toString()}`
+    const websiteImageShare = `https://small-page-energy-dynamic-image-generator.vercel.app/api/website-share?${queryParams.toString()}`
 
     const refined = { ...c, websiteImageShare }
 

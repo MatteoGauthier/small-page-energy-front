@@ -90,6 +90,7 @@ const customCrumbs = [
                 <div class="flex flex-col items-start">
                   <span class="text-xl font-bold mb-2">Partage le score de {props.website.name} !</span>
                   <button
+                    data-umami-event="Share Website"
                     data-share-target={props.websiteImageShare}
                     class={`primary-btn share-button nav-link text-gray100  bg-blue400 text-center flex flex-row gap-2 justify-center w-fit items-center hover:bg-blue600 transition`}
                   >
